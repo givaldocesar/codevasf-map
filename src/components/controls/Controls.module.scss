@@ -1,0 +1,32 @@
+@import "../styles/colors";
+@import "../styles/breakpoints";
+
+.control {
+    position: absolute;
+    padding: 4px;
+    max-width: fit-content;
+    background-color: $bg-control;
+    opacity: 0.5;
+    border-radius: 0.75rem;
+
+    &:hover {
+        opacity: 1;
+        transition: opacity 500ms ease-in-out;
+    }
+}
+
+.title {
+    display: none;
+    padding: 6px 12px;
+
+    h2 {
+        font-weight: bold;
+        font-size: large;
+    }
+}
+
+@media (min-width: $break-large){
+    .title {
+        display: block;
+    }
+}

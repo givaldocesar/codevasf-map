@@ -1,0 +1,36 @@
+{
+  "name": "codevasf-map",
+  "version": "0.0.1",
+  "description": "Biblioteca React + OpenLayers para projetos de desenvolvimento da CODEVASF",
+  "exports": {
+    ".": "./src/components/index.tsx",
+    "./styles": "./src/components/styles.css",
+    "./controls": "./src/components/controls/index.tsx",
+    "./tile-layers": "./src/components/tile-layers/index.tsx"
+  },
+  "author": {
+    "name": "Givaldo Cesar / 1ªSR",
+    "email": "givaldo.junior@codevasf.gov.br"
+  },
+  "keywords": [
+    "react",
+    "codevasf",
+    "open layers"
+  ],
+  "license": "ISC",
+  "peerDependencies": {
+    "next": "^14.2.5",
+    "ol": "^10.0.0",
+    "proj4": "^2.12.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sass": "^1.77.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.2.0",
+    "@types/openlayers": "^4.6.23",
+    "@types/proj4": "^2.5.5",
+    "@types/react": "^18.3.3",
+    "typescript": "^5.5.4"
+  }
+}

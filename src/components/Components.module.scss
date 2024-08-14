@@ -1,0 +1,25 @@
+@import "./styles/widths";
+@import "./styles/colors";
+
+.map {
+    position: relative;
+    overflow: hidden;
+    min-width: $s-80;
+    min-height: $s-80;
+    background-color: $gray-200;
+}
+
+.loading_map{
+    width: $s-full;
+    height: $s-full;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+        font-weight: bold;
+        font-size: larger;
+        color: $std;
+    }
+}
+

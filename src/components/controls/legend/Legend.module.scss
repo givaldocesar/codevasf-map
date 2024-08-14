@@ -1,0 +1,56 @@
+@import "../../styles/breakpoints";
+
+.area {
+    padding: 5px;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.title {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 5px;
+
+    h3{
+        font-weight: bold;
+        font-size: small;
+    }
+}
+
+.items {
+    padding-left: 15px;
+    max-height: 500px;
+    overflow: hidden;
+    transition: max-height 250ms ease-in-out;
+}
+
+.item {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 5px;
+
+    label {
+        cursor: pointer;
+        font-size: smaller;
+    }
+}
+
+@media (min-width: $break-large){
+    .title {
+        h3 {
+            font-size: medium;
+        }
+    }
+
+    .items {
+        padding-left: 23px;
+    }
+
+    .item {
+        label {
+            font-size: small;
+        }
+    }
+}
