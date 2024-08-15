@@ -1,6 +1,6 @@
 import TileLayer from "ol/layer/Tile";
 import { getUid } from "ol";
-import styles from "./Legend.module.scss";
+import styles from "../Legend.module.scss";
 
 
 const TileLayerItem: React.FC<{layer: TileLayer}> = ({layer}) => {

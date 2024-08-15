@@ -1,4 +1,5 @@
 import { Map, View } from "ol";
+import { Extent } from "ol/extent";
 import { defaults } from "ol/interaction/defaults";
 
 class CustomMap extends Map {
@@ -23,6 +24,13 @@ class CustomMap extends Map {
                 minZoom: minZoom,
                 maxZoom: maxZoom
             })
+        });
+    }
+
+    fit(extent: Extent){
+        this.getView().fit(extent, {
+            padding: [50, 50, 50, 50],
+            duration: 500
         });
     }
 }

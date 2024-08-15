@@ -3,19 +3,16 @@ import { getUid } from "ol";
 import { CollectionEvent } from "ol/Collection";
 import BaseLayer from "ol/layer/Base";
 import TileLayer from "ol/layer/Tile";
-import { MapContext } from "../../contexts";
-import { ArrowButton } from "../../buttons";
+import { MapContext } from "../../../contexts";
+import LayersArea from "../LayersArea";
 import TileLayerItem from "./TileLayerItem";
-import styles from "./Legend.module.scss";
+
 
 const TileLayersArea: React.FC = () => {
     const ref = useRef<HTMLDivElement>(null);
     const map = useContext(MapContext);
     const layers = useMemo<TileLayer[]>(() => [], []);
-    
     const [revision, setRevision ] = useState(0);
-    const [hide, setHide] = useState(true);
-    
 
     useEffect(() => {
         function addLayer(evt: CollectionEvent<BaseLayer>){
@@ -42,19 +39,9 @@ const TileLayersArea: React.FC = () => {
     }, []);
 
     return (
-        <div className={styles.area} ref={ref}>
-            <div className={styles.title}>
-                <ArrowButton 
-                    title={hide ? 'Mostrar camadas' : 'Ocultar camadas'}
-                    style={{rotate: hide ? '180deg' : '0deg'}}
-                    onClick={() => setHide(!hide)}
-                />
-                <h3>Camadas de Base</h3>
-            </div>
-            <div className={styles.items} style={{maxHeight: hide ? '0px' : '500px' }}>
-                { layers.map(layer => <TileLayerItem layer={layer} key={getUid(layer)} />)}
-            </div>
-        </div>
+        <LayersArea ref={ref} title="Camadas de Base" hide={true}>
+            { layers.map(layer => <TileLayerItem layer={layer} key={getUid(layer)} />) }
+        </LayersArea>
     );
 }
 

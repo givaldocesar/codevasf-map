@@ -6,10 +6,11 @@
     ".": "./src/components/index.tsx",
     "./styles": "./src/components/styles.css",
     "./controls": "./src/components/controls/index.tsx",
-    "./tile-layers": "./src/components/tile-layers/index.tsx"
+    "./tile-layers": "./src/components/tile-layers/index.tsx",
+    "./vector-layers": "./src/components/vector-layers/index.tsx"
   },
   "author": {
-    "name": "Givaldo Cesar / 1ªSR",
+    "name": "Givaldo Cesar / CODEVASF 1ªSR",
     "email": "givaldo.junior@codevasf.gov.br"
   },
   "keywords": [

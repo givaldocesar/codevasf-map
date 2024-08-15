@@ -1,5 +1,6 @@
-@import "./styles/widths";
-@import "./styles/colors";
+@import "../styles/breakpoints";
+@import "../styles/widths";
+@import "../styles/colors";
 
 .map {
     position: relative;
@@ -20,6 +21,23 @@
         font-weight: bold;
         font-size: larger;
         color: $std;
+    }
+}
+
+.layer_icon {
+    width: $s-4;
+    height: $s-4;
+
+    text {
+        font: bold 200px sans-serif;
+        fill: red;
+    }
+}
+
+@media (min-width: $break-large){
+    .layer_icon {
+        width: $s-6;
+        height: $s-6;
     }
 }
 
