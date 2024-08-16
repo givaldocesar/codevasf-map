@@ -36,4 +36,3 @@ class CustomMap extends Map {
 }
 
 export default CustomMap;
-export type MapType = InstanceType<typeof CustomMap>;

@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState, useMemo, useRef } from "react";
+import { useEffect, useContext, useState, useMemo, useRef, useCallback } from "react";
 import { getUid } from "ol";
 import { CollectionEvent } from "ol/Collection";
 import BaseLayer from "ol/layer/Base";
@@ -14,28 +14,29 @@ const TileLayersArea: React.FC = () => {
     const layers = useMemo<TileLayer[]>(() => [], []);
     const [revision, setRevision ] = useState(0);
 
-    useEffect(() => {
-        function addLayer(evt: CollectionEvent<BaseLayer>){
-            const layer = evt.element;
-            
-            if(layer instanceof TileLayer && !layers.some(item => getUid(item) === getUid(layer))){
-                layers.push(layer);
-                setRevision(revision + 1);
-            }
+    const addLayer = useCallback((evt: CollectionEvent<BaseLayer>) => {
+        const layer = evt.element;
+        
+        if(layer instanceof TileLayer && !layers.some(item => getUid(item) === getUid(layer))){
+            layers.push(layer);
+            setRevision(revision + 1);
         }
-
-        map?.getLayers().on('add', addLayer);
-        return () => { map?.getLayers().un('add', addLayer) }
     }, []);
 
-    useEffect(() => {
-        function changeCurrent(evt: Event){
-            const target = evt.target as HTMLInputElement;
-            layers.forEach(layer => layer.setVisible(target.value === getUid(layer)));
-        }
+    const changeCurrent = useCallback((evt: Event) => {
+        evt.stopPropagation();
+        const target = evt.target as HTMLInputElement;
+        layers.forEach(layer => layer.setVisible(target.value === getUid(layer)));
+    }, []);
 
+    map?.getLayers().on('add', addLayer);
+
+    useEffect(() => {
         ref.current?.addEventListener('change', changeCurrent);
-        return () => { ref.current?.removeEventListener('change', changeCurrent); }
+        return () => { 
+            map?.getLayers().un('add', addLayer) 
+            ref.current?.removeEventListener('change', changeCurrent); 
+        }
     }, []);
 
     return (

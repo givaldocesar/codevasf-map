@@ -1,8 +1,13 @@
 import React from "react";
-import { MapType } from "../../classes/CustomMap";
+import { CustomMap, CustomLayer } from "../../classes";
+import { Style } from "ol/style";
 
-const MapContext = React.createContext<MapType | null>(null);
+const MapContext = React.createContext<CustomMap | null>(null);
+const LayerContext = React.createContext<CustomLayer | null>(null);
+const StyleContext = React.createContext<Style | null>(null);
 
 export {
-    MapContext
+    MapContext,
+    LayerContext,
+    StyleContext
 }

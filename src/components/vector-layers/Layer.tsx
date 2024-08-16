@@ -1,15 +1,16 @@
 import { useMemo, useContext, useEffect } from "react";
 import { GeoJSON } from "ol/format";
 import { CustomLayer } from "../../classes";
-import { MapContext } from "../contexts";
+import { MapContext, LayerContext } from "../contexts";
 import { AttributionLike } from "ol/source/Source";
 
 const FORMAT = new GeoJSON();
 
 interface Props {
     children?: React.ReactNode;
-    attributions?: AttributionLike;
     data: {[property: string]: any} | {[property: string]: any}[];
+    
+    attributions?: AttributionLike;
     minZoom?: number;
     maxZoom?: number;
     visible?: boolean;
@@ -23,11 +24,16 @@ interface Props {
 const Layer: React.FC<Props> = ({children, data, ...props}) => {
     const map = useContext(MapContext);
     const layer = useMemo(() => {
-        const features = FORMAT.readFeatures(data, {
-            featureProjection: map?.getView().getProjection()
-        });
-
-        return new CustomLayer({features: features, ...props});
+        try{
+            const features = FORMAT.readFeatures(data, {
+                featureProjection: map?.getView().getProjection()
+            });
+            return new CustomLayer({features: features, ...props});
+        
+        } catch (err){
+            throw new Error(`LAYER ${props.title} => 'invalid JSON data.'`);
+        }
+        
     }, []);
     
     useEffect(() => {
@@ -35,7 +41,11 @@ const Layer: React.FC<Props> = ({children, data, ...props}) => {
         return () => { map?.removeLayer(layer) }
     }, []);
     
-    return <>{children}</>
+    return (
+        <LayerContext.Provider value={layer}>
+            {children}
+        </LayerContext.Provider>
+    );
 }
 
 export default Layer;

@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState, useMemo } from "react";
+import { useEffect, useContext, useState, useMemo, useCallback } from "react";
 import { getUid } from "ol";
 import { CollectionEvent } from "ol/Collection";
 import BaseLayer from "ol/layer/Base";
@@ -9,21 +9,31 @@ import LayersArea from "../LayersArea";
 
 const VectorLayersArea: React.FC = () => {
     const map = useContext(MapContext);
-    const layers = useMemo<CustomLayer[]>(() => [], []);
+    let layers = useMemo<CustomLayer[]>(() => [], []);
     const [revision, setRevision ] = useState(0);
 
-    useEffect(() => {
-        function addLayer(evt: CollectionEvent<BaseLayer>){
-            const layer = evt.element;
-            
-            if(layer instanceof CustomLayer && !layers.some(item => getUid(item) === getUid(layer))){
-                layers.push(layer);
-                setRevision(revision + 1);
-            }
+    const addLayer = useCallback((evt: CollectionEvent<BaseLayer>) => {
+        const layer = evt.element; 
+        if(layer instanceof CustomLayer && !layers.some(item => getUid(item) === getUid(layer))){
+            layers.push(layer);
+            setRevision(revision + 1);
         }
+    }, []);
 
-        map?.getLayers().on('add', addLayer);
-        return () => { map?.getLayers().un('add', addLayer) }
+    const removeLayer = useCallback((evt: CollectionEvent<BaseLayer>) => {
+        const layer = evt.element;
+        layers = layers.filter(item => getUid(item) !== getUid(layer));
+        setRevision(revision + 1);
+    }, []);
+
+    map?.getLayers().on('add', addLayer);
+    map?.getLayers().on('remove', removeLayer);
+    
+    useEffect(() => {
+        return () => { 
+            map?.getLayers().un('add', addLayer);
+            map?.getLayers().un('remove', removeLayer);
+        }
     }, []);
 
     return (
