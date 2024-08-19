@@ -1,8 +1,8 @@
 import { useMemo, useContext, useEffect } from "react";
 import { GeoJSON } from "ol/format";
+import { AttributionLike } from "ol/source/Source";
 import { CustomLayer } from "../../classes";
 import { MapContext, LayerContext } from "../contexts";
-import { AttributionLike } from "ol/source/Source";
 
 const FORMAT = new GeoJSON();
 
@@ -28,8 +28,9 @@ const Layer: React.FC<Props> = ({children, data, ...props}) => {
             const features = FORMAT.readFeatures(data, {
                 featureProjection: map?.getView().getProjection()
             });
-            return new CustomLayer({features: features, ...props});
-        
+    
+            return new CustomLayer({ features: features, ...props });
+
         } catch (err){
             throw new Error(`LAYER ${props.title} => 'invalid JSON data.'`);
         }

@@ -1,5 +1,5 @@
 import { Map, View } from "ol";
-import { Extent } from "ol/extent";
+import { Extent, isEmpty } from "ol/extent";
 import { defaults } from "ol/interaction/defaults";
 
 class CustomMap extends Map {
@@ -28,10 +28,12 @@ class CustomMap extends Map {
     }
 
     fit(extent: Extent){
-        this.getView().fit(extent, {
-            padding: [50, 50, 50, 50],
-            duration: 500
-        });
+        if(!isEmpty(extent)){
+            this.getView().fit(extent, {
+                padding: [50, 50, 50, 50],
+                duration: 500
+            });
+        }
     }
 }
 

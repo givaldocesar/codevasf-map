@@ -9,13 +9,15 @@ import { getUid } from "ol";
 
 registerProjections();
 
-const Map: React.FC<React.HTMLAttributes<HTMLDivElement>&{
+interface Props {
     projection?:    string;
     center?:        [number, number];
     zoom?:          number;
     minZoom?:       number;
     maxZoom?:       number;
-}> = ({
+}
+
+const Map: React.FC<React.HTMLAttributes<HTMLDivElement>&Props> = ({
     children,
     className="",
     projection,

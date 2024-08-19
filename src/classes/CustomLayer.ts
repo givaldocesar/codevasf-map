@@ -1,8 +1,12 @@
 import { Feature } from "ol";
+import { createEmpty, extend } from "ol/extent";
 import VectorImageLayer from "ol/layer/VectorImage";
-import { AttributionLike } from "ol/source/Source";
 import VectorSource from "ol/source/Vector";
+import { AttributionLike } from "ol/source/Source";
 import { defaultStyle } from "../components/vector-layers/styles";
+import { Filter } from "../interfaces";
+import { NO_CATEGORY } from "./CustomCategorizedStyle";
+
 
 interface Options {
     attributions?: AttributionLike;
@@ -36,6 +40,34 @@ class CustomLayer extends VectorImageLayer {
             order: order,
             title: title,
         });
+    }
+
+    async filterFeatures(filter: Filter){
+        const features: Feature[] = [];
+
+        this.getSource()?.forEachFeature((feature) => {
+            if(feature.get(filter.field) === filter.value){
+                features.push(feature);
+            }
+        });
+
+        return features;
+    }
+
+    async getFeaturesExtent(filter?: Filter){
+        if(filter){
+            const extent = createEmpty();
+            
+            this.getSource()?.forEachFeature((feature) => {
+                if(feature.get(filter.field) === filter.value){
+                    extend(extent, feature.getGeometry()?.getExtent() || extent);
+                }
+            });
+
+            return extent;
+        } else {
+            return this.getSource()?.getExtent();
+        }
     }
 
     getGeometry(): 'Point' | 'LineString' | 'Polygon' | undefined {

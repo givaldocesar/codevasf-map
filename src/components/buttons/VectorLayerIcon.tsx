@@ -1,25 +1,25 @@
-import { Icon, Style, Circle } from "ol/style";
-import { CustomLayer } from "../classes";
-import styles from "./Components.module.scss";
+import { Icon, Circle } from "ol/style";
+import { CustomStyle } from "../../classes";
+import styles from "./Button.module.scss";
 
 
 interface Props {
-    layer: CustomLayer;
+    style: CustomStyle;
+    geometry: string | undefined;
 }
 
 const VectorLayerIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>&Props> = ({
     className="",
-    layer
+    style,
+    geometry
 }) => {
-    const style = layer.getStyle() as Style;
-    
     return (
         <svg className={`${styles.layer_icon} ${className}`} viewBox="0 0 50 50">
             {
                 style.getImage() instanceof Icon ?
                     <>
                     </> :
-                layer.getGeometry() === 'Point' ?
+                geometry === 'Point' ?
                     <> 
                         <circle 
                             cx={25}
@@ -31,7 +31,7 @@ const VectorLayerIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>&Props> = 
                             strokeLinecap="round"
                         />
                     </> :
-                layer.getGeometry() === 'LineString' ?
+                geometry === 'LineString' ?
                     <>
                         <line 
                             x1={5} y1={25} x2={45} y2={25}
@@ -40,7 +40,7 @@ const VectorLayerIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>&Props> = 
                             strokeLinecap="round"
                         />
                     </> :
-                layer.getGeometry() === 'Polygon' ?
+                geometry === 'Polygon' ?
                     <>
                         <rect 
                             x={5} y={5} width={40} height={40} 

@@ -40,11 +40,19 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
             -->title:        <string>            Adiciona um titulo a camada, visivel na legenda.
 
             ╚> style:
-                Style:  Disponibiliza o estilo da camada para os elementos-filhos.
-                Stroke: Altera a linha da camada.
-                        -->color:   Altera a cor da linha.
-                        -->width:   Altera a espessura da linha.
-                Fill:   Altera o preenchimento da camada.
-                        -->color:   Altera a cor do preenchimento.
+                --Style:            Disponibiliza o estilo da camada para os elementos-filhos.
+                --CategorizedStyle: Cria um estilo categorizado para a camada. Necessário adicionar elementos "Category" para estilizar.
+                    -->field:                   Campo que irá categorizar a camada. 
+                                                P.ex: Categorizar Municípios pelo "field" nome.
+                    -->showNoCategoryFeatures:  Mostra as feições que não pertencem a categoria.
+                --Category:                     Cria uma categoria para um estilo categorizado.
+                    --->value:                  Valor de filtro das feições.
+                                                O filtro utiliza a propriedade "field" de "CategorizedStyle".
+                    --->value = 'NO_CATEGORY'   Estiliza as feições que não estão em nenhuma categoria.
+                --Stroke:           Altera a linha da camada ou categoria.
+                    -->color:                   Altera a cor da linha.
+                    -->width:                   Altera a espessura da linha.
+                --Fill:             Altera o preenchimento da camada ou categoria.
+                    -->color:                   Altera a cor do preenchimento.
 
                 
