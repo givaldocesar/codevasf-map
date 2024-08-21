@@ -1,5 +1,7 @@
+@import "../../styles/animations";
+
 .pulse {
-    animation: pulse 1s ease-in-out infinite;
+    animation: $pulse;
 }
 
 .dots::after {
@@ -8,18 +10,6 @@
     width: 1em;
     text-align: left;
     animation: dots 500ms steps(4, end) infinite
-}
-
-@keyframes pulse {
-    0% { 
-        opacity: 0.5;
-    }
-    50% { 
-        opacity: 1.0;
-    }
-    100% { 
-        opacity: 0.5;
-    }
 }
 
 @keyframes dots {

@@ -7,7 +7,7 @@ const TileLayerItem: React.FC<{layer: TileLayer}> = ({layer}) => {
     const id = getUid(layer);
     
     return (
-        <div className={styles.item}>
+        <div className={styles.item} style={{order: layer.get('order')}}>
             <input 
                 type="radio" 
                 name="tile-layer" 

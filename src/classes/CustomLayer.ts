@@ -3,9 +3,10 @@ import { createEmpty, extend } from "ol/extent";
 import VectorImageLayer from "ol/layer/VectorImage";
 import VectorSource from "ol/source/Vector";
 import { AttributionLike } from "ol/source/Source";
+import { Filter, Geometries, LayerStatus } from "../interfaces";
 import { defaultStyle } from "../components/vector-layers/styles";
-import { Filter } from "../interfaces";
-import { NO_CATEGORY } from "./CustomCategorizedStyle";
+import { EventTypes } from "ol/Observable";
+
 
 
 interface Options {
@@ -13,16 +14,22 @@ interface Options {
     features?: Feature[];
     title?: string;
     order?: number;
+    visible?: boolean; 
     geometry: 'Point' | 'LineString' | 'Polygon';
 }
 
 class CustomLayer extends VectorImageLayer {
+    geometry_: Geometries | undefined;
+    status_: LayerStatus;
+    lodingProgress_: number;
+    
     constructor({
         attributions, 
         features, 
         title, 
         order,
         geometry,
+        visible,
         ...props
         } : Options
     ){
@@ -31,14 +38,18 @@ class CustomLayer extends VectorImageLayer {
                 attributions: attributions,
                 features: features
             }),
-            style: defaultStyle,
+            style: defaultStyle.clone(),
             ...props
         });
 
+        this.geometry_ = geometry;
+        this.status_ = 'loading';
+        this.lodingProgress_ = 0;
+
         this.setProperties({
-            geometry: geometry,
             order: order,
             title: title,
+            defaultVisible: visible 
         });
     }
 
@@ -70,8 +81,30 @@ class CustomLayer extends VectorImageLayer {
         }
     }
 
-    getGeometry(): 'Point' | 'LineString' | 'Polygon' | undefined {
-        return this.get('geometry');
+    getGeometry(){
+        return this.geometry_;
+    }
+
+    getLoadingProgress(){
+        return this.lodingProgress_;
+    }
+
+    getStatus(){
+        return this.status_;
+    }
+
+    setGeometry(geometry?: Geometries){
+        this.geometry_ = geometry;
+    }
+
+    setLoadingProgress(value: number){
+        this.lodingProgress_ = value;
+        this.dispatchEvent('progress-changed');
+    }
+
+    setStatus(status: LayerStatus){
+        this.status_ = status;
+        this.dispatchEvent('status-changed');
     }
 }
 

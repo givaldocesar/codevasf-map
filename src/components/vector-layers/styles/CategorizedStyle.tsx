@@ -8,9 +8,9 @@ interface Props {
     showNoCategoryFeatures?: boolean;
 }
 
-const CategorizedStyle: React.FC<Props> = ({children, field, showNoCategoryFeatures}) => {
+const CategorizedStyle: React.FC<Props> = ({children, field}) => {
     const layer = useContext(LayerContext);
-    const style = new CustomCategorizedStyle({ field, showNoCategoryFeatures });
+    const style = new CustomCategorizedStyle({ field });
     layer?.setStyle(style);
 
     return (

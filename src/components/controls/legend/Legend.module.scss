@@ -23,6 +23,9 @@
     max-height: 500px;
     overflow: hidden;
     transition: max-height 250ms ease-in-out;
+
+    display: flex;
+    flex-flow: column nowrap;
 }
 
 .categorized_item {
@@ -41,10 +44,10 @@
     flex-flow: row nowrap;
     align-items: center;
     gap: 5px;
+    font-size: smaller;
 
     label {
         cursor: pointer;
-        font-size: smaller;
     }
 }
 
@@ -60,8 +63,6 @@
     }
 
     .item {
-        label {
-            font-size: small;
-        }
+        font-size: small;
     }
 }

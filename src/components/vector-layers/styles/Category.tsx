@@ -5,7 +5,7 @@ import { LayerContext, StyleContext } from "../../contexts";
 
 interface Props {
     children?: React.ReactNode; 
-    label: string;
+    label?: string;
     value: string;
     geometry?: 'Point' | 'LineString' | 'Polygon' | undefined;
 }
@@ -17,7 +17,8 @@ const Category: React.FC<Props> = ({children, label, value, geometry}) => {
     const style = new CustomStyle({
         label: label,
         value: value, 
-        geometry: geometry || layer?.getGeometry()
+        geometry: geometry || layer?.getGeometry(),
+        visible: layer?.get('defaultVisible')
     });
 
     parentStyle.addStyle(style);

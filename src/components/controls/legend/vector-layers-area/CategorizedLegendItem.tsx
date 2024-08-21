@@ -1,10 +1,20 @@
 import { useState } from "react";
 import { CustomCategorizedStyle, CustomLayer, NO_CATEGORY } from "../../../../classes";
+import { LayerStatus } from "../../../../interfaces";
 import { VectorLayerIcon, CollpaseLayerIcon } from "../../../buttons";
+import LoadingItem from "./LoadingItem";
 import styles from "../Legend.module.scss";
 
 const CategorizedLegendItem: React.FC<{layer: CustomLayer}> = ({layer}) => {
     const [collapsed, setCollapsed] = useState(false);
+    const [layerStatus, setStatus] = useState<LayerStatus>('loading');
+
+    //@ts-expect-error
+    layer.on('status-changed', () => setStatus(layer.getStatus()));
+
+    //LOADING
+    if(layerStatus === 'loading') return <LoadingItem layer={layer} />;
+
     const style = layer.getStyle() as CustomCategorizedStyle;
     
     function changeVisibility(evt: React.ChangeEvent<HTMLInputElement>){
@@ -62,11 +72,13 @@ const CategorizedLegendItem: React.FC<{layer: CustomLayer}> = ({layer}) => {
         map.fit(await layer.getFeaturesExtent(filter));
   
     }
+
+    const visible = layer.get('defaultVisible');
     
     return (
-        <form className={styles.categorized_item}>
+        <form className={styles.categorized_item} style={{order: layer.get('order')}}>
             <div className={styles.item}>
-                <input type="checkbox" defaultChecked={layer.getVisible()} onChange={changeVisibility} name="main"/>
+                <input type="checkbox" defaultChecked={visible} onChange={changeVisibility} name="main"/>
                 <CollpaseLayerIcon collpased={collapsed} onClick={() => setCollapsed(!collapsed)}/>
                 <label onClick={() => zoom()}>{layer.get('title')}</label>
             </div>
@@ -75,7 +87,7 @@ const CategorizedLegendItem: React.FC<{layer: CustomLayer}> = ({layer}) => {
                     style.getStyles().map(item => {
                         return (
                             <div className={styles.item} key={item.getValue()}>
-                                <input type="checkbox" defaultChecked={layer.getVisible()} onChange={changeVisibility} name={item.getValue()}/>
+                                <input type="checkbox" defaultChecked={visible} onChange={changeVisibility} name={item.getValue()}/>
                                 <VectorLayerIcon geometry={item.getGeometryType()} style={item}/>
                                 <label onClick={() => zoom(item.getValue())} id={item.getValue()}>{item.getLabel() || item.getValue() }</label>
                             </div>

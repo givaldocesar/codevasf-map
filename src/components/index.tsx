@@ -10,7 +10,7 @@ import { getUid } from "ol";
 registerProjections();
 
 interface Props {
-    projection?:    string;
+    projection?:    "EPSG:31983" | "EPSG:31984" | "EPSG:4674" | "EPSG:4326";
     center?:        [number, number];
     zoom?:          number;
     minZoom?:       number;

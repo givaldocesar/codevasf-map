@@ -19,7 +19,7 @@ export const defaultStyle = new OLStyle({
 const Style: React.FC<{children?: React.ReactNode}> = ({children}) => {
     const layer = useContext(LayerContext);
     const style = layer?.getStyle() as OLStyle;
-    
+
     return (
         <StyleContext.Provider value={style}>
             {children}

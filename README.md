@@ -9,8 +9,16 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
 
 ## Componentes
     ╚> Map: Cria o objeto Map do OL.
+        -->center:      [<number>,<number>]     Ponto central inicial do mapa.
+        -->zoom:        <number>                Zoom inicial do mapa.
+        -->minZoom:     <number>                Zoom mínimo permitido pelo mapa.
+        -->maxZoom      <number>                Zoom máximo permitido pelo mapa.
+        -->projection:  <"EPSG:31983" |         Sistema de Projeção utilizado no mapa.
+                         "EPSG:31984" | 
+                         "EPSG:4674" | 
+                         "EPSG:4326">
 
-    ╚> Controls:       Agrupa os controles do mapa. (Ajuda a organizar o código)
+    ╚> Controls:        Agrupa os controles do mapa. (Ajuda a organizar o código)
         --Title:        Adiciona um título ao mapa.
         --Legend:       Adiciona legenda ao mapa, onde é possivel alterar o estado das camadas.
         --Scale:        Mostra uma escala gráfica no mapa.
@@ -35,24 +43,48 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
     
     ╚> VectorLayers:   Agrupa as camadas vetoriais. (Ajuda a organizar o código)
         -- Layer:       Adiciona uma camada vetorial ao mapa.
-            -->attributions: <string | string[]> Adiciona fontes a camada, são exibidas com o control "Attributions".
-            -->data:         <object>            Dados a serem exibidos no mapa, no formato GeoJSON. 
-            -->title:        <string>            Adiciona um titulo a camada, visivel na legenda.
+            -->layer:           <CustomLayer>           Layer que servirá de base para a camada.
+                                                        Caso omitida, será adicionada a padrão.
+            -->fit:             <boolean>               Enquadra a camada no mapa após seu carregamento.
+            -->attributions:    <string | string[]>     Adiciona fontes a camada, são exibidas com o control "Attributions".
+            -->data:            <object>                Dados a serem exibidos no mapa, no formato GeoJSON. 
+            -->title:           <string>                Adiciona um titulo a camada, visivel na legenda.
+            -->minZoom:         <number>                Zoom mínimo que a camada será exibida.
+            -->maxZoom          <number>                Zoom máximo que a camada será exibida.
+            -->visible          <boolean>               Define se a camada será exibidade por padrão.
+            -->zIndex           <number>                Define a ordem de exibição da camada. 
+                                                        Camadas com valores mais baixos são sobrepostas.
+            -->geometry:        <'Point' |              Geometria das feições da camada.
+                                 'LineString' |         Não altera a exibição, apenas utilizada pra definir o ícone que aparecerá na legenda.
+                                 'Polygon' | 
+                                 undefined>
 
             ╚> style:
                 --Style:            Disponibiliza o estilo da camada para os elementos-filhos.
                 --CategorizedStyle: Cria um estilo categorizado para a camada. Necessário adicionar elementos "Category" para estilizar.
-                    -->field:                   Campo que irá categorizar a camada. 
-                                                P.ex: Categorizar Municípios pelo "field" nome.
-                    -->showNoCategoryFeatures:  Mostra as feições que não pertencem a categoria.
-                --Category:                     Cria uma categoria para um estilo categorizado.
-                    --->value:                  Valor de filtro das feições.
-                                                O filtro utiliza a propriedade "field" de "CategorizedStyle".
-                    --->value = 'NO_CATEGORY'   Estiliza as feições que não estão em nenhuma categoria.
+                    -->field:       <string>            Campo que irá categorizar a camada. 
+                                                        P.ex: Categorizar Municípios pelo "field" nome.
+                --Category:                             Cria uma categoria para um estilo categorizado.
+                    --->label:      <string>            Rotulo da categoria que aparecerá na legenda.
+                                                        Caso não seja fornecido, o valor usado será o 'value'.
+                    --->geometry:   <'Point' |          Tipo de ícone que aparecerá na legenda.
+                                     'LineString' |     Caso não seja fornecido será usado a geometria da camada.
+                                     'Polygon' | 
+                                     undefined>                                              
+                    --->value:                          Valor de filtro das feições.
+                                                        O filtro utiliza a propriedade "field" de "CategorizedStyle".
+                    --->value = 'NO_CATEGORY'           Exibe e estiliza as feições que não foram categorizadas.
                 --Stroke:           Altera a linha da camada ou categoria.
                     -->color:                   Altera a cor da linha.
                     -->width:                   Altera a espessura da linha.
                 --Fill:             Altera o preenchimento da camada ou categoria.
                     -->color:                   Altera a cor do preenchimento.
+        
+        -- URLDataLayer:            Extensão de "Layer". Usa dados adquiridos de uma URL:
+            --> url:        <string>        URL para aquisição dos dados.
+                                            Deve conter o cabeçário 'Content-Type' com os valores:
+                                                >application/json:                      para dados GeoJSON.
+                                                >application/vnd.google-earth.kml+xml:  para dados KML;      
+            --> urlInit:    <RequestInit>   Opções para a função 'fetch'.
 
                 

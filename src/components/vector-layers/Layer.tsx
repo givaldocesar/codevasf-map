@@ -1,49 +1,69 @@
 import { useMemo, useContext, useEffect } from "react";
+import { Feature } from "ol";
 import { GeoJSON } from "ol/format";
 import { AttributionLike } from "ol/source/Source";
 import { CustomLayer } from "../../classes";
+import { Geometries } from "../../interfaces";
 import { MapContext, LayerContext } from "../contexts";
+
 
 const FORMAT = new GeoJSON();
 
-interface Props {
+export interface LayerProps {
     children?: React.ReactNode;
-    data: {[property: string]: any} | {[property: string]: any}[];
     
     attributions?: AttributionLike;
-    minZoom?: number;
     maxZoom?: number;
+    minZoom?: number;
     visible?: boolean;
     zIndex?: number;
 
+    fit?: boolean;
     title?: string;
     order?: number;
-    geometry: 'Point' | 'LineString' | 'Polygon';
+    geometry: Geometries;
 }
 
-const Layer: React.FC<Props> = ({children, data, ...props}) => {
+interface Props extends LayerProps {
+    data?: {[property: string]: any} | {[property: string]: any}[];
+    layer?: CustomLayer;
+}
+
+const Layer: React.FC<Props> = ({children, data, layer, fit, ...props}) => {
     const map = useContext(MapContext);
-    const layer = useMemo(() => {
-        try{
-            const features = FORMAT.readFeatures(data, {
-                featureProjection: map?.getView().getProjection()
-            });
-    
-            return new CustomLayer({ features: features, ...props });
+    const base = useMemo(() => {
+        try{            
+            let features: Feature[] = [];
+
+            if(data && data.length > 0 ){
+                features = FORMAT.readFeatures(data, {
+                    featureProjection: map?.getView().getProjection()
+                });
+            }
+
+            if(data && layer){
+                layer.getSource()?.addFeatures(features);
+            }
+
+            return layer || new CustomLayer({ features: features, ...props });
 
         } catch (err){
-            throw new Error(`LAYER ${props.title} => 'invalid JSON data.'`);
+            const error = err as Error;
+            throw new Error(`LAYER ${props.title} => ${error.message}`);
         }
         
     }, []);
     
     useEffect(() => {
-        map?.addLayer(layer);
-        return () => { map?.removeLayer(layer) }
+        map?.addLayer(base);
+        if(fit){ 
+            map?.fit(base.getSource()?.getExtent());
+        }
+        return () => { map?.removeLayer(base) }
     }, []);
     
     return (
-        <LayerContext.Provider value={layer}>
+        <LayerContext.Provider value={base}>
             {children}
         </LayerContext.Provider>
     );
