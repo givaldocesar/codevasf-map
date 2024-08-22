@@ -8,9 +8,11 @@ interface Props {
     label?: string;
     value: string;
     geometry?: 'Point' | 'LineString' | 'Polygon' | undefined;
+    zIndex?: number;
+    visible?: boolean;
 }
 
-const Category: React.FC<Props> = ({children, label, value, geometry}) => {
+const Category: React.FC<Props> = ({children, label, value, geometry, visible, ...props}) => {
     const layer = useContext(LayerContext);
     const parentStyle = useContext(StyleContext) as CustomCategorizedStyle;
     
@@ -18,10 +20,15 @@ const Category: React.FC<Props> = ({children, label, value, geometry}) => {
         label: label,
         value: value, 
         geometry: geometry || layer?.getGeometry(),
-        visible: layer?.get('defaultVisible')
+        visible: visible === undefined ? layer?.get('defaultVisible') : visible,
+        ...props
     });
 
-    parentStyle.addStyle(style);
+    if(parentStyle){
+        parentStyle.addStyle(style);
+    } else {
+        console.error(`ERROR - LAYER ${layer?.get('title')}: no 'CategorizedStyle' element.`);
+    }
 
     return (
         <StyleContext.Provider value={style}>

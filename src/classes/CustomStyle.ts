@@ -50,6 +50,7 @@ class CustomStyle extends Style {
             geometry: this.geometryType_,
             label: this.label_,
             value: this.value_,
+            visible: this.visible_,
             stroke: this.getStroke() || undefined,
             fill: this.getFill() || undefined
         });

@@ -51,7 +51,6 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
             -->title:           <string>                Adiciona um titulo a camada, visivel na legenda.
             -->minZoom:         <number>                Zoom mínimo que a camada será exibida.
             -->maxZoom          <number>                Zoom máximo que a camada será exibida.
-            -->visible          <boolean>               Define se a camada será exibidade por padrão.
             -->zIndex           <number>                Define a ordem de exibição da camada. 
                                                         Camadas com valores mais baixos são sobrepostas.
             -->geometry:        <'Point' |              Geometria das feições da camada.
@@ -60,7 +59,8 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
                                  undefined>
 
             ╚> style:
-                --Style:            Disponibiliza o estilo da camada para os elementos-filhos.
+                --Style:                        Disponibiliza o estilo da camada para os elementos-filhos.
+                    -->visible:     <boolean>   Define se a camada será exibidade por padrão.
                 --CategorizedStyle: Cria um estilo categorizado para a camada. Necessário adicionar elementos "Category" para estilizar.
                     -->field:       <string>            Campo que irá categorizar a camada. 
                                                         P.ex: Categorizar Municípios pelo "field" nome.

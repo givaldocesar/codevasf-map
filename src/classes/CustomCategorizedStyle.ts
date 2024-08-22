@@ -9,13 +9,12 @@ export const NO_CATEGORY = 'NO_CATEGORY';
 
 interface Props {
     styles?: CustomStyle[]; 
-    field: string;
-    showNoCategoryFeatures?: boolean;
+    field: string
 }
 
 class CustomCategorizedStyle extends Style {
     styles_: {[value: string]: CustomStyle };
-    field_: string; 
+    field_: string;
 
     constructor({ styles=[], field}: Props){
         super({});
@@ -61,8 +60,8 @@ class CustomCategorizedStyle extends Style {
 
     renderFunction_(feature: Feature | FeatureLike){
         const style = this.getStyle(feature.get(this.field_));
-        return style?.getVisible() ? style.clone() : undefined;
-        
+        console.log(style.getVisible())
+        return style?.getVisible() ? style.clone() : undefined; 
     }
 
     setField(field: string){

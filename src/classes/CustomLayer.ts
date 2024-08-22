@@ -29,7 +29,6 @@ class CustomLayer extends VectorImageLayer {
         title, 
         order,
         geometry,
-        visible,
         ...props
         } : Options
     ){
@@ -48,8 +47,7 @@ class CustomLayer extends VectorImageLayer {
 
         this.setProperties({
             order: order,
-            title: title,
-            defaultVisible: visible 
+            title: title
         });
     }
 

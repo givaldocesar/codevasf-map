@@ -5,11 +5,13 @@ import { LayerContext, StyleContext } from "../../contexts";
 interface Props {
     children?: React.ReactNode;
     field: string;
-    showNoCategoryFeatures?: boolean;
+    visible?: boolean;
 }
 
-const CategorizedStyle: React.FC<Props> = ({children, field}) => {
+const CategorizedStyle: React.FC<Props> = ({children, field, visible=true}) => {
     const layer = useContext(LayerContext);
+    layer?.set('defaultVisible', visible);
+    
     const style = new CustomCategorizedStyle({ field });
     layer?.setStyle(style);
 

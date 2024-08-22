@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useContext } from "react";
+import { GeoJSON } from "ol/format";
 import { CustomLayer, LayerCache } from "../../classes";
-import { getFormat } from "../../utils";
 import { MapContext } from "../contexts";
 import Layer, { LayerProps } from "./Layer";
-import { GeoJSON } from "ol/format";
+import { getFormatFromContent } from "./utils";
 
 
 interface Props extends LayerProps {
@@ -21,16 +21,11 @@ const URLDataLayer: React.FC<Props> = ({children, url, urlInit, fit, ...props}) 
                 const headResponse = await fetch(url, { method: "HEAD" });
                 const serverLastModified = headResponse.headers.get('last-modified');                
                 
-                const cache = new LayerCache({
-                    name: 'url_files',
-                    keyPath: 'url',
-                    indexes: [{name: "lastModified", unique: false}]
-                });
-                
+                const cache = new LayerCache({ name: 'url_files', keyPath: 'url'});
                 await cache.connect();
-                const cacheData = await cache.get(url);
                 
-                if(cacheData.lastModified === serverLastModified){
+                const cacheData = await cache.get(url);
+                if(cacheData?.lastModified === serverLastModified){
                     //CACHE FEATURES
                     layer.setLoadingProgress(5); 
                     
@@ -47,7 +42,7 @@ const URLDataLayer: React.FC<Props> = ({children, url, urlInit, fit, ...props}) 
                         const contentLenght = response.headers.get('content-length') as string;
                         const lastModified = response.headers.get('last-modified') as string;
     
-                        const format = getFormat(contentType);
+                        const format = getFormatFromContent(contentType);
                         const reader = response.body?.getReader();
     
                         if(reader){

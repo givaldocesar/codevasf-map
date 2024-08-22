@@ -11,13 +11,10 @@ const FORMAT = new GeoJSON();
 
 export interface LayerProps {
     children?: React.ReactNode;
-    
     attributions?: AttributionLike;
     maxZoom?: number;
     minZoom?: number;
-    visible?: boolean;
     zIndex?: number;
-
     fit?: boolean;
     title?: string;
     order?: number;
@@ -41,10 +38,8 @@ const Layer: React.FC<Props> = ({children, data, layer, fit, ...props}) => {
                 });
             }
 
-            if(data && layer){
-                layer.getSource()?.addFeatures(features);
-            }
-
+            if(data && layer) layer.getSource()?.addFeatures(features);
+            
             return layer || new CustomLayer({ features: features, ...props });
 
         } catch (err){
@@ -56,9 +51,7 @@ const Layer: React.FC<Props> = ({children, data, layer, fit, ...props}) => {
     
     useEffect(() => {
         map?.addLayer(base);
-        if(fit){ 
-            map?.fit(base.getSource()?.getExtent());
-        }
+        if(fit) map?.fit(base.getSource()?.getExtent());
         return () => { map?.removeLayer(base) }
     }, []);
     

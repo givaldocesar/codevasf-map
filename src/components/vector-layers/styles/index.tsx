@@ -16,8 +16,9 @@ export const defaultStyle = new OLStyle({
     })
 });
 
-const Style: React.FC<{children?: React.ReactNode}> = ({children}) => {
+const Style: React.FC<{children?: React.ReactNode, visible?: boolean}> = ({children, visible=true}) => {
     const layer = useContext(LayerContext);
+    layer?.setVisible(visible);
     const style = layer?.getStyle() as OLStyle;
 
     return (

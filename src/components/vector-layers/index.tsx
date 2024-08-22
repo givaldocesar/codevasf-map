@@ -5,3 +5,4 @@ const VectorLayers: React.FC<{children?: React.ReactNode}> = ({children}) => {
 export default VectorLayers;
 export { default as Layer } from "./Layer";
 export { default as URLDataLayer } from "./URLDataLayer";
+export { default as APIDataLayer } from "./APIDataLayer";
