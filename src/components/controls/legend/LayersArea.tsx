@@ -19,7 +19,7 @@ const LayersArea = forwardRef<HTMLDivElement, Props>(({children, title, hide=fal
                     style={{rotate: _hide ? '180deg' : '0deg'}}
                     onClick={() => setHide(!_hide)}
                 />
-                <h3>{title}</h3>
+                <h3 style={{paddingRight: '30px'}}>{title}</h3>
             </div>
             <div className={styles.items} style={{maxHeight: _hide ? '0px' : '500px' }}>
                 { children }

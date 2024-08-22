@@ -86,5 +86,13 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
                                                 >application/json:                      para dados GeoJSON.
                                                 >application/vnd.google-earth.kml+xml:  para dados KML;      
             --> urlInit:    <RequestInit>   Opções para a função 'fetch'.
+        
+        -- APIDataLayer:            Extensão de "Layer". Usa dados adquiridos de uma URL:
+            --> database:       <string>        Tabela do banco de dados presente na API da CODEVASF.
+            --> urlInit:        <RequestInit>   Opções para a função 'fetch'.
+            --> groupField:     <string>        Campo para adquirir as versões dos dados do banco de dados.
+                                                P.ex: A área de atuação está presente no banco de dados na tabela 'municipios',
+                                                suas versões são consideradas utilizando o coluna "code".
+                                                Consulte a API para obter mais informações.
 
                 

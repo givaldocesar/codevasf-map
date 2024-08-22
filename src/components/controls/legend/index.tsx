@@ -2,9 +2,25 @@ import { BaseControl } from "..";
 import TileLayersArea from "./tile-layers-area";
 import VectorLayersArea from "./vector-layers-area";
 
-const Legend: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({className}) => {
+interface Props extends React.HTMLAttributes<HTMLDivElement>{
+    collapsable?: boolean;
+    collapseImage?: string;
+    position?: 'top_right' | 'top_left';
+}
+
+const Legend: React.FC<Props> = ({
+    className, 
+    collapsable=false, 
+    collapseImage, 
+    position ='top_right'
+}) => {
     return (
-        <BaseControl className={className}>
+        <BaseControl 
+            className={className} 
+            collapsable={collapsable}
+            collapseImage={collapseImage}
+            position={position}
+        >
             <TileLayersArea />
             <VectorLayersArea />
         </BaseControl>

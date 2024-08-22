@@ -60,7 +60,6 @@ class CustomCategorizedStyle extends Style {
 
     renderFunction_(feature: Feature | FeatureLike){
         const style = this.getStyle(feature.get(this.field_));
-        console.log(style.getVisible())
         return style?.getVisible() ? style.clone() : undefined; 
     }
 

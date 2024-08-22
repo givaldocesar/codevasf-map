@@ -60,10 +60,30 @@
     }
 }
 
+.collapse_button {
+    border-radius: 10px;
+    width: $s-6;
+    height: $s-6;
+
+    &:hover{
+        background-color: $hover;
+
+        line { stroke: white; }
+
+        image { filter: invert(1); }
+    }
+    
+}
+
 @media (min-width: $break-large){
     .arrow, .layer_icon {
         width: $s-6;
         height: $s-6;
+    }
+
+    .collapse_button {
+        width: $s-8;
+        height: $s-8;
     }
 
     .load_circle {
