@@ -3,6 +3,7 @@ import { FeatureLike } from "ol/Feature";
 import { Style } from "ol/style";
 import CustomStyle from "./CustomStyle";
 import { toContext } from "ol/render";
+import CustomText from "./CustomText";
 
 
 export const NO_CATEGORY = 'NO_CATEGORY';
@@ -26,23 +27,12 @@ class CustomCategorizedStyle extends Style {
             if(value){ this.styles_['teste'] = style }
         });
 
-        this.setRenderer((coordinates, state) =>{
-            const context = state.context;
-            const geometry = state.geometry.clone();
-            // @ts-ignore: Unreachable code error
-            geometry.setCoordinates(coordinates);
-
-            const render = toContext(context, {pixelRatio: 1});
-            const style = this.renderFunction_(state.feature);
-            if(style){
-                render.setStyle(style);
-                render.drawGeometry(geometry);
-            }
-        });
+        this.renderFunction = this.renderFunction.bind(this);
     }
 
     addStyle(style: CustomStyle){
         const value = style.getValue();
+        if(this.getText()) style.setText(this.getText() as CustomText);
         if(value){ this.styles_[value] = style }
     }
 
@@ -58,9 +48,12 @@ class CustomCategorizedStyle extends Style {
         return Object.values(this.styles_);
     }
 
-    renderFunction_(feature: Feature | FeatureLike){
-        const style = this.getStyle(feature.get(this.field_));
-        return style?.getVisible() ? style.clone() : undefined; 
+    renderFunction(feature: Feature | FeatureLike){
+        const style = this.getStyle(feature.get(this.field_))?.clone();
+        const label = style?.getText() as CustomText;
+        if(label) label.setFeatureLabel(feature);
+        
+        return style?.getVisible() ? style : undefined; 
     }
 
     setField(field: string){

@@ -1,25 +1,13 @@
 import { useContext } from "react";
+import { Stroke, Fill } from "ol/style";
 import { LayerContext, StyleContext } from "../../contexts";
-import { Style as OLStyle, Stroke, Fill, Circle } from "ol/style";
+import { CustomStyle } from "../../../classes";
 
-export const defaultStroke = new Stroke({color: 'black', width: 2});
-
-export const defaultFill = new Fill({color: '#FFFFFF7F'});
-
-export const defaultStyle = new OLStyle({
-    stroke: defaultStroke,
-    fill: defaultFill,
-    image: new Circle({
-        stroke: defaultStroke,
-        fill: defaultFill,
-        radius: 10
-    })
-});
 
 const Style: React.FC<{children?: React.ReactNode, visible?: boolean}> = ({children, visible=true}) => {
     const layer = useContext(LayerContext);
     layer?.setVisible(visible);
-    const style = layer?.getStyle() as OLStyle;
+    const style = layer?.getStyle() as CustomStyle;
 
     return (
         <StyleContext.Provider value={style}>
@@ -29,7 +17,12 @@ const Style: React.FC<{children?: React.ReactNode, visible?: boolean}> = ({child
 }
 
 export default Style;
+
+export const defaultStroke = new Stroke({color: 'black', width: 2});
+export const defaultFill = new Fill({color: '#FFFFFF7F'});
+
 export { default as CategorizedStyle } from "./CategorizedStyle";
 export { default as Category } from "./Category";
 export { default as Stroke } from "./Stroke";
 export { default as Fill } from "./Fill";
+export { default as FeatureLabel } from "./FeatureLabel";

@@ -1,4 +1,7 @@
-import { Style, Circle, Stroke, Fill } from "ol/style";
+import { Feature } from "ol";
+import { FeatureLike } from "ol/Feature";
+import { Style, Circle, Stroke, Fill, Text } from "ol/style";
+import { CustomText } from "../classes";
 import { defaultFill, defaultStroke } from "../components/vector-layers/styles";
 
 interface Props {
@@ -7,7 +10,8 @@ interface Props {
     label?: string,
     stroke?: Stroke;
     value?: string,
-    visible?: boolean
+    visible?: boolean;
+    text?: Text;
 }
 
 
@@ -42,7 +46,7 @@ class CustomStyle extends Style {
         this.value_ = value;
         this.visible_ = visible;
 
-        this.clone = this.clone.bind(this);
+        this.renderFunction = this.renderFunction.bind(this);
     }
 
     clone(){
@@ -51,8 +55,9 @@ class CustomStyle extends Style {
             label: this.label_,
             value: this.value_,
             visible: this.visible_,
-            stroke: this.getStroke() || undefined,
-            fill: this.getFill() || undefined
+            stroke: this.getStroke()?.clone() || undefined,
+            fill: this.getFill()?.clone() || undefined,
+            text: this.getText()?.clone() || undefined
         });
     }
 
@@ -72,7 +77,13 @@ class CustomStyle extends Style {
         return this.visible_;
     }
 
-    setGeometrytype(geometry?: 'Point' | 'LineString' | 'Polygon'){
+    renderFunction(feature: Feature | FeatureLike){
+        const label = this.getText() as CustomText;
+        if(label) label.setFeatureLabel(feature);
+        return this;
+    }
+
+    setGeometryType(geometry?: 'Point' | 'LineString' | 'Polygon'){
         this.geometryType_ = geometry;
     }
 

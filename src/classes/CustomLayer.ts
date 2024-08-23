@@ -4,9 +4,7 @@ import VectorImageLayer from "ol/layer/VectorImage";
 import VectorSource from "ol/source/Vector";
 import { AttributionLike } from "ol/source/Source";
 import { Filter, Geometries, LayerStatus } from "../interfaces";
-import { defaultStyle } from "../components/vector-layers/styles";
-import { EventTypes } from "ol/Observable";
-
+import { CustomCategorizedStyle, CustomStyle } from ".";
 
 
 interface Options {
@@ -37,7 +35,7 @@ class CustomLayer extends VectorImageLayer {
                 attributions: attributions,
                 features: features
             }),
-            style: defaultStyle.clone(),
+            style: new CustomStyle({}),
             ...props
         });
 
@@ -91,6 +89,11 @@ class CustomLayer extends VectorImageLayer {
         return this.status_;
     }
 
+    getStyle(): CustomStyle | CustomCategorizedStyle {
+        //@ts-ignore
+        return this.style_;
+    }
+
     setGeometry(geometry?: Geometries){
         this.geometry_ = geometry;
     }
@@ -103,6 +106,14 @@ class CustomLayer extends VectorImageLayer {
     setStatus(status: LayerStatus){
         this.status_ = status;
         this.dispatchEvent('status-changed');
+    }
+
+    setStyle(style: CustomStyle | CustomCategorizedStyle){
+        //@ts-ignore
+        this.style_ = style;
+
+        //@ts-ignore
+        this.styleFunction_ = style.renderFunction;
     }
 }
 
