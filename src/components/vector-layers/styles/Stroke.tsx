@@ -1,18 +1,21 @@
 import { useContext } from "react";
-import { Circle } from "ol/style";
-import { StyleContext } from "../../contexts";
+import { FlatStroke } from "ol/style/flat";
+import { SimpleStyle } from "../../../classes";
+import { LayerContext, StyleContext } from "../../contexts";
 
 
-const Stroke: React.FC<{color?: string; width?: number;}> = ({color, width}) => {
-    const style = useContext(StyleContext);
-    
-    const stroke = style?.getStroke();
-    color ? stroke?.setColor(color) : null;
-    width ? stroke?.setWidth(width) : null;
-    
-    const image = style?.getImage() as Circle;
-    image.setStroke(stroke || null);
+const Stroke: React.FC<FlatStroke> = (props) => {
+    //melhorar solução
+    const layer = useContext(LayerContext);
+    const style = useContext(StyleContext) as SimpleStyle;
 
+    try {
+        style?.setStroke(props);
+        layer?.dispatchEvent('change-style');
+    } catch (error){
+        throw new Error(`LAYER ${layer?.get('title')}: No 'SimpleStyle' or 'Category' parent for 'Stroke' element.`);
+    }
+   
     return <></>;
 }
 

@@ -1,11 +1,12 @@
 import { useEffect, useMemo } from "react";
 import dynamic from "next/dynamic";
+import { getUid } from "ol";
 import { CustomMap } from "../classes";
 import { registerProjections } from "../utils";
 import { TextLoader } from "./loaders";
 import { MapContext } from "./contexts";
 import styles from "./Components.module.scss";
-import { getUid } from "ol";
+
 
 registerProjections();
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CustomLayer, CustomStyle } from "../../../../classes";
+import { CustomLayer, SimpleStyle } from "../../../../classes";
 import { LayerStatus } from "../../../../interfaces";
 import { VectorLayerIcon } from "../../../buttons";
 import LoadingItem from "./LoadingItem";
@@ -28,7 +28,7 @@ const SimpleLegendItem: React.FC<Props> = ({layer}) => {
         map.fit(layer.getSource()?.getExtent());
     }
 
-    const style = layer.getStyle() as CustomStyle;
+    const style = layer.getBaseStyle() as SimpleStyle;
     return (
         <div className={styles.item} style={{order: layer.get('order')}}>
             <input type="checkbox" defaultChecked={layer.getVisible()} onChange={changeVisibility} />
@@ -36,6 +36,8 @@ const SimpleLegendItem: React.FC<Props> = ({layer}) => {
             <label onClick={zoom}>{layer.get('title')}</label>
         </div>
     );
+
+    return <></>;
 }
 
 export default SimpleLegendItem;

@@ -3,8 +3,11 @@ import { createEmpty, extend } from "ol/extent";
 import VectorImageLayer from "ol/layer/VectorImage";
 import VectorSource from "ol/source/Vector";
 import { AttributionLike } from "ol/source/Source";
+import { FlatStyle } from "ol/style/flat";
 import { Filter, Geometries, LayerStatus } from "../interfaces";
-import { CustomCategorizedStyle, CustomStyle } from ".";
+import SimpleStyle from "./styles/SimpleStyle";
+import CategorizedStyle from "./styles/CategorizedStyle";
+
 
 
 interface Options {
@@ -13,6 +16,7 @@ interface Options {
     title?: string;
     order?: number;
     visible?: boolean; 
+    style?: FlatStyle;
     geometry: 'Point' | 'LineString' | 'Polygon';
 }
 
@@ -20,6 +24,7 @@ class CustomLayer extends VectorImageLayer {
     geometry_: Geometries | undefined;
     status_: LayerStatus;
     lodingProgress_: number;
+    baseStyle_: SimpleStyle | CategorizedStyle;
     
     constructor({
         attributions, 
@@ -27,18 +32,18 @@ class CustomLayer extends VectorImageLayer {
         title, 
         order,
         geometry,
+        style,
         ...props
         } : Options
     ){
         super({
-            source: new VectorSource({
-                attributions: attributions,
-                features: features
-            }),
-            style: new CustomStyle({}),
+            source: new VectorSource({ attributions: attributions, features: features }),
             ...props
         });
-
+     
+        this.baseStyle_ = new SimpleStyle(style);
+        this.setStyle(this.baseStyle_.flatten() as FlatStyle);
+        
         this.geometry_ = geometry;
         this.status_ = 'loading';
         this.lodingProgress_ = 0;
@@ -47,6 +52,9 @@ class CustomLayer extends VectorImageLayer {
             order: order,
             title: title
         });
+
+        //@ts-ignore
+        this.on('change-style', () => this.setStyle(this.baseStyle_.flatten()));
     }
 
     async filterFeatures(filter: Filter){
@@ -77,6 +85,10 @@ class CustomLayer extends VectorImageLayer {
         }
     }
 
+    getBaseStyle(){
+        return this.baseStyle_;
+    }
+
     getGeometry(){
         return this.geometry_;
     }
@@ -89,9 +101,8 @@ class CustomLayer extends VectorImageLayer {
         return this.status_;
     }
 
-    getStyle(): CustomStyle | CustomCategorizedStyle {
-        //@ts-ignore
-        return this.style_;
+    setBaseStyle(style: SimpleStyle | CategorizedStyle){
+        this.baseStyle_ = style;
     }
 
     setGeometry(geometry?: Geometries){
@@ -106,14 +117,6 @@ class CustomLayer extends VectorImageLayer {
     setStatus(status: LayerStatus){
         this.status_ = status;
         this.dispatchEvent('status-changed');
-    }
-
-    setStyle(style: CustomStyle | CustomCategorizedStyle){
-        //@ts-ignore
-        this.style_ = style;
-
-        //@ts-ignore
-        this.styleFunction_ = style.renderFunction;
     }
 }
 

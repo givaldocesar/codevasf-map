@@ -1,6 +1,7 @@
 import { useContext } from "react";
-import { CustomCategorizedStyle } from "../../../classes";
+import { CategorizedStyle as CStyle } from "../../../classes";
 import { LayerContext, StyleContext } from "../../contexts";
+
 
 interface Props {
     children?: React.ReactNode;
@@ -10,10 +11,8 @@ interface Props {
 
 const CategorizedStyle: React.FC<Props> = ({children, field, visible=true}) => {
     const layer = useContext(LayerContext);
-    layer?.set('defaultVisible', visible);
-    
-    const style = new CustomCategorizedStyle({ field });
-    layer?.setStyle(style);
+    const style = new CStyle({field, visible});
+    layer?.setBaseStyle(style);
 
     return (
         <StyleContext.Provider value={style}>

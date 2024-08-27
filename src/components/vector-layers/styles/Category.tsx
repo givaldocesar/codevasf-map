@@ -1,38 +1,38 @@
 import { useContext } from "react";
-import { CustomStyle, CustomCategorizedStyle } from "../../../classes";
+import { CategorizedStyle, CategoryStyle } from "../../../classes";
 import { LayerContext, StyleContext } from "../../contexts";
+import { Geometries } from "../../../interfaces";
+
 
 
 interface Props {
     children?: React.ReactNode; 
     label?: string;
     value: string;
-    geometry?: 'Point' | 'LineString' | 'Polygon' | undefined;
+    geometry?: Geometries;
     zIndex?: number;
     visible?: boolean;
 }
 
-const Category: React.FC<Props> = ({children, label, value, geometry, visible, ...props}) => {
+const Category: React.FC<Props> = ({children, label, value, geometry, visible}) => {
     const layer = useContext(LayerContext);
-    const parentStyle = useContext(StyleContext) as CustomCategorizedStyle;
-    
-    const style = new CustomStyle({
-        label: label,
-        value: value, 
+    const parent = useContext(StyleContext) as CategorizedStyle;
+    const style = new CategoryStyle({
         geometry: geometry || layer?.getGeometry(),
-        visible: visible === undefined ? layer?.get('defaultVisible') : visible,
-        ...props
+        visible: visible || parent.getDefaultVisible(),
+        value, 
+        label,
     });
 
-    if(parentStyle){
-        parentStyle.addStyle(style);
+    if(!parent){
+        throw new Error(`LAYER ${layer?.get('title')}: No 'CategorizedStyle' parent for 'Category' element.`);
     } else {
-        console.error(`ERROR - LAYER ${layer?.get('title')}: no 'CategorizedStyle' element.`);
+        parent.addStyle(style);
     }
 
     return (
         <StyleContext.Provider value={style}>
-            {children}
+            { children }
         </StyleContext.Provider>
     );
 }

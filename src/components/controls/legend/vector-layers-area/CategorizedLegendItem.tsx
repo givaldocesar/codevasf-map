@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CustomCategorizedStyle, CustomLayer, NO_CATEGORY } from "../../../../classes";
+import {  CustomLayer, CategorizedStyle, NO_CATEGORY } from "../../../../classes";
 import { LayerStatus } from "../../../../interfaces";
 import { VectorLayerIcon, CollpaseLayerIcon } from "../../../buttons";
 import LoadingItem from "./LoadingItem";
@@ -15,10 +15,10 @@ const CategorizedLegendItem: React.FC<{layer: CustomLayer}> = ({layer}) => {
     //LOADING
     if(layerStatus === 'loading') return <LoadingItem layer={layer} />;
 
-    const style = layer.getStyle() as CustomCategorizedStyle;
+    const style = layer.getBaseStyle() as CategorizedStyle;
     
     function changeVisibility(evt: React.ChangeEvent<HTMLInputElement>){
-        evt.stopPropagation();
+       evt.stopPropagation();
         const elements = evt.target.form?.elements as HTMLFormControlsCollection;
         
         if(evt.target.name === 'main'){
@@ -55,7 +55,7 @@ const CategorizedLegendItem: React.FC<{layer: CustomLayer}> = ({layer}) => {
             }
         }   
 
-        layer.changed();
+        layer.dispatchEvent('change-style');
     }
 
     async function zoom(value?: string){
@@ -73,7 +73,7 @@ const CategorizedLegendItem: React.FC<{layer: CustomLayer}> = ({layer}) => {
   
     }
 
-    const visible = layer.get('defaultVisible');
+    const visible = style.getDefaultVisible();
     
     return (
         <form className={styles.categorized_item} style={{order: layer.get('order')}}>
@@ -88,7 +88,7 @@ const CategorizedLegendItem: React.FC<{layer: CustomLayer}> = ({layer}) => {
                         return (
                             <div className={styles.item} key={item.getValue()}>
                                 <input type="checkbox" defaultChecked={visible} onChange={changeVisibility} name={item.getValue()}/>
-                                <VectorLayerIcon geometry={item.getGeometryType()} style={item}/>
+                                <VectorLayerIcon geometry={item.getGeometry()} style={item}/>
                                 <label onClick={() => zoom(item.getValue())} id={item.getValue()}>{item.getLabel() || item.getValue() }</label>
                             </div>
                         );

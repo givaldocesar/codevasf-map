@@ -1,10 +1,9 @@
-import { Icon, Circle } from "ol/style";
-import { CustomStyle } from "../../classes";
+import { CategoryStyle, SimpleStyle } from "../../classes";
 import styles from "./Button.module.scss";
 
 
 interface Props {
-    style: CustomStyle;
+    style: SimpleStyle | CategoryStyle;
     geometry: string | undefined;
 }
 
@@ -13,10 +12,12 @@ const VectorLayerIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>&Props> = 
     style,
     geometry
 }) => {
+    let flat = style.getStyle();
+    
     return (
         <svg className={`${styles.layer_icon} ${className}`} viewBox="0 0 50 50">
             {
-                style.getImage() instanceof Icon ?
+                flat['icon-src'] ?
                     <>
                     </> :
                 geometry === 'Point' ?
@@ -24,10 +25,10 @@ const VectorLayerIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>&Props> = 
                         <circle 
                             cx={25}
                             cy={25}
-                            r={(style?.getImage() as Circle).getRadius()}
-                            stroke={ (style?.getImage() as Circle).getStroke()?.getColor() as string }
-                            strokeWidth={ (style?.getImage() as Circle).getStroke()?.getWidth() }
-                            fill={ (style?.getImage() as Circle).getFill()?.getColor() as string }
+                            r={ flat['circle-radius'] }
+                            stroke={ flat['circle-stroke-color'] as string }
+                            strokeWidth={ flat['circle-stroke-width'] as number }
+                            fill={ flat['circle-fill-color'] as string }
                             strokeLinecap="round"
                         />
                     </> :
@@ -35,8 +36,8 @@ const VectorLayerIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>&Props> = 
                     <>
                         <line 
                             x1={5} y1={25} x2={45} y2={25}
-                            stroke={ style?.getStroke()?.getColor() as string }
-                            strokeWidth={ style?.getStroke()?.getWidth() }
+                            stroke={ flat['circle-stroke-color'] as string }
+                            strokeWidth={ flat['circle-stroke-width'] as number }
                             strokeLinecap="round"
                         />
                     </> :
@@ -44,15 +45,15 @@ const VectorLayerIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>&Props> = 
                     <>
                         <rect 
                             x={5} y={5} width={40} height={40} 
-                            fill={ style?.getFill()?.getColor() as string }
-                            stroke={ style?.getStroke()?.getColor() as string }
-                            strokeWidth={ style?.getStroke()?.getWidth() }
+                            stroke={flat['circle-stroke-color'] as string }
+                            strokeWidth={ flat['circle-stroke-width'] as number }
+                            fill={ flat['circle-fill-color'] as string }
                             strokeLinecap="round"
                         />
                     </> :
                     <>
                         <title>Sem geometria definida</title>
-                        <text x={50} y={195}>?</text>
+                        <text x={10} y={48} >?</text>
                     </>    
             }
         </svg>
