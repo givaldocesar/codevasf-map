@@ -1,6 +1,4 @@
-import { BaseControl } from "..";
-import TileLayersArea from "./tile-layers-area";
-import VectorLayersArea from "./vector-layers-area";
+import BaseControl from "../BaseControl";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement>{
     collapsable?: boolean;
@@ -8,23 +6,22 @@ interface Props extends React.HTMLAttributes<HTMLDivElement>{
     collapsePositionButton?: 'top_right' | 'top_left';
 }
 
-const Legend: React.FC<Props> = ({
+const DragAndDrop: React.FC<Props> = ({
     className, 
     collapsable=false, 
     collapseImage, 
     collapsePositionButton ='top_right'
 }) => {
     return (
-        <BaseControl 
+        <BaseControl
             className={className} 
             collapsable={collapsable}
             collapseImage={collapseImage}
             collapsePositionButton={collapsePositionButton}
         >
-            <TileLayersArea />
-            <VectorLayersArea />
+
         </BaseControl>
-    );
+    )
 }
 
-export default Legend;
+export default DragAndDrop;

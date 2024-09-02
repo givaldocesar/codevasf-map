@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import { LayerContext, StyleContext } from "../../contexts";
+import { SelectStyle } from "../../../classes";
+import { LayerContext, StyleContext, InteractionContext } from "../../contexts";
 
 
 const SimpleStyle: React.FC<{
@@ -10,8 +11,15 @@ const SimpleStyle: React.FC<{
     visible=true
 }) => {
     const layer = useContext(LayerContext);
-    layer?.setVisible(visible);
-    const style = layer?.getBaseStyle();
+    const interaction = useContext(InteractionContext);
+    
+    let style;
+    if(interaction){
+        style = interaction.getStyle() as SelectStyle;
+    } else {
+        layer?.setVisible(visible);
+        style = layer?.getBaseStyle();
+    }
     
     return (
         <StyleContext.Provider value={style}>

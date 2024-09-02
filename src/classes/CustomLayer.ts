@@ -54,7 +54,14 @@ class CustomLayer extends VectorImageLayer {
         });
 
         //@ts-ignore
-        this.on('change-style', () => this.setStyle(this.baseStyle_.flatten()));
+        this.on('change-style', () => {
+            try{
+                this.setStyle(this.baseStyle_.flatten());
+            } catch (err){
+                const error = err as Error;
+                throw new Error(`LAYER ${title}: STYLE ERROR: ${error.message}`);
+            }
+        });
     }
 
     async filterFeatures(filter: Filter){

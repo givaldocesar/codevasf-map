@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { CategorizedStyle as CStyle } from "../../../classes";
-import { LayerContext, StyleContext } from "../../contexts";
+import { CategorizedStyle as CStyle, SelectStyle } from "../../../classes";
+import { LayerContext, StyleContext, InteractionContext } from "../../contexts";
 
 
 interface Props {
@@ -11,8 +11,15 @@ interface Props {
 
 const CategorizedStyle: React.FC<Props> = ({children, field, visible=true}) => {
     const layer = useContext(LayerContext);
-    const style = new CStyle({field, visible});
-    layer?.setBaseStyle(style);
+    const interaction = useContext(InteractionContext);
+
+    let style;
+    if(interaction){
+        style = interaction.getStyle() as SelectStyle;
+    } else {
+        style = new CStyle({field, visible});
+        layer?.setBaseStyle(style);
+    }
 
     return (
         <StyleContext.Provider value={style}>

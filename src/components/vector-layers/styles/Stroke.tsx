@@ -1,19 +1,21 @@
 import { useContext } from "react";
 import { FlatStroke } from "ol/style/flat";
-import { SimpleStyle } from "../../../classes";
+import { SimpleStyle, SelectStyle } from "../../../classes";
 import { LayerContext, StyleContext } from "../../contexts";
+import { convertFlatStroke } from "../utils/convert-flat-styles";
 
 
 const Stroke: React.FC<FlatStroke> = (props) => {
     //melhorar solução
     const layer = useContext(LayerContext);
-    const style = useContext(StyleContext) as SimpleStyle;
+    const style = useContext(StyleContext);
 
-    try {
-        style?.setStroke(props);
+    if(style instanceof SimpleStyle){
+        style.setStroke(props);
         layer?.dispatchEvent('change-style');
-    } catch (error){
-        throw new Error(`LAYER ${layer?.get('title')}: No 'SimpleStyle' or 'Category' parent for 'Stroke' element.`);
+       
+    } else if(style instanceof SelectStyle) {
+        style.setStroke(convertFlatStroke(props));
     }
    
     return <></>;

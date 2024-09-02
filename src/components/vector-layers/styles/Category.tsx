@@ -4,7 +4,6 @@ import { LayerContext, StyleContext } from "../../contexts";
 import { Geometries } from "../../../interfaces";
 
 
-
 interface Props {
     children?: React.ReactNode; 
     label?: string;

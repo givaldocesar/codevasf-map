@@ -7,7 +7,7 @@ import styles from "./Controls.module.scss";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
     collapsable?: boolean;
-    position?: 'top_right' | 'top_left';
+    collapsePositionButton?: 'top_right' | 'top_left';
     collapseImage?: string;
 }
 
@@ -15,7 +15,7 @@ const BaseControl: React.FC<Props> = ({
     children, 
     className="", 
     collapsable, 
-    position='top_right', 
+    collapsePositionButton='top_right', 
     collapseImage,
     ...props
 }) => {
@@ -38,7 +38,7 @@ const BaseControl: React.FC<Props> = ({
         <div ref={ref} className={`${styles.control} ${className}`}{ ...props }>
             {collapsable &&
                 <CollapseButton 
-                    className={styles[position]}
+                    className={styles[collapsePositionButton]}
                     collapsed={collapsed} 
                     onClick={() => setCollapsed(!collapsed)} 
                     image={collapseImage}

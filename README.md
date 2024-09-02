@@ -20,9 +20,12 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
 
     ╚> Controls:        Agrupa os controles do mapa. (Ajuda a organizar o código)
         --Title:        Adiciona um título ao mapa.
-        --Legend:       Adiciona legenda ao mapa, onde é possivel alterar o estado das camadas.
         --Scale:        Mostra uma escala gráfica no mapa.
         --Attributions: Permite visualizar as informações de atribuições na 'source' das camadas.
+        --Legend:                                                   Adiciona legenda ao mapa, onde é possivel alterar o estado das camadas.
+            -->collapsable              <boolean>                   Habilita o botão de colapsar.
+            -->collapseImage            <string>                    Caminho para a image de fundo do botão de colapsar. 
+            -->collapsePositionButton   <'top_right' | 'top_left'>  Posição do botão para colapsar.
 
         É possivel controlar a posição dos controles através do atributo 'className' com CSS ou tailwind.
     

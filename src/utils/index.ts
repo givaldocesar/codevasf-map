@@ -1,3 +1,7 @@
 export { default as clipFeature } from "./clipFeature";
+export { default as extractStringFromExpression } from "./extractStringExpressionFromExpression";
+export { default as getFeatureLabel } from "./getFeatureLabel";
 export { default as registerProjections } from "./registerProjections";
-export { default as extractStringFromExpression, FIELD_REGEX } from "./extractStringExpressionFromExpression";
+
+export const FIELD_REGEX = /\{[\w]+\}/gi;
+

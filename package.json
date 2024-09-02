@@ -8,7 +8,8 @@
     "./controls": "./src/components/controls/index.tsx",
     "./tile-layers": "./src/components/tile-layers/index.tsx",
     "./vector-layers": "./src/components/vector-layers/index.tsx",
-    "./vector-layers/styles": "./src/components/vector-layers/styles/index.tsx"
+    "./vector-layers/styles": "./src/components/vector-layers/styles/index.tsx",
+    "./vector-layers/interactions": "./src/components/vector-layers/interactions/index.tsx"
   },
   "author": {
     "name": "Givaldo Cesar / CODEVASF 1ªSR",
@@ -35,5 +36,8 @@
     "@types/proj4": "^2.5.5",
     "@types/react": "^18.3.3",
     "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "@turf/truncate": "^7.1.0"
   }
 }
