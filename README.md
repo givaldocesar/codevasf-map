@@ -26,6 +26,11 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
             -->collapsable              <boolean>                   Habilita o botão de colapsar.
             -->collapseImage            <string>                    Caminho para a image de fundo do botão de colapsar. 
             -->collapsePositionButton   <'top_right' | 'top_left'>  Posição do botão para colapsar.
+        --DragAndDrop:                                              Adiciona a interação de DragAndDrop arquivos KML's ao mapa.
+            -->collapsable              <boolean>                   Habilita o botão de colapsar.
+            -->collapseImage            <string>                    Caminho para a image de fundo do botão de colapsar. 
+            -->collapsePositionButton   <'top_right' | 'top_left'>  Posição do botão para colapsar.
+            -->showControl              <boolean>                   Exibe/Oculta o controle.
 
         É possivel controlar a posição dos controles através do atributo 'className' com CSS ou tailwind.
     

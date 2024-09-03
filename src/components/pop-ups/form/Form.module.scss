@@ -1,0 +1,58 @@
+@import "../../../styles/colors";
+
+
+.form {
+   width: 100%;
+}
+
+.row {
+    padding: 2px 0px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    label {
+        width: 40%;
+        min-width: fit-content;
+    }
+
+    button {
+        flex: 1; 
+        padding: 5px 10px;
+        background-color: $std;
+        color: white;
+        border-radius: 10px;
+
+        &:hover {
+            background-color: $hover;
+        }
+    }
+
+    input {
+        flex: 1;
+    }
+
+    input[type=number] {
+        border: 1px solid $std;
+        border-radius: 2px;
+        outline-color: $active;
+        text-align: right;
+        padding-right: 5px;
+    }
+
+    input[type=color]{
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}
+
+.title {
+    width: 100%;
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    color: $std;
+    border-bottom: 2px solid $std;
+}

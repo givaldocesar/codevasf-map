@@ -24,7 +24,7 @@ const CollapseButton: React.FC<React.HTMLAttributes<HTMLOrSVGElement>&Props> = (
             {collapsed ? 
                 <>
                     {image ?  
-                        <image href={image} width={48} height={48}/> : 
+                        <image x={3} y={3} href={image} width={44} height={44}/> : 
                         <>
                             <line x1={10} y1={25} x2={40} y2={25} />
                             <line x1={25} y1={10} x2={25} y2={40} />

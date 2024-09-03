@@ -9,22 +9,22 @@ import SimpleStyle from "./styles/SimpleStyle";
 import CategorizedStyle from "./styles/CategorizedStyle";
 
 
-
 interface Options {
+    geometry?: Geometries;
     attributions?: AttributionLike;
     features?: Feature[];
     title?: string;
     order?: number;
     visible?: boolean; 
     style?: FlatStyle;
-    geometry: 'Point' | 'LineString' | 'Polygon';
+    zIndex?: number;
 }
 
 class CustomLayer extends VectorImageLayer {
-    geometry_: Geometries | undefined;
-    status_: LayerStatus;
-    lodingProgress_: number;
-    baseStyle_: SimpleStyle | CategorizedStyle;
+    private geometry_: Geometries | undefined;
+    private status_: LayerStatus;
+    private lodingProgress_: number;
+    private baseStyle_: SimpleStyle | CategorizedStyle;
     
     constructor({
         attributions, 
@@ -59,7 +59,7 @@ class CustomLayer extends VectorImageLayer {
                 this.setStyle(this.baseStyle_.flatten());
             } catch (err){
                 const error = err as Error;
-                throw new Error(`LAYER ${title}: STYLE ERROR: ${error.message}`);
+                throw new Error(`LAYER ${this.get('title')}: STYLE ERROR: ${error.message}`);
             }
         });
     }

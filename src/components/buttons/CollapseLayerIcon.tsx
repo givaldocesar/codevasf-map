@@ -1,3 +1,4 @@
+import BaseIcon from "./BaseIcon";
 import styles from "./Button.module.scss";
 
 interface Props {
@@ -10,9 +11,8 @@ const CollapseLayerIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>&Props> 
     collpased=false
 }) => {
     return (
-        <svg 
-            className={`${styles.layer_icon} ${styles.collapse_icon} ${className}`} 
-            viewBox="0 0 50 50"
+        <BaseIcon
+            className={`${styles.collapse_icon} ${className}`} 
             onClick={onClick}
         >
             <title>{ collpased ? "Mostrar" : "Ocultar" }</title>
@@ -25,7 +25,7 @@ const CollapseLayerIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>&Props> 
                     <line x1={10} y1={25} x2={40} y2={25} />
                 </>
             }
-        </svg>
+        </BaseIcon>
     );
 }
 

@@ -1,0 +1,46 @@
+@import "../../../styles/breakpoints";
+@import "../../../styles/widths";
+@import "../../../styles/colors";
+
+.title {
+    font-weight: bold;
+    font-size: small;
+    padding: 2px 37.5px 2px 0px;
+}
+
+.item {
+    padding: 2px 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 5px;
+
+    span {
+        font-size: small;
+
+        &:hover{
+            cursor: pointer;
+        }
+    }
+
+    svg {
+        cursor: pointer;
+    }
+
+    &:hover{
+        background-color: $lite;
+    }
+}
+
+@media (min-width: $break-large){
+    .title {
+        font-size: medium;
+        padding: 5px 37.5px 5px 0px;
+    }
+
+    .item {
+        span {
+            font-size: medium;
+        }
+    }
+}

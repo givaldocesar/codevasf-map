@@ -14,6 +14,8 @@ const VectorLayersArea: React.FC = () => {
 
     const addLayer = useCallback((evt: CollectionEvent<BaseLayer>) => {
         const layer = evt.element; 
+        if(layer.get('ignore')) return ;
+
         if(layer instanceof CustomLayer && !layers.some(item => getUid(item) === getUid(layer))){
             layers.push(layer);
             setRevision(revision + 1);

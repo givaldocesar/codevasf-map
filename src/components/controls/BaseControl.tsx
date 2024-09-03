@@ -1,4 +1,4 @@
-import { useRef, useContext, useEffect, useState } from "react";
+import { forwardRef, useRef, useContext, useEffect, useState, createElement } from "react";
 import Control from "ol/control/Control";
 import { MapContext } from "../contexts";
 import { CollapseButton } from "../buttons";
@@ -11,15 +11,15 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
     collapseImage?: string;
 }
 
-const BaseControl: React.FC<Props> = ({
+const BaseControl = forwardRef<HTMLDivElement, Props>(({
     children, 
     className="", 
     collapsable, 
     collapsePositionButton='top_right', 
     collapseImage,
     ...props
-}) => {
-    const ref = useRef<HTMLDivElement>(null);
+}, ref) => {
+    const controlRef = useRef<HTMLDivElement>(null);
     const map = useContext(MapContext);
     const [collapsed, setCollapsed] = useState<boolean>(false);
 
@@ -28,27 +28,30 @@ const BaseControl: React.FC<Props> = ({
     }, []);
 
     useEffect(() => {
-        if(!ref.current){ return }
-        const control = new Control({element: ref.current });
+        if(!controlRef.current){ return }
+
+        const control = new Control({element: controlRef.current });
         map?.addControl(control);
         return () => { map?.removeControl(control) };
     }, []);
     
     return (
-        <div ref={ref} className={`${styles.control} ${className}`}{ ...props }>
-            {collapsable &&
-                <CollapseButton 
-                    className={styles[collapsePositionButton]}
-                    collapsed={collapsed} 
-                    onClick={() => setCollapsed(!collapsed)} 
-                    image={collapseImage}
-                />
-            }
-            <div style={{display: collapsed ? 'none' : 'block'}}>
-                { children }
+        <div id='control-wrapper' style={{display: 'none'}}>
+            <div ref={controlRef} className={`${styles.control} ${className}`} { ...props }>
+                {collapsable &&
+                    <CollapseButton 
+                        className={styles[collapsePositionButton]}
+                        collapsed={collapsed} 
+                        onClick={() => setCollapsed(!collapsed)} 
+                        image={collapseImage}
+                    />
+                }
+                <div style={{display: collapsed ? 'none' : 'block'}} ref={ref}>
+                    { children }
+                </div>
             </div>
         </div>
     );
-}
+});
 
 export default BaseControl;

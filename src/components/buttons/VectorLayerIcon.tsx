@@ -1,21 +1,24 @@
 import { CategoryStyle, SimpleStyle } from "../../classes";
-import styles from "./Button.module.scss";
+import BaseIcon from "./BaseIcon";
 
 
 interface Props {
+    className?: string;
     style: SimpleStyle | CategoryStyle;
     geometry: string | undefined;
+    onClick: (evt: React.MouseEvent<HTMLOrSVGElement, MouseEvent>) => void;
 }
 
-const VectorLayerIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>&Props> = ({
+const VectorLayerIcon: React.FC<Props> = ({
     className="",
     style,
-    geometry
+    geometry,
+    onClick
 }) => {
     let flat = style.getStyle();
     
     return (
-        <svg className={`${styles.layer_icon} ${className}`} viewBox="0 0 50 50">
+        <BaseIcon className={className} onClick={onClick}>
             {
                 flat['icon-src'] ?
                     <>
@@ -56,7 +59,7 @@ const VectorLayerIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>&Props> = 
                         <text x={10} y={48} >?</text>
                     </>    
             }
-        </svg>
+        </BaseIcon>
     );
 }
 

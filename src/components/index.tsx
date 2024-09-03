@@ -1,6 +1,5 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import dynamic from "next/dynamic";
-import { getUid } from "ol";
 import { CustomMap } from "../classes";
 import { registerProjections } from "../utils";
 import { TextLoader } from "./loaders";
@@ -27,6 +26,9 @@ const Map: React.FC<React.HTMLAttributes<HTMLDivElement>&Props> = ({
     minZoom,
     maxZoom
 }) => {
+    const ref = useRef<HTMLDivElement>(null);
+    const [popup, setPopup] = useState<React.ReactNode>(null);
+
     const map = useMemo(() => new CustomMap({
         projection: projection,
         center: center,
@@ -35,18 +37,24 @@ const Map: React.FC<React.HTMLAttributes<HTMLDivElement>&Props> = ({
         maxZoom: maxZoom
     }), []);
 
-    const mapID = `map_${getUid(map)}`;
+    useEffect(() => {
+        map.setTarget(ref?.current || undefined);
+        return () => map.setTarget(undefined);
+    }, [ref.current]);
 
     useEffect(() => {
-        map.setTarget(mapID);
-        return () => map.setTarget(undefined);
-    }, []);
+        ref.current?.addEventListener('show-popup', ((evt: CustomEvent) => {
+            evt.stopPropagation();
+            setPopup(evt.detail);
+        }) as EventListener);
+    });
 
     return (
-        <div className={`${styles.map} ${className}`} id={mapID}>
+        <div className={`${styles.map} ${className}`} ref={ref}>
             <MapContext.Provider value={map}>
                 { children }
             </MapContext.Provider>
+            { popup }
         </div>
     );
 }
