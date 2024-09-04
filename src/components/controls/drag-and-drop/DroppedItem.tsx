@@ -12,7 +12,7 @@ interface Props {
 
 const DroppedItem: React.FC<Props> = ({id, layer}) => {
     const [name, _] = id.split('_');
-    const [revision, setRevision] = useState<number>(0);
+    const [__, setRevision] = useState<number>(0);
     const map = useContext(MapContext);
 
     useEffect(() => {

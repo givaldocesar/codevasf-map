@@ -31,6 +31,7 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
             -->collapseImage            <string>                    Caminho para a image de fundo do botão de colapsar. 
             -->collapsePositionButton   <'top_right' | 'top_left'>  Posição do botão para colapsar.
             -->showControl              <boolean>                   Exibe/Oculta o controle.
+            -->showFeaturesProperties   <boolean>                   Habilita um popup que mostra as propriedades da feição, quando o mouse repousa sobre esta.
 
         É possivel controlar a posição dos controles através do atributo 'className' com CSS ou tailwind.
     

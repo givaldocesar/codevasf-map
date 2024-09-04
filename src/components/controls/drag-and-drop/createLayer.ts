@@ -1,0 +1,87 @@
+import { Feature, Overlay } from "ol";
+import { Select } from "ol/interaction";
+import { never, pointerMove } from "ol/events/condition";
+import { Style, Stroke, Fill, Circle } from "ol/style";
+import { CustomLayer, CustomMap } from "../../../classes";
+import { randomColor } from "../../../utils";
+import updatePopup from "./updatePopup";
+import styles from "./DragAndDrop.module.scss";
+
+
+
+interface Paramaters {
+    map?: CustomMap | null; 
+    title: string;
+    features: Feature[];
+    showProperties?: boolean;
+}
+
+export default function createLayer({map, title, features, showProperties} : Paramaters){
+    const stroke = randomColor("HEX", 0.75);
+    const fill = randomColor("HEX", 0.75);
+    
+    //LAYER
+    const layer = new CustomLayer({
+        geometry: 'Polygon',
+        zIndex: 9999,
+        style: {
+            "stroke-color": stroke,
+            "circle-stroke-color": stroke,
+            "fill-color": fill,
+            "circle-fill-color": fill
+        }
+    });
+    layer.set('ignore', true);
+    layer.set('title', title);
+    layer.getSource()?.addFeatures(features); 
+
+    map?.addLayer(layer);
+    map?.fit(layer.getSource()?.getExtent());
+
+    //HOVER SHOWING PROPERTIES
+    if(showProperties && map){
+        const hover = new Select({
+            condition: pointerMove,
+            toggleCondition: never,
+            style: new Style({
+                stroke: new Stroke({color: "crimson", width: 4}),
+                fill: new Fill({color: "#F0808095"}),
+                image: new Circle({
+                    radius: 10,
+                    stroke: new Stroke({color: "crimson", width: 4}),
+                    fill: new Fill({color: "#F0808095"})
+                })
+            }),
+            layers: [layer]
+        });
+
+        hover.on('select', (evt) => {
+            if(evt.selected.length > 0){
+                map.getViewport().style.cursor = "zoom-in";
+            } else {
+                map.getViewport().style.cursor = "default";
+            }
+        });
+
+        const container = document.createElement('div');
+        container.className = styles.popup;
+
+        const popup = new Overlay({
+            element: container
+        });
+
+        hover.on('select', (evt) => {
+            if(evt.selected.length > 0){
+                updatePopup(popup, evt.selected[0]);
+                popup.setPosition(evt.mapBrowserEvent.coordinate);
+                map.addOverlay(popup);
+            } else {
+                map.removeOverlay(popup);
+            }
+        });
+
+        map.addInteraction(hover);
+    }
+
+    return layer;
+}

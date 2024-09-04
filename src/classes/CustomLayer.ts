@@ -4,6 +4,7 @@ import VectorImageLayer from "ol/layer/VectorImage";
 import VectorSource from "ol/source/Vector";
 import { AttributionLike } from "ol/source/Source";
 import { FlatStyle } from "ol/style/flat";
+import BaseEvent from "ol/events/Event";
 import { Filter, Geometries, LayerStatus } from "../interfaces";
 import SimpleStyle from "./styles/SimpleStyle";
 import CategorizedStyle from "./styles/CategorizedStyle";

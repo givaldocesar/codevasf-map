@@ -2,12 +2,11 @@ import { useContext, useEffect, useMemo, useState, useRef } from "react";
 import { Feature } from "ol";
 import { KML } from "ol/format";
 import { DragAndDrop as Interaction } from "ol/interaction";
-import { CustomLayer } from "../../../classes";
 import { MapContext } from "../../../components/contexts";
 import BaseControl from "../BaseControl";
 import DroppedItem from "./DroppedItem";
+import createLayer from "./createLayer";
 import styles from "./DragAndDrop.module.scss";
-import { randomColor } from "../../../utils";
 
 
 interface Props extends React.HTMLAttributes<HTMLDivElement>{
@@ -15,6 +14,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement>{
     collapseImage?: string;
     collapsePositionButton?: 'top_right' | 'top_left';
     showControl?: boolean;
+    showFeaturesProperties?: boolean;
 }
 
 const DragAndDrop: React.FC<Props> = ({
@@ -22,7 +22,8 @@ const DragAndDrop: React.FC<Props> = ({
     collapsable=false, 
     collapseImage, 
     collapsePositionButton ='top_right',
-    showControl=true
+    showControl=true,
+    showFeaturesProperties=false
 }) => {
     const ref = useRef<HTMLDivElement>(null);
     const map = useContext(MapContext);
@@ -49,25 +50,12 @@ const DragAndDrop: React.FC<Props> = ({
                 map?.fit(file.props.layer.getSource()?.getExtent());
             
             } else {
-                const stroke = randomColor("HEX", 0.75);
-                const fill = randomColor("HEX", 0.75);
-                
-                const layer = new CustomLayer({
-                    geometry: 'Polygon',
-                    zIndex: 9999,
-                    style: {
-                        "stroke-color": stroke,
-                        "circle-stroke-color": stroke,
-                        "fill-color": fill,
-                        "circle-fill-color": fill
-                    }
+                const layer = createLayer({
+                    map: map,
+                    title: evt.file.name, 
+                    features: evt.features as Feature[],
+                    showProperties: showFeaturesProperties
                 });
-                layer.set('ignore', true);
-                layer.set('title', evt.file.name);
-                layer.getSource()?.addFeatures(evt.features as Feature[]); 
-                
-                map?.addLayer(layer);
-                map?.fit(layer.getSource()?.getExtent());
                 
                 files.push(<DroppedItem key={id} id={id} layer={layer} />);
                 setRevision(revision => revision + 1);
