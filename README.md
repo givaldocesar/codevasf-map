@@ -50,7 +50,7 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
             --> zIndex:     <number>    Define a ordem de exibição da camada. 
                                         Camadas com valores mais baixos são sobrepostas.
     
-    ╚> VectorLayers:   Agrupa as camadas vetoriais. (Ajuda a organizar o código)
+    ╚> VectorLayers:    Agrupa as camadas vetoriais. (Ajuda a organizar o código)
         -- Layer:       Adiciona uma camada vetorial ao mapa.
             -->layer:           <CustomLayer>           Layer que servirá de base para a camada.
                                                         Caso omitida, será adicionada a padrão.
@@ -70,30 +70,42 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
             ╚> style:
                 --Style:                        Disponibiliza o estilo da camada para os elementos-filhos.
                     -->visible:     <boolean>   Define se a camada será exibidade por padrão.
+                    --Stroke:                       Altera a linha da camada. 
+                                                    Utilizar as propriedades de ['FlatStroke do OL'](https://openlayers.org/en/latest/apidoc/module-ol_style_flat.html#~FlatStroke).
+                    --Fill:                         Altera o preenchimento da camada.
+                                                    Utilizar as propriedades de ['FlatFill do OL'](https://openlayers.org/en/latest/apidoc/module-ol_style_flat.html#~FlatFill).
+                    --FeatureLabel:                 Adiciona rótulos as feições de um estilo. 
+                        -->expression:  <string>        Template para criar os rótulos. Para utilizar valores presentes nas feições utilize o template 
+                                                        '{propriedade}'. P.ex: a expressão '{municipio}' exibirá 'valor_propriedade_municipio', para as feições que possuirem a prorpriedade 'municipio'.
+                        OBS: Utilizar as propriedades de ['FlatText do OL'](https://openlayers.org/en/latest/apidoc/module-ol_style_flat.html#~FlatText).
+                            É possível adicionar uma padrão pra todas as categorias, colocando o elemento 'FeatureLabel' como filho de 'CategorizedStyle'.
+
                 --CategorizedStyle:             Cria um estilo categorizado para a camada. Necessário adicionar elementos "Category" para estilizar.
                     -->visible:     <boolean>   Define se a camada será exibidade por padrão.
-                    -->field:       <string>            Campo que irá categorizar a camada. 
-                                                        P.ex: Categorizar Municípios pelo "field" nome.
+                    -->field:       <string>                Campo que irá categorizar a camada. 
+                                                             P.ex: Categorizar Municípios pelo "field" nome.
+                    
                     --Category:                             Cria uma categoria para um estilo categorizado.
                         --->label:      <string>            Rotulo da categoria que aparecerá na legenda.
                                                             Caso não seja fornecido, o valor usado será o 'value'.
                         --->geometry:   <'Point' |          Tipo de ícone que aparecerá na legenda.
-                                        'LineString' |     Caso não seja fornecido será usado a geometria da camada.
+                                        'LineString' |      Caso não seja fornecido será usado a geometria da camada.
                                         'Polygon' | 
                                         undefined>                                              
                         --->value:                          Valor de filtro das feições.
                                                             O filtro utiliza a propriedade "field" de "CategorizedStyle".
                         --->value = 'NO_CATEGORY'           Exibe e estiliza as feições que não foram categorizadas.
 
-                    --Stroke:                       Altera a linha da camada ou categoria. 
-                                                    Utilizar as propriedades de ['FlatStroke do OL'](https://openlayers.org/en/latest/apidoc/module-ol_style_flat.html#~FlatStroke).
-                    --Fill:                         Altera o preenchimento da camada ou categoria.
-                                                    Utilizar as propriedades de ['FlatFill do OL'](https://openlayers.org/en/latest/apidoc/module-ol_style_flat.html#~FlatFill).
-                    --FeatureLabel:                 Adiciona rótulos as feições de um estilo ou categoria. 
-                        -->expression:  <string>        Template para criar os rótulos. Para utilizar valores presentes nas feições utilize o template 
-                                                        '{propriedade}'. P.ex: a expressão '{municipio}' exibirá 'valor_propriedade_municipio', para as feições que possuirem a prorpriedade 'municipio'.
-                        OBS:Utilizar as propriedades de ['FlatText do OL'](https://openlayers.org/en/latest/apidoc/module-ol_style_flat.html#~FlatText).
-                            É possível adicionar uma padrão pra todas as categorias, colocando o elemento 'FeatureLabel' como filho de 'CategorizedStyle'.
+                        OBS: 'Stroke', 'Fill' e 'FeatureLabel' também podem ser utilizados como filhossde 'Category'.
+            
+            ╚> interactions:        
+                --Interactions:             Agrupa as interações das camadas vetoriais. (Ajuda a organizar o código).  
+                    --Hover:                Seleciona a feição a qual o mouse está parado.
+                    --Click:                Seleciona uma feição ao clicar nela.
+                        --->zoomToFeature:  Dá zoom na feição selecionada.   
+
+                    OBS: 'SimpleStyle' e 'CategorizedStyle' também podem ser utilizados como filhos de 'Hover' e 'Click'.          
+
         
         -- URLDataLayer:            Extensão de "Layer". Usa dados adquiridos de uma URL:
             --> url:        <string>        URL para aquisição dos dados.

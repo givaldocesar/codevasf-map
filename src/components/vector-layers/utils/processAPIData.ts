@@ -1,7 +1,7 @@
 import { GeoJSON } from "ol/format";
 import { Projection } from "ol/proj";
 import { CustomLayer, LayerCache } from "../../../classes";
-import { BASE_URL } from ".";
+import { BASE_URL } from "./constants";
 import apiDataToFeature, { APIData } from "./apiDataToFeature";
 
 

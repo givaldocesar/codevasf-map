@@ -6,7 +6,7 @@ interface Props {
     className?: string;
     style: SimpleStyle | CategoryStyle;
     geometry: string | undefined;
-    onClick: (evt: React.MouseEvent<HTMLOrSVGElement, MouseEvent>) => void;
+    onClick?: (evt: React.MouseEvent<HTMLOrSVGElement, MouseEvent>) => void;
 }
 
 const VectorLayerIcon: React.FC<Props> = ({

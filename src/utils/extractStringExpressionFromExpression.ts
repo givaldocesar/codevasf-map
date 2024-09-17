@@ -1,4 +1,4 @@
-import { FIELD_REGEX } from ".";
+import { FIELD_REGEX } from "./constants";
 
 export default function extractStringFromExpression(expression: string){
     const toSplit = expression.replace(FIELD_REGEX, (match, _) => `§${match}§`);

@@ -5,3 +5,4 @@ const Interactions: React.FC<{children?: React.ReactNode}> = ({children}) => {
 export default Interactions;
 export { default as Click } from "./Click";
 export { default as Hover } from "./Hover";
+export { default as SelectedInfoControl } from "./SelectedInfoControl";

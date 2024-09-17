@@ -1,15 +1,48 @@
 {
   "name": "codevasf-map",
+  "type": "module",
   "version": "0.0.1",
   "description": "Biblioteca React + OpenLayers para projetos de desenvolvimento da CODEVASF",
+  "files": ["dist"],
   "exports": {
-    ".": "./src/components/index.tsx",
-    "./styles": "./src/components/styles.css",
-    "./controls": "./src/components/controls/index.tsx",
-    "./tile-layers": "./src/components/tile-layers/index.tsx",
-    "./vector-layers": "./src/components/vector-layers/index.tsx",
-    "./vector-layers/styles": "./src/components/vector-layers/styles/index.tsx",
-    "./vector-layers/interactions": "./src/components/vector-layers/interactions/index.tsx"
+    ".": {
+      "types": "./dist/esm/index.d.ts",
+      "import": "./dist/esm/index.esm.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./styles": {
+      "import": "./dist/esm/styles.css",
+      "require": "./dist/cjs/styles.css"
+    },
+    "./controls": {
+      "types": "./dist/esm/controls/index.d.ts",
+      "import": "./dist/esm/controls/index.esm.js",
+      "require": "./dist/cjs/controls/index.js"
+    },
+    "./tile-layers": {
+      "types": "./dist/esm/tile-layers/index.d.ts",
+      "import": "./dist/esm/tile-layers/index.esm.js",
+      "require": "./dist/cjs/tile-layers/index.js"
+    },
+    "./vector-layers": {
+      "types": "./dist/esm/vector-layers/index.d.ts",
+      "import" : "./dist/esm/vector-layers/index.esm.js",
+      "require": "./dist/cjs/vector-layers/index.js"
+    },
+    "./vector-layers/styles": {
+      "types": "./dist/esm/vector-layers/styles/index.d.ts",
+      "import" : "./dist/esm/vector-layers/styles/index.esm.js",
+      "require": "./dist/cjs/vector-layers/styles/index.js"
+    },
+    "./vector-layers/interactions": {
+      "types": "./dist/esm/vector-layers/interactions/index.d.ts",
+      "import" : "./dist/esm/vector-layers/interactions/index.esm.js",
+      "require": "./dist/cjs/vector-layers/interactions/index.js"
+    }
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "prepublish": "build"
   },
   "author": {
     "name": "Givaldo Cesar / CODEVASF 1ªSR",
@@ -18,11 +51,12 @@
   "keywords": [
     "react",
     "codevasf",
-    "open layers"
+    "openlayers"
   ],
   "license": "ISC",
   "peerDependencies": {
     "@turf/bbox-clip": "^7.1.0",
+    "@turf/truncate": "^7.1.0",
     "next": "^14.2.5",
     "ol": "^10.0.0",
     "proj4": "^2.12.0",
@@ -31,13 +65,18 @@
     "sass": "^1.77.8"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-image": "^3.0.3",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
     "@types/node": "^22.2.0",
     "@types/openlayers": "^4.6.23",
     "@types/proj4": "^2.5.5",
     "@types/react": "^18.3.3",
+    "rollup": "^4.21.3",
+    "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
     "typescript": "^5.5.4"
-  },
-  "dependencies": {
-    "@turf/truncate": "^7.1.0"
   }
 }

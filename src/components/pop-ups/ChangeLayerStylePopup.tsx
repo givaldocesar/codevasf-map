@@ -1,5 +1,5 @@
 import { FlatStyle } from "ol/style/flat";
-import Popup from ".";
+import Popup from "./Popup";
 import { CustomLayer, SimpleStyle } from "../../classes";
 import Form, { FormRow, FormTitle } from "./form";
 

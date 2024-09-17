@@ -1,4 +1,4 @@
-import { BaseControl } from "..";
+import BaseControl from "../BaseControl";
 import TileLayersArea from "./tile-layers-area";
 import VectorLayersArea from "./vector-layers-area";
 

@@ -1,5 +1,5 @@
 import { FeatureLike } from "ol/Feature";
-import { FIELD_REGEX } from ".";
+import { FIELD_REGEX } from "./constants";
 
 export default function getFeatureLabel(feature: FeatureLike, expression: string){
     return expression.replaceAll(FIELD_REGEX, (match, _) => {
