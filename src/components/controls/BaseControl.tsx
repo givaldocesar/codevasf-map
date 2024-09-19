@@ -1,17 +1,17 @@
-import { forwardRef, useRef, useContext, useEffect, useState, createElement } from "react";
+import React, { forwardRef, useRef, useContext, useEffect, useState } from "react";
 import Control from "ol/control/Control";
 import { MapContext } from "../contexts";
 import { CollapseButton } from "../buttons";
 import styles from "./Controls.module.scss";
 
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
+interface BaseControlProps extends React.HTMLAttributes<HTMLDivElement> {
     collapsable?: boolean;
     collapsePositionButton?: 'top_right' | 'top_left';
     collapseImage?: string;
 }
 
-const BaseControl = forwardRef<HTMLDivElement, Props>(({
+const BaseControl = forwardRef<HTMLDivElement, BaseControlProps>(({
     children, 
     className="", 
     collapsable, 

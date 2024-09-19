@@ -1,3 +1,12 @@
-node_modules
-tsconfig.json
+# Exclude source files
+/src
+
+# Exclude local configuration
+/.babelrc
+
+# Exclude node_modules
+/node_modules
+
+# Exclude miscellaneous files
 .gitignore
+tsconfig.json

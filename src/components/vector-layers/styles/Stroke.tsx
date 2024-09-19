@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { FlatStroke } from "ol/style/flat";
-import { SimpleStyle, SelectStyle } from "../../../classes";
+import { CustomSimpleStyle, SelectStyle } from "../../../classes";
 import { LayerContext, StyleContext } from "../../contexts";
 import { convertFlatStroke } from "../utils/convert-flat-styles";
 
@@ -10,7 +10,7 @@ const Stroke: React.FC<FlatStroke> = (props) => {
     const layer = useContext(LayerContext);
     const style = useContext(StyleContext);
 
-    if(style instanceof SimpleStyle){
+    if(style instanceof CustomSimpleStyle){
         style.setStroke(props);
         layer?.dispatchEvent('change-style');
        

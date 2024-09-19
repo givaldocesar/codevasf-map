@@ -4,22 +4,10 @@ import VectorImageLayer from "ol/layer/VectorImage";
 import VectorSource from "ol/source/Vector";
 import { AttributionLike } from "ol/source/Source";
 import { FlatStyle } from "ol/style/flat";
-import BaseEvent from "ol/events/Event";
 import { Filter, Geometries, LayerStatus } from "../interfaces";
-import SimpleStyle from "./styles/SimpleStyle";
-import CategorizedStyle from "./styles/CategorizedStyle";
+import SimpleStyle from "./styles/CustomSimpleStyle";
+import CategorizedStyle from "./styles/CustomCategorizedStyle";
 
-
-interface Options {
-    geometry?: Geometries;
-    attributions?: AttributionLike;
-    features?: Feature[];
-    title?: string;
-    order?: number;
-    visible?: boolean; 
-    style?: FlatStyle;
-    zIndex?: number;
-}
 
 class CustomLayer extends VectorImageLayer {
     private geometry_: Geometries | undefined;
@@ -35,8 +23,17 @@ class CustomLayer extends VectorImageLayer {
         geometry,
         style,
         ...props
-        } : Options
-    ){
+        } : 
+    {
+        geometry?: Geometries;
+        attributions?: AttributionLike;
+        features?: Feature[];
+        title?: string;
+        order?: number;
+        visible?: boolean; 
+        style?: FlatStyle;
+        zIndex?: number;
+    }){
         super({
             source: new VectorSource({ attributions: attributions, features: features }),
             ...props

@@ -2,7 +2,7 @@ import { FlatText, Rule, StringExpression } from "ol/style/flat";
 import { extractStringFromExpression } from "../../utils";
 import CategoryStyle from "./CategoryStyle";
 
-export default class CategorizedStyle {
+export default class CustomCategorizedStyle {
     private categories_: CategoryStyle[];
     private field_: string;
     private baseText_?: FlatText; 

@@ -1,44 +1,17 @@
 {
   "name": "codevasf-map",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Biblioteca React + OpenLayers para projetos de desenvolvimento da CODEVASF",
   "files": ["dist"],
   "exports": {
-    ".": {
-      "types": "./dist/esm/index.d.ts",
-      "import": "./dist/esm/index.esm.js",
-      "require": "./dist/cjs/index.js"
-    },
-    "./styles": {
-      "import": "./dist/esm/styles.css",
-      "require": "./dist/cjs/styles.css"
-    },
-    "./controls": {
-      "types": "./dist/esm/controls/index.d.ts",
-      "import": "./dist/esm/controls/index.esm.js",
-      "require": "./dist/cjs/controls/index.js"
-    },
-    "./tile-layers": {
-      "types": "./dist/esm/tile-layers/index.d.ts",
-      "import": "./dist/esm/tile-layers/index.esm.js",
-      "require": "./dist/cjs/tile-layers/index.js"
-    },
-    "./vector-layers": {
-      "types": "./dist/esm/vector-layers/index.d.ts",
-      "import" : "./dist/esm/vector-layers/index.esm.js",
-      "require": "./dist/cjs/vector-layers/index.js"
-    },
-    "./vector-layers/styles": {
-      "types": "./dist/esm/vector-layers/styles/index.d.ts",
-      "import" : "./dist/esm/vector-layers/styles/index.esm.js",
-      "require": "./dist/cjs/vector-layers/styles/index.js"
-    },
-    "./vector-layers/interactions": {
-      "types": "./dist/esm/vector-layers/interactions/index.d.ts",
-      "import" : "./dist/esm/vector-layers/interactions/index.esm.js",
-      "require": "./dist/cjs/vector-layers/interactions/index.js"
-    }
+    "./styles": "./dist/styles.css",
+    ".":                { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./controls":       { "types": "./dist/controls.d.ts", "import": "./dist/controls.js" },
+    "./tile-layers":    { "types": "./dist/tile-layers.d.ts", "import": "./dist/tile-layers.js"},
+    "./vector-layers":  { "types": "./dist/vector-layers.d.ts", "import": "./dist/vector-layers.js"},
+    "./vector-layers/styles":       { "types": "./dist/vector-layers.d.ts", "import": "./dist/vector-styles.js"},
+    "./vector-layers/interactions": { "types": "./dist/vector-layers.d.ts", "import": "./dist/vector-interactions.js"}
   },
   "scripts": {
     "build": "rollup -c",
@@ -61,8 +34,7 @@
     "ol": "^10.0.0",
     "proj4": "^2.12.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "sass": "^1.77.8"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^26.0.1",
@@ -73,10 +45,11 @@
     "@types/openlayers": "^4.6.23",
     "@types/proj4": "^2.5.5",
     "@types/react": "^18.3.3",
-    "rollup": "^4.21.3",
+    "rollup": "^4.22.0",
     "rollup-plugin-dts": "^6.1.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
+    "sass": "^1.77.8",
     "typescript": "^5.5.4"
   }
 }

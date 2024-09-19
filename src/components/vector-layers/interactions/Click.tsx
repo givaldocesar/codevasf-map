@@ -1,16 +1,17 @@
-import { useContext, useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 import { singleClick } from "ol/events/condition";
 import { CustomLayer, CustomSelect } from "../../../classes";
 import { MapContext, LayerContext } from "../../../components/contexts";
 import BaseInteraction from "./BaseInteraction";
 
 
-interface Props {
+const Click: React.FC<{
     children?: React.ReactNode; 
     zoomToFeature?: boolean;
-}
-
-const Click: React.FC<Props> = ({children, zoomToFeature}) => {
+}> = ({
+    children, 
+    zoomToFeature
+}) => {
     const map = useContext(MapContext);
     const layer = useContext(LayerContext) as CustomLayer;
     

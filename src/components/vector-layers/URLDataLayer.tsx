@@ -1,17 +1,17 @@
-import { useEffect, useMemo, useContext } from "react";
+import React, { useEffect, useMemo, useContext } from "react";
 import { GeoJSON } from "ol/format";
 import { CustomLayer, LayerCache } from "../../classes";
 import { MapContext } from "../contexts";
-import Layer, { LayerProps } from "./Layer";
+import Layer, { BaseLayerProps } from "./Layer";
 import { getFormatFromContent } from "./utils";
 
 
-interface Props extends LayerProps {
+interface URLDataLayerProps extends BaseLayerProps {
     url: string;
     urlInit?: RequestInit;
 }
 
-const URLDataLayer: React.FC<Props> = ({children, url, urlInit, fit, ...props}) => {
+const URLDataLayer: React.FC<URLDataLayerProps> = ({children, url, urlInit, fit, ...props}) => {
     const map = useContext(MapContext);
     const layer = useMemo(() => new CustomLayer(props), []);
 

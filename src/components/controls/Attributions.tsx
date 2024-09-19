@@ -1,4 +1,4 @@
-import { useMemo, useContext, useEffect } from "react";
+import React, { useMemo, useContext, useEffect } from "react";
 import { Attribution } from "ol/control";
 import { MapContext } from "../contexts";
 

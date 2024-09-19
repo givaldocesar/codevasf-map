@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { FlatFill } from "ol/style/flat";
-import { SelectStyle, SimpleStyle } from "../../../classes";
+import { SelectStyle, CustomSimpleStyle } from "../../../classes";
 import { LayerContext, StyleContext } from "../../contexts";
 import { convertFlatFill } from "../utils/convert-flat-styles";
 
@@ -11,7 +11,7 @@ const Fill: React.FC<FlatFill> = (props) => {
     const layer = useContext(LayerContext);
     const style = useContext(StyleContext);
 
-    if(style instanceof SimpleStyle){
+    if(style instanceof CustomSimpleStyle){
         style?.setFill(props);
         layer?.dispatchEvent('change-style');
         

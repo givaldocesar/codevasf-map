@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, useRef } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import { CustomMap } from "../classes";
 import { registerProjections } from "../utils";
@@ -9,7 +9,7 @@ import styles from "./Components.module.scss";
 
 registerProjections();
 
-interface Props {
+interface MapProps {
     projection?:    "EPSG:31983" | "EPSG:31984" | "EPSG:4674" | "EPSG:4326";
     center?:        [number, number];
     zoom?:          number;
@@ -17,7 +17,7 @@ interface Props {
     maxZoom?:       number;
 }
 
-const Map: React.FC<React.HTMLAttributes<HTMLDivElement>&Props> = ({
+const Map: React.FC<React.HTMLAttributes<HTMLDivElement>&MapProps> = ({
     children,
     className="",
     projection,

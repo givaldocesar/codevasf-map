@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState, useRef } from "react";
+import React, { useContext, useEffect, useMemo, useState, useRef } from "react";
 import { Feature } from "ol";
 import { KML } from "ol/format";
 import { DragAndDrop as Interaction } from "ol/interaction";
@@ -9,7 +9,7 @@ import createLayer from "./createLayer";
 import styles from "./DragAndDrop.module.scss";
 
 
-interface Props extends React.HTMLAttributes<HTMLDivElement>{
+interface DragAndDropProps extends React.HTMLAttributes<HTMLDivElement>{
     collapsable?: boolean;
     collapseImage?: string;
     collapsePositionButton?: 'top_right' | 'top_left';
@@ -17,7 +17,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement>{
     showFeaturesProperties?: boolean;
 }
 
-const DragAndDrop: React.FC<Props> = ({
+const DragAndDrop: React.FC<DragAndDropProps> = ({
     className, 
     collapsable=false, 
     collapseImage, 

@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./Loaders.module.scss";
 
 const Loader: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({

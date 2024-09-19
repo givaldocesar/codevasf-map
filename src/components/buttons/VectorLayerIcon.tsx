@@ -1,15 +1,15 @@
-import { CategoryStyle, SimpleStyle } from "../../classes";
+import { CategoryStyle, CustomSimpleStyle } from "../../classes";
 import BaseIcon from "./BaseIcon";
 
 
-interface Props {
+interface VectorLayerIconProps {
     className?: string;
-    style: SimpleStyle | CategoryStyle;
+    style: CustomSimpleStyle | CategoryStyle;
     geometry: string | undefined;
     onClick?: (evt: React.MouseEvent<HTMLOrSVGElement, MouseEvent>) => void;
 }
 
-const VectorLayerIcon: React.FC<Props> = ({
+const VectorLayerIcon: React.FC<VectorLayerIconProps> = ({
     className="",
     style,
     geometry,

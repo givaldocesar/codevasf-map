@@ -12,7 +12,7 @@ export const defaultStyle: FlatStyle = {
 }
 
 
-export default class SimpleStyle {
+export default class CustomSimpleStyle {
     private style_: FlatStyle;
 
     constructor(options?: FlatStyle){

@@ -1,5 +1,5 @@
 {
-  "include": ["src", "rollup-config.js"],
+  "include": ["src/**/*"],
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
     /* Language and Environment */
@@ -30,9 +30,5 @@
 
     /* Completeness */
     "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
-    "plugins": [],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
   }
 }

@@ -1,15 +1,17 @@
-import { useContext } from "react";
-import { CategorizedStyle as CStyle, SelectStyle } from "../../../classes";
+import React, { useContext } from "react";
+import { CustomCategorizedStyle as CStyle, SelectStyle } from "../../../classes";
 import { LayerContext, StyleContext, InteractionContext } from "../../contexts";
 
 
-interface Props {
+const CategorizedStyle: React.FC<{
     children?: React.ReactNode;
     field: string;
     visible?: boolean;
-}
-
-const CategorizedStyle: React.FC<Props> = ({children, field, visible=true}) => {
+}> = ({
+    children, 
+    field, 
+    visible=true
+}) => {
     const layer = useContext(LayerContext);
     const interaction = useContext(InteractionContext);
 

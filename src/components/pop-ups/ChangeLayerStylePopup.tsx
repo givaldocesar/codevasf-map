@@ -1,6 +1,6 @@
 import { FlatStyle } from "ol/style/flat";
 import Popup from "./Popup";
-import { CustomLayer, SimpleStyle } from "../../classes";
+import { CustomLayer, CustomSimpleStyle } from "../../classes";
 import Form, { FormRow, FormTitle } from "./form";
 
 const ChangeLayerStylePopup: React.FC<{layer: CustomLayer}> = ({layer}) => {
@@ -22,7 +22,7 @@ const ChangeLayerStylePopup: React.FC<{layer: CustomLayer}> = ({layer}) => {
         const { stroke, fill, opacity } = target.elements;
         const opacityValue = Math.ceil(parseInt(opacity.value)*255/100).toString(16).padStart(2, '0');
 
-        const baseStyle = layer.getBaseStyle() as SimpleStyle;
+        const baseStyle = layer.getBaseStyle() as CustomSimpleStyle;
         baseStyle.setStroke({"stroke-color": stroke.value});
         baseStyle.setFill({"fill-color": fill.value + opacityValue});
 

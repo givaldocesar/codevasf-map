@@ -1,3 +1,4 @@
+import React from "react";
 import BaseControl from "./BaseControl";
 import styles from "./Controls.module.scss";
 

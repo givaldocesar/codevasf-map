@@ -1,6 +1,6 @@
 import { FlatStyle, FlatText, Rule } from "ol/style/flat";
 import { Geometries } from "../../interfaces";
-import SimpleStyle from "./SimpleStyle";
+import SimpleStyle from "./CustomSimpleStyle";
 
 export default class CategoryStyle extends SimpleStyle{
     private label_?: string;

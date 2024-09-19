@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
 import styles from "./Button.module.scss";
 
-interface Props {
+interface CollapseButtonProps {
     collapsed?: boolean;
     image?: string;
 }
 
-const CollapseButton: React.FC<React.HTMLAttributes<HTMLOrSVGElement>&Props> = ({
+const CollapseButton: React.FC<React.HTMLAttributes<HTMLOrSVGElement>&CollapseButtonProps> = ({
     className="",
     collapsed=false,
     onClick,

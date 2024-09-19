@@ -1,15 +1,12 @@
 import { useState } from "react";
-import { CustomLayer, SimpleStyle } from "../../../../classes";
+import { CustomLayer, CustomSimpleStyle } from "../../../../classes";
 import { LayerStatus } from "../../../../interfaces";
 import { VectorLayerIcon } from "../../../buttons";
 import LoadingItem from "./LoadingItem";
 import styles from "../Legend.module.scss";
 
-interface Props {
-    layer: CustomLayer
-}
 
-const SimpleLegendItem: React.FC<Props> = ({layer}) => {
+const SimpleLegendItem: React.FC<{layer: CustomLayer}> = ({layer}) => {
     const [layerStatus, setStatus] = useState<LayerStatus>('loading');
     
     //@ts-expect-error
@@ -28,7 +25,7 @@ const SimpleLegendItem: React.FC<Props> = ({layer}) => {
         map.fit(layer.getSource()?.getExtent());
     }
 
-    const style = layer.getBaseStyle() as SimpleStyle;
+    const style = layer.getBaseStyle() as CustomSimpleStyle;
     return (
         <div className={styles.item} style={{order: layer.get('order')}}>
             <input type="checkbox" defaultChecked={layer.getVisible()} onChange={changeVisibility} />
@@ -36,8 +33,6 @@ const SimpleLegendItem: React.FC<Props> = ({layer}) => {
             <label onClick={zoom}>{layer.get('title')}</label>
         </div>
     );
-
-    return <></>;
 }
 
 export default SimpleLegendItem;

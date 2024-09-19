@@ -1,4 +1,4 @@
-import { useMemo, useContext, useEffect } from "react";
+import React, { useMemo, useContext, useEffect } from "react";
 import TileLayer from "ol/layer/Tile";
 import { OSM } from "ol/source";
 import { MapContext } from "../contexts";

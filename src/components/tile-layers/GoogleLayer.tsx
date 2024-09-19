@@ -1,4 +1,4 @@
-import { useContext, useState, useMemo, useEffect } from "react";
+import React, { useContext, useState, useMemo, useEffect } from "react";
 import Image, { StaticImageData } from "next/image";
 import TileLayer from "ol/layer/Tile";
 import { Google, XYZ } from "ol/source";

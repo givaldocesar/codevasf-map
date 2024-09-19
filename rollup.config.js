@@ -1,34 +1,33 @@
-import rollupConfig from "./rollup-config.js";
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import typescript from '@rollup/plugin-typescript';
+import external from 'rollup-plugin-peer-deps-external';
+import postcss from 'rollup-plugin-postcss';
+import image from '@rollup/plugin-image';
+import rollupTypes from './rollup-types.js';
 
 export default [
-    ...rollupConfig({
-        input: './src/components/index.tsx',
-        output: 'index',
-        css: 'components'
-    }),
-    ...rollupConfig({
-        input: './src/components/controls/index.tsx',
-        output: 'controls/index',
-        css: 'controls'
-    }),
-    ...rollupConfig({
-        input: './src/components/tile-layers/index.tsx',
-        output: 'tile-layers/index',
-        css: 'tile-layers'
-    }),
-    ...rollupConfig({
-        input: './src/components/vector-layers/index.tsx',
-        output: 'vector-layers/index',
-        css: 'vector-layers'
-    }),
-    ...rollupConfig({
-        input: './src/components/vector-layers/styles/index.tsx',
-        output: 'vector-layers/styles/index',
-        css: 'vector-styles'
-    }),
-    ...rollupConfig({
-        input: './src/components/vector-layers/interactions/index.tsx',
-        output: 'vector-layers/interactions/index',
-        css: 'vector-interactions'
-    }),
+    {
+        input: "src/components/index.ts",
+        output: [
+            {
+                file: `dist/index.js`,
+                format: 'esm',
+                exports: 'named',
+                sourcemap: true
+            }
+        ],
+        plugins: [
+            external(),
+            image(),
+            resolve(),
+            commonjs(),
+            typescript({ tsconfig: './tsconfig.json' }),
+            postcss( {extract: `styles.css`} ) 
+        ]
+    },
+    rollupTypes({input: "src/components/index.ts", name: "index"}),
+    rollupTypes({input: "src/components/controls/index.tsx", name: "controls"}),
+    rollupTypes({input: "src/components/tile-layers/index.tsx", name: "tile-layers"}),
+    rollupTypes({input: "src/components/vector-layers/index.tsx", name: "vector-layers"}),
 ]

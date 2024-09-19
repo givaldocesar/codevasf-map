@@ -1,17 +1,17 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Feature } from "ol";
 import { SelectEvent } from "ol/interaction/Select";
 import { InteractionContext, LayerContext } from "../../contexts";
 import { BaseControl } from "../../controls";
 
-interface Props {
+interface SelectedInfoControlProps {
     collapsable?: boolean;
     collapseImage?: string;
     collapsePositionButton?: "top_right" | "top_left";
     factory: (features: Feature[]) => React.ReactElement; 
 }
 
-const SelectedInfoControl: React.FC<React.HTMLAttributes<HTMLDivElement>&Props> = ({
+const SelectedInfoControl: React.FC<React.HTMLAttributes<HTMLDivElement>&SelectedInfoControlProps> = ({
     children,
     collapsable,
     collapseImage,

@@ -1,11 +1,11 @@
 import BaseIcon from "./BaseIcon";
 import styles from "./Button.module.scss";
 
-interface Props {
+interface CollapseLayerIconProps {
     collpased?: boolean;
 }
 
-const CollapseLayerIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>&Props> = ({
+const CollapseLayerIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>& CollapseLayerIconProps> = ({
     className="",
     onClick,
     collpased=false

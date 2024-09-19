@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { SelectStyle } from "../../../classes";
 import { LayerContext, StyleContext, InteractionContext } from "../../contexts";
 
@@ -28,7 +28,7 @@ const SimpleStyle: React.FC<{
     );
 }
 
-export default SimpleStyle;
+export { SimpleStyle };
 export { default as CategorizedStyle } from "./CategorizedStyle";
 export { default as Category } from "./Category";
 export { default as Stroke } from "./Stroke";

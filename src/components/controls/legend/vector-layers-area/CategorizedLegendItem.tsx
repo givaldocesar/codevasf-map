@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {  CustomLayer, CategorizedStyle, NO_CATEGORY } from "../../../../classes";
+import {  CustomLayer, CustomCategorizedStyle, NO_CATEGORY } from "../../../../classes";
 import { LayerStatus } from "../../../../interfaces";
 import { VectorLayerIcon, CollpaseLayerIcon } from "../../../buttons";
 import LoadingItem from "./LoadingItem";
@@ -15,7 +15,7 @@ const CategorizedLegendItem: React.FC<{layer: CustomLayer}> = ({layer}) => {
     //LOADING
     if(layerStatus === 'loading') return <LoadingItem layer={layer} />;
 
-    const style = layer.getBaseStyle() as CategorizedStyle;
+    const style = layer.getBaseStyle() as CustomCategorizedStyle;
     
     function changeVisibility(evt: React.ChangeEvent<HTMLInputElement>){
        evt.stopPropagation();

@@ -1,14 +1,15 @@
+import React from "react";
 import BaseControl from "../BaseControl";
 import TileLayersArea from "./tile-layers-area";
 import VectorLayersArea from "./vector-layers-area";
 
-interface Props extends React.HTMLAttributes<HTMLDivElement>{
+interface LegendProps extends React.HTMLAttributes<HTMLDivElement>{
     collapsable?: boolean;
     collapseImage?: string;
     collapsePositionButton?: 'top_right' | 'top_left';
 }
 
-const Legend: React.FC<Props> = ({
+const Legend: React.FC<LegendProps> = ({
     className, 
     collapsable=false, 
     collapseImage, 

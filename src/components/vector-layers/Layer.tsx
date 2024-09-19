@@ -1,4 +1,4 @@
-import { useMemo, useContext, useEffect } from "react";
+import React, { useMemo, useContext, useEffect } from "react";
 import { Feature } from "ol";
 import { GeoJSON } from "ol/format";
 import { AttributionLike } from "ol/source/Source";
@@ -9,7 +9,7 @@ import { MapContext, LayerContext } from "../contexts";
 
 const FORMAT = new GeoJSON();
 
-export interface LayerProps {
+export interface BaseLayerProps {
     children?: React.ReactNode;
     attributions?: AttributionLike;
     maxZoom?: number;
@@ -21,12 +21,12 @@ export interface LayerProps {
     geometry: Geometries;
 }
 
-interface Props extends LayerProps {
+interface LayerProps extends BaseLayerProps {
     data?: {[property: string]: any} | {[property: string]: any}[];
     layer?: CustomLayer;
 }
 
-const Layer: React.FC<Props> = ({children, data, layer, fit, ...props}) => {
+const Layer: React.FC<LayerProps> = ({children, data, layer, fit, ...props}) => {
     const map = useContext(MapContext);
     const base = useMemo(() => {
         try{            

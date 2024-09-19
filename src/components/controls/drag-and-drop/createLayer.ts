@@ -8,15 +8,17 @@ import updatePopup from "./updatePopup";
 import styles from "./DragAndDrop.module.scss";
 
 
-
-interface Paramaters {
+export default function createLayer({
+    map, 
+    title, 
+    features, 
+    showProperties
+} : {
     map?: CustomMap | null; 
     title: string;
     features: Feature[];
     showProperties?: boolean;
-}
-
-export default function createLayer({map, title, features, showProperties} : Paramaters){
+}){
     const stroke = randomColor("HEX", 0.75);
     const fill = randomColor("HEX", 0.75);
     

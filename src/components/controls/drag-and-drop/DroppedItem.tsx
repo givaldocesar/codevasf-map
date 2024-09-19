@@ -1,16 +1,18 @@
 import { useContext, useState, useEffect } from "react";
-import { CustomLayer, SimpleStyle } from "../../../classes";
+import { CustomLayer, CustomSimpleStyle } from "../../../classes";
 import { MapContext } from "../../../components/contexts";
 import { RemoveLayerIcon, VectorLayerIcon } from "../../../components/buttons";
 import { ChangeLayerStylePopup } from "../../../components/pop-ups";
 import styles from "./DragAndDrop.module.scss";
 
-interface Props {
+
+const DroppedItem: React.FC<{
     id: string;
     layer: CustomLayer;
-}
-
-const DroppedItem: React.FC<Props> = ({id, layer}) => {
+}> = ({
+    id, 
+    layer
+}) => {
     const [name, _] = id.split('_');
     const [__, setRevision] = useState<number>(0);
     const map = useContext(MapContext);
@@ -46,7 +48,7 @@ const DroppedItem: React.FC<Props> = ({id, layer}) => {
         <div className={styles.item}>
             <VectorLayerIcon 
                 geometry={layer.getGeometry()} 
-                style={layer.getBaseStyle() as SimpleStyle}
+                style={layer.getBaseStyle() as CustomSimpleStyle}
                 onClick={changeStyle}
             />
             <span onClick={zoom}>{ name }</span>
