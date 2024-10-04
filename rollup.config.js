@@ -23,7 +23,7 @@ export default [
             resolve(),
             commonjs(),
             typescript({ tsconfig: './tsconfig.json' }),
-            postcss( {extract: `styles.css`} ) 
+            postcss( {extract: `styles_components.css`} ) 
         ]
     },
     rollupTypes({input: "src/components/index.ts", name: "index"}),

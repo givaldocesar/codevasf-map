@@ -99,10 +99,23 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
                         OBS: 'Stroke', 'Fill' e 'FeatureLabel' também podem ser utilizados como filhossde 'Category'.
             
             ╚> interactions:        
-                --Interactions:             Agrupa as interações das camadas vetoriais. (Ajuda a organizar o código).  
-                    --Hover:                Seleciona a feição a qual o mouse está parado.
-                    --Click:                Seleciona uma feição ao clicar nela.
-                        --->zoomToFeature:  Dá zoom na feição selecionada.   
+                --Interactions:                         Agrupa as interações das camadas vetoriais. (Ajuda a organizar o código).  
+                    --Hover:                            Seleciona a feição a qual o mouse está parado.
+                    --Click:                            Seleciona uma feição ao clicar nela.
+                        --->zoomToFeature:  <boolean>   Dá zoom na feição selecionada. 
+                    --SelectedInfoControl:                                      Exibe um controle com conteúdo gerado pela 'factory'.
+                        -->collapsable              <boolean>                   Habilita o botão de colapsar.
+                        -->collapseImage            <string>                    Caminho para a image de fundo do botão de colapsar. 
+                        -->collapsePositionButton   <'top_right' | 'top_left'>  Posição do botão para colapsar.
+                        -->factory:                 (<Feature>) => ReactNode    Função que recebe uma feição e retorna o contéudo do 'control'.
+                    --SelectControl:                    Adiciona uma barra com um "select" para a interação pai deste elemento.
+                        --->fieldValue:     <string>    Campo da feição o qual as opçoes do "select" serão prenchidas, as opções terão todos
+                                                        valores distintos deste campo.     
+                        --->expression:     <string?>   Template para criar os textos das opções. Para utilizar valores presentes nas feições utilize o template 
+                                                        '{propriedade}'. P.ex: a expressão '{municipio}' exibirá 'valor_propriedade_municipio', para as feições que possuirem a prorpriedade 'municipio'.
+                        --->label:          <string?>   Rótulo que aparecerá antes do 'select' neste 'control'.
+                        --->labelClassName: <string>    Classname CSS para a label.    
+                        --->collapsable:    <boolean>   Adicona um botão para colapsar o 'control'. 
 
                     OBS: 'SimpleStyle' e 'CategorizedStyle' também podem ser utilizados como filhos de 'Hover' e 'Click'.          
 

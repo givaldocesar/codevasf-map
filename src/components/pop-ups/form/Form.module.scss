@@ -1,5 +1,5 @@
 @import "../../../styles/colors";
-
+@import "../../../styles/breakpoints";
 
 .form {
    width: 100%;
@@ -55,4 +55,18 @@
     font-weight: bold;
     color: $std;
     border-bottom: 2px solid $std;
+}
+
+.select {
+    flex: 1;
+    border: 1px solid $std;
+    border-radius: 2px;
+    outline-color: $active;
+    font-size: x-small;
+}
+
+@media (min-width: $break-large){
+    .select {
+        font-size: medium;
+    }
 }

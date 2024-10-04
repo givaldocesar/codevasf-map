@@ -11,3 +11,4 @@ const Form: React.FC<React.FormHTMLAttributes<HTMLFormElement>> = ({children, cl
 export default Form;
 export { default as FormRow } from "./FormRow";
 export { default as FormTitle } from "./FormTitle";
+export { default as Select } from "./Select";

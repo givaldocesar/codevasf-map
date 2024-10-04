@@ -1,11 +1,11 @@
 import { useContext, useEffect } from "react";
-import { Select } from "ol/interaction";
+import { CustomSelect } from "../../../classes";
 import { MapContext, InteractionContext } from "../../../components/contexts";
 
 
 interface Props {
     children?: React.ReactNode; 
-    interaction: Select;
+    interaction: CustomSelect;
 }
 
 const BaseInteraction: React.FC<Props> = ({children, interaction}) => {

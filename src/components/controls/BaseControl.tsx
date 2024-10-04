@@ -34,21 +34,31 @@ const BaseControl = forwardRef<HTMLDivElement, BaseControlProps>(({
         map?.addControl(control);
         return () => { map?.removeControl(control) };
     }, []);
-    
-    return (
-        <div id='control-wrapper' style={{display: 'none'}}>
-            <div ref={controlRef} className={`${styles.control} ${className}`} { ...props }>
-                {collapsable &&
-                    <CollapseButton 
-                        className={styles[collapsePositionButton]}
-                        collapsed={collapsed} 
-                        onClick={() => setCollapsed(!collapsed)} 
-                        image={collapseImage}
-                    />
-                }
-                <div style={{display: collapsed ? 'none' : 'block'}} ref={ref}>
-                    { children }
+
+    if(collapsable){
+        return (
+            <div style={{display: 'none'}}>
+                <div ref={controlRef} className={`${styles.control} ${className}`} { ...props }>
+                    {collapsable &&
+                        <CollapseButton 
+                            className={styles[collapsePositionButton]}
+                            collapsed={collapsed} 
+                            onClick={() => setCollapsed(!collapsed)} 
+                            image={collapseImage}
+                        />
+                    }
+                    <div style={{display: collapsed ? 'none' : 'block'}} ref={ref}>
+                        { children }
+                    </div>
                 </div>
+            </div>
+        );
+    }
+
+    return (
+        <div style={{display: 'none'}}>
+            <div ref={controlRef} className={`${styles.control} ${className}`} { ...props }>  
+                { children }
             </div>
         </div>
     );

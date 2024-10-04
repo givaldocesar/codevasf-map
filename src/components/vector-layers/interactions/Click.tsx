@@ -1,6 +1,7 @@
 import React, { useContext, useMemo } from "react";
 import { singleClick } from "ol/events/condition";
 import { CustomLayer, CustomSelect } from "../../../classes";
+import { getFeaturesExtent } from "../../../utils";
 import { MapContext, LayerContext } from "../../../components/contexts";
 import BaseInteraction from "./BaseInteraction";
 
@@ -22,10 +23,7 @@ const Click: React.FC<{
         });
 
         if(zoomToFeature){
-            interaction.on('select', (evt) => {
-                const feature = evt.selected[0];
-                if(feature) map?.fit(feature.getGeometry()?.getExtent());
-            });
+            interaction.on('select', (evt) => map?.fit(getFeaturesExtent(evt.selected)) );
         }
         
         return interaction;

@@ -1,7 +1,7 @@
 {
   "name": "codevasf-map",
   "type": "module",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Biblioteca React + OpenLayers para projetos de desenvolvimento da CODEVASF",
   "files": ["dist"],
   "exports": {

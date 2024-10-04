@@ -42,7 +42,6 @@ const SelectedInfoControl: React.FC<React.HTMLAttributes<HTMLDivElement>&Selecte
             </BaseControl>
         );
     } catch (err) {
-        console.log(err)
         throw new Error(`LAYER ${layer?.get('title')}: no factory is provided for 'SelectedInfoControl'.`);
     }
 }

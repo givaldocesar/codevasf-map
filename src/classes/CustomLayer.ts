@@ -62,13 +62,13 @@ class CustomLayer extends VectorImageLayer {
         });
     }
 
-    async filterFeatures(filter: Filter){
+    async filterFeatures(filters: Filter[]){
         const features: Feature[] = [];
 
         this.getSource()?.forEachFeature((feature) => {
-            if(feature.get(filter.field) === filter.value){
-                features.push(feature);
-            }
+            let add = true;
+            filters.forEach(filter => { if(feature.get(filter.field) !== filter.value) add=false });
+            if(add) features.push(feature);
         });
 
         return features;

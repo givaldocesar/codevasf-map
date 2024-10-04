@@ -1,0 +1,29 @@
+@import "../../../styles/breakpoints";
+
+.control {
+    display: flex;
+    align-items: center;
+    flex-flow: row nowrap;
+    gap: 15px;
+    overflow: hidden;
+}
+
+.hidden {
+    gap: 0px;
+}
+
+.select {
+    flex: 1;
+    height: 20px;
+    gap: 5px;
+
+    select {
+        height: 100%;
+    }
+}
+
+@media (min-width: $break-large){
+    .select {
+        height: 24px;
+    }
+}
