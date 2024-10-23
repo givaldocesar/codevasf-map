@@ -1,18 +1,18 @@
-@import "../styles/breakpoints";
-@import "../styles/widths";
-@import "../styles/colors";
+@use "../styles/breakpoints";
+@use "../styles/widths";
+@use "../styles/colors";
 
 .map {
     position: relative;
     overflow: hidden;
-    min-width: $s-80;
-    min-height: $s-80;
-    background-color: $gray-200;
+    min-width: widths.$s-80;
+    min-height: widths.$s-80;
+    background-color: colors.$gray-200;
 }
 
 .loading_map{
-    width: $s-full;
-    height: $s-full;
+    width: widths.$s-full;
+    height: widths.$s-full;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,13 +20,13 @@
     p {
         font-weight: bold;
         font-size: larger;
-        color: $std;
+        color: colors.$std;
     }
 }
 
 
 
-@media (min-width: $break-large){
+@media (min-width: breakpoints.$break-large){
    
 }
 

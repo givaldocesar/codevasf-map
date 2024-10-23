@@ -19,8 +19,8 @@ const URLDataLayer: React.FC<URLDataLayerProps> = ({children, url, urlInit, fit,
         async function getData(){
             try{
                 const headResponse = await fetch(url, { method: "HEAD" });
-                const serverLastModified = headResponse.headers.get('last-modified');                
-                
+                const serverLastModified = headResponse.headers.get('last-modified');
+                                
                 const cache = new LayerCache({ name: 'url_files', keyPath: 'url'});
                 await cache.connect();
                 

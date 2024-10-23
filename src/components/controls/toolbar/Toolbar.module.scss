@@ -1,0 +1,37 @@
+@use "../../../styles/colors";
+@use "../../../styles/widths";
+@use "../../../styles/breakpoints";
+
+.toolbar {
+    padding: 2px;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 5px;
+}
+
+.tool {
+    width: widths.$s-8;
+    height: widths.$s-8;
+    border: 1px solid darkgray;
+    border-radius: 10px;
+
+    &:hover {
+        background-color: colors.$hover;
+    }
+}
+
+.active {
+    background-color: colors.$active;
+}
+
+
+@media (min-width: breakpoints.$break-large){
+    .toolbar {
+        flex-flow: row nowrap;
+    }
+
+    .tool {
+        width: widths.$s-10;
+        height: widths.$s-10;
+    }
+}

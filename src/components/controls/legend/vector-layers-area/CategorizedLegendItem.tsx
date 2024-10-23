@@ -6,7 +6,9 @@ import LoadingItem from "./LoadingItem";
 import styles from "../Legend.module.scss";
 
 const CategorizedLegendItem: React.FC<{layer: CustomLayer}> = ({layer}) => {
-    const [collapsed, setCollapsed] = useState(false);
+    const style = layer.getBaseStyle() as CustomCategorizedStyle;
+    
+    const [collapsed, setCollapsed] = useState(style.getCollapsed());
     const [layerStatus, setStatus] = useState<LayerStatus>('loading');
 
     //@ts-expect-error
@@ -15,8 +17,6 @@ const CategorizedLegendItem: React.FC<{layer: CustomLayer}> = ({layer}) => {
     //LOADING
     if(layerStatus === 'loading') return <LoadingItem layer={layer} />;
 
-    const style = layer.getBaseStyle() as CustomCategorizedStyle;
-    
     function changeVisibility(evt: React.ChangeEvent<HTMLInputElement>){
        evt.stopPropagation();
         const elements = evt.target.form?.elements as HTMLFormControlsCollection;

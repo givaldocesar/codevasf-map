@@ -32,6 +32,9 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
             -->collapsePositionButton   <'top_right' | 'top_left'>  Posição do botão para colapsar.
             -->showControl              <boolean>                   Exibe/Oculta o controle.
             -->showFeaturesProperties   <boolean>                   Habilita um popup que mostra as propriedades da feição, quando o mouse repousa sobre esta.
+        --Toolbar:                  Adiciona uma toolbar ao mapa. 'Tools' podem ser filhos deste componente.
+        --Tool:                     Adiciona uma ferramenta a 'Toolbar'. 'Tools' são "buttons" e aceitam suas propriedads HTML.
+            -->active:  <boolean>   Indica que a ferramenta está ativa.
 
         É possivel controlar a posição dos controles através do atributo 'className' com CSS ou tailwind.
     
@@ -44,7 +47,7 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
 
         -- GoogleLayer:     Adiciona uma camada do Google ao mapa.
                             Necessário API do Google para funcionar, o valor da API deve estar guardada na variável NEXT_PUBLIC_API_KEY ou API_KEY.
-            
+            --> mapType?:   <'hybrid' | 'roadmap' | 'satellite' | 'terrain'>
             --> standard:   <boolean>   Define que a camada será exibida inicialmente.
             --> order:      <number>    Define a ordem da camada na legenda.
             --> zIndex:     <number>    Define a ordem de exibição da camada. 
@@ -80,8 +83,9 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
                         OBS: Utilizar as propriedades de ['FlatText do OL'](https://openlayers.org/en/latest/apidoc/module-ol_style_flat.html#~FlatText).
                             É possível adicionar uma padrão pra todas as categorias, colocando o elemento 'FeatureLabel' como filho de 'CategorizedStyle'.
 
-                --CategorizedStyle:             Cria um estilo categorizado para a camada. Necessário adicionar elementos "Category" para estilizar.
-                    -->visible:     <boolean>   Define se a camada será exibidade por padrão.
+                --CategorizedStyle:                         Cria um estilo categorizado para a camada. Necessário adicionar elementos "Category" para estilizar.
+                    -->collapsed:   <boolean>               Define se o item na legenda começara ou não colapsado.
+                    -->visible:     <boolean>               Define se a camada será exibidade por padrão.
                     -->field:       <string>                Campo que irá categorizar a camada. 
                                                              P.ex: Categorizar Municípios pelo "field" nome.
                     

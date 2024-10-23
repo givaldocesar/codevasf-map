@@ -1,17 +1,37 @@
 {
   "name": "codevasf-map",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Biblioteca React + OpenLayers para projetos de desenvolvimento da CODEVASF",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "exports": {
     "./styles": "./dist/styles.css",
-    ".":                { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
-    "./controls":       { "types": "./dist/controls.d.ts", "import": "./dist/controls.js" },
-    "./tile-layers":    { "types": "./dist/tile-layers.d.ts", "import": "./dist/tile-layers.js"},
-    "./vector-layers":  { "types": "./dist/vector-layers.d.ts", "import": "./dist/vector-layers.js"},
-    "./vector-layers/styles":       { "types": "./dist/vector-layers.d.ts", "import": "./dist/vector-styles.js"},
-    "./vector-layers/interactions": { "types": "./dist/vector-layers.d.ts", "import": "./dist/vector-interactions.js"}
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./controls": {
+      "types": "./dist/controls.d.ts",
+      "import": "./dist/controls.js"
+    },
+    "./tile-layers": {
+      "types": "./dist/tile-layers.d.ts",
+      "import": "./dist/tile-layers.js"
+    },
+    "./vector-layers": {
+      "types": "./dist/vector-layers.d.ts",
+      "import": "./dist/vector-layers.js"
+    },
+    "./vector-layers/styles": {
+      "types": "./dist/vector-layers.d.ts",
+      "import": "./dist/vector-styles.js"
+    },
+    "./vector-layers/interactions": {
+      "types": "./dist/vector-layers.d.ts",
+      "import": "./dist/vector-interactions.js"
+    }
   },
   "scripts": {
     "build": "rollup -c",
@@ -30,6 +50,7 @@
   "peerDependencies": {
     "@turf/bbox-clip": "^7.1.0",
     "@turf/truncate": "^7.1.0",
+    "classnames": "^2.5.1",
     "next": "^14.2.5",
     "ol": "^10.0.0",
     "proj4": "^2.12.0",

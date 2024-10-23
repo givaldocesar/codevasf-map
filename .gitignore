@@ -1,4 +1,12 @@
 node_modules/
-dist/
+
+#DIST FOLDER
+dist/index.*
+dist/controls.d.ts
+dist/tile-layers.d.ts
+dist/vector-layers.d.ts
+dist/styles_components.css
+
+#MISC
 .tsbuildinfo
 .rollup.cache

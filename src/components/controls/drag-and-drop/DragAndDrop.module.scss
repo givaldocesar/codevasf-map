@@ -1,6 +1,6 @@
-@import "../../../styles/breakpoints";
-@import "../../../styles/widths";
-@import "../../../styles/colors";
+@use "../../../styles/breakpoints";
+@use "../../../styles/widths";
+@use "../../../styles/colors";
 
 .title {
     font-weight: bold;
@@ -28,7 +28,7 @@
     }
 
     &:hover{
-        background-color: $lite;
+        background-color: colors.$lite;
     }
 }
 
@@ -41,7 +41,7 @@
 
     table {
         padding: 5px;
-        border: 2px solid $std;
+        border: 2px solid colors.$std;
         border-collapse: collapse;
         border-radius: 5px;
     }
@@ -58,7 +58,7 @@
     }
 }
 
-@media (min-width: $break-large){
+@media (min-width: breakpoints.$break-large){
     .title {
         font-size: medium;
         padding: 5px 37.5px 5px 0px;

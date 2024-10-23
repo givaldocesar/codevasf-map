@@ -1,11 +1,11 @@
-@import "../../styles/breakpoints";
-@import "../../styles/widths";
-@import "../../styles/colors";
-@import "../../styles/animations";
+@use "../../styles/breakpoints";
+@use "../../styles/widths";
+@use "../../styles/colors";
+@use "../../styles/animations";
 
 .arrow {
-    width: $s-4;
-    height: $s-4;
+    width: widths.$s-4;
+    height: widths.$s-4;
     border-radius: 50%;
     transition: rotate 250ms ease-in-out;
 
@@ -15,7 +15,7 @@
     
     &:hover{
         cursor: pointer;
-        background-color: $hover;
+        background-color: colors.$hover;
 
         path { 
             fill: white;
@@ -28,8 +28,8 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    width: $s-4;
-    height: $s-4;
+    width: widths.$s-4;
+    height: widths.$s-4;
 
     text {
         font: bold 55px sans-serif;
@@ -43,10 +43,10 @@
 }
 
 .load_circle {
-    border: 3px solid $std;
-    border-top-color: $active;
+    border: 3px solid colors.$std;
+    border-top-color: colors.$active;
     border-radius: 50%;
-    animation: $pulse, $rotate;
+    animation: animations.$pulse, animations.$rotate;
 }
 
 .collapse_icon, .remove_icon {
@@ -64,7 +64,7 @@
 }
 
 .remove_icon:hover {
-    background-color: $hover;
+    background-color: colors.$hover;
 
     line {
         stroke: white;
@@ -73,11 +73,11 @@
 
 .collapse_button {
     border-radius: 10px;
-    width: $s-6;
-    height: $s-6;
+    width: widths.$s-6;
+    height: widths.$s-6;
 
     &:hover{
-        background-color: $hover;
+        background-color: colors.$hover;
 
         line { stroke: white; }
 
@@ -86,15 +86,15 @@
     
 }
 
-@media (min-width: $break-large){
+@media (min-width: breakpoints.$break-large){
     .arrow, .layer_icon {
-        width: $s-6;
-        height: $s-6;
+        width: widths.$s-6;
+        height: widths.$s-6;
     }
 
     .collapse_button {
-        width: $s-8;
-        height: $s-8;
+        width: widths.$s-8;
+        height: widths.$s-8;
     }
 
     .load_circle {

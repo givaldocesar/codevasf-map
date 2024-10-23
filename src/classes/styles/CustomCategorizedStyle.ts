@@ -7,18 +7,22 @@ export default class CustomCategorizedStyle {
     private field_: string;
     private baseText_?: FlatText; 
     private defaultVisible_: boolean;
+    private collapsed_: boolean;
 
     constructor({
         field, 
         categories, 
-        visible
+        visible,
+        collapsed
     } : {
         field: string;
         categories?: CategoryStyle[];
         visible?: boolean;
+        collapsed?: boolean;
     }){
         this.field_ = field;
         this.categories_ = categories || [];
+        this.collapsed_ = collapsed || false;
         this.defaultVisible_ = (visible === undefined ? true : visible);
     }
 
@@ -42,6 +46,14 @@ export default class CustomCategorizedStyle {
         return style;
     }
 
+    getCollapsed(){
+        return this.collapsed_;
+    }
+
+    getDefaultVisible(){
+        return this.defaultVisible_;
+    }
+
     getField(){
         return this.field_;
     }
@@ -54,8 +66,8 @@ export default class CustomCategorizedStyle {
         return this.categories_;
     }
 
-    getDefaultVisible(){
-        return this.defaultVisible_;
+    setCollapsed(collapsed: boolean){
+        this.collapsed_ = collapsed;
     }
 
     setText(text: FlatText, expression?: string){

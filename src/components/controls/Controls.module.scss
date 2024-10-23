@@ -1,11 +1,11 @@
-@import "../../styles/colors";
-@import "../../styles/breakpoints";
+@use "../../styles/colors";
+@use "../../styles/breakpoints";
 
 .control {
     position: absolute;
     padding: 4px;
     max-width: fit-content;
-    background-color: $bg-control;
+    background-color: colors.$bg-control;
     opacity: 0.5;
     border-radius: 0.75rem;
 
@@ -35,7 +35,7 @@
     left: 4px;
 }
 
-@media (min-width: $break-large){
+@media (min-width: breakpoints.$break-large){
     .title {
         display: block;
     }

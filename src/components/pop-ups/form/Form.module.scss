@@ -1,5 +1,5 @@
-@import "../../../styles/colors";
-@import "../../../styles/breakpoints";
+@use "../../../styles/colors";
+@use "../../../styles/breakpoints";
 
 .form {
    width: 100%;
@@ -20,12 +20,12 @@
     button {
         flex: 1; 
         padding: 5px 10px;
-        background-color: $std;
+        background-color: colors.$std;
         color: white;
         border-radius: 10px;
 
         &:hover {
-            background-color: $hover;
+            background-color: colors.$hover;
         }
     }
 
@@ -34,9 +34,9 @@
     }
 
     input[type=number] {
-        border: 1px solid $std;
+        border: 1px solid colors.$std;
         border-radius: 2px;
-        outline-color: $active;
+        outline-color: colors.$active;
         text-align: right;
         padding-right: 5px;
     }
@@ -53,19 +53,19 @@
     text-align: center;
     font-size: larger;
     font-weight: bold;
-    color: $std;
-    border-bottom: 2px solid $std;
+    color: colors.$std;
+    border-bottom: 2px solid colors.$std;
 }
 
 .select {
     flex: 1;
-    border: 1px solid $std;
+    border: 1px solid colors.$std;
     border-radius: 2px;
-    outline-color: $active;
+    outline-color: colors.$active;
     font-size: x-small;
 }
 
-@media (min-width: $break-large){
+@media (min-width: breakpoints.$break-large){
     .select {
         font-size: medium;
     }

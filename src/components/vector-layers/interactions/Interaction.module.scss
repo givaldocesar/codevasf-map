@@ -1,4 +1,4 @@
-@import "../../../styles/breakpoints";
+@use "../../../styles/breakpoints";
 
 .control {
     display: flex;
@@ -22,7 +22,7 @@
     }
 }
 
-@media (min-width: $break-large){
+@media (min-width: breakpoints.$break-large){
     .select {
         height: 24px;
     }

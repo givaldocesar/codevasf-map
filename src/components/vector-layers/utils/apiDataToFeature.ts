@@ -5,16 +5,18 @@ import { Projection } from "ol/proj";
 export interface APIData {
     crs: string;
     geometry: string;
-    properties: {};
+    [key: string]: string | number | undefined
 }
 
 function conversor(data : APIData, projection?: Projection){
+    const {crs, geometry, ...properties } = data
+     
     return new Feature({
-        geometry: new WKT().readGeometry(data.geometry, {
-            dataProjection: data.crs,
+        geometry: new WKT().readGeometry(geometry, {
+            dataProjection: crs,
             featureProjection: projection
         }),
-        ...data.properties
+        ...properties
     });
 }
 

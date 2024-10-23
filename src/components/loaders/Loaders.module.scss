@@ -1,7 +1,7 @@
-@import "../../styles/animations";
+@use "../../styles/animations";
 
 .pulse {
-    animation: $pulse;
+    animation: animations.$pulse;
 }
 
 .dots::after {

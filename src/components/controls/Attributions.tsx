@@ -6,7 +6,7 @@ const Attributions: React.FC<{
     className?: string,
     collapsible?: boolean
 }> = ({
-    className,
+    className='',
     collapsible=true
 }) => {
     const map = useContext(MapContext);

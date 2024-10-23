@@ -26,7 +26,7 @@ export default function processAPIData({layer, database, projection, cache, vers
                 
             } else {
                 //SERVER FEATURES
-                const response = await fetch(BASE_URL + `/${database}/${version[groupField]}`);
+                const response = await fetch(BASE_URL + `/${database}?${groupField}=${version[groupField]}`);
             
                 if(response.ok){
                     const data: APIData | APIData [] = await response.json();
