@@ -5,6 +5,7 @@ export { default as extractStringFromExpression } from "./extractStringExpressio
 export { default as getFeatureLabel } from "./getFeatureLabel";
 export { default as randomColor } from "./randomColor"; 
 export { default as registerProjections } from "./registerProjections";
+export { default as useForceUpdate } from "./useForceUpdate";
 
 
 

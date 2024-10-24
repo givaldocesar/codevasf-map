@@ -32,9 +32,9 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
             -->collapsePositionButton   <'top_right' | 'top_left'>  Posição do botão para colapsar.
             -->showControl              <boolean>                   Exibe/Oculta o controle.
             -->showFeaturesProperties   <boolean>                   Habilita um popup que mostra as propriedades da feição, quando o mouse repousa sobre esta.
-        --Toolbar:                  Adiciona uma toolbar ao mapa. 'Tools' podem ser filhos deste componente.
-        --Tool:                     Adiciona uma ferramenta a 'Toolbar'. 'Tools' são "buttons" e aceitam suas propriedads HTML.
-            -->active:  <boolean>   Indica que a ferramenta está ativa.
+        --Toolbar:                                                  Adiciona uma toolbar ao mapa. 'Tools' podem ser filhos deste componente.
+        --Tool:                                                     Adiciona uma ferramenta a 'Toolbar'. 'Tools' são "buttons" e aceitam suas propriedads HTML.
+            -->active:  <boolean>                                   Indica que a ferramenta está ativa.
 
         É possivel controlar a posição dos controles através do atributo 'className' com CSS ou tailwind.
     

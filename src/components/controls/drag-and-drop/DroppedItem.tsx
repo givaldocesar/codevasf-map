@@ -3,6 +3,7 @@ import { CustomLayer, CustomSimpleStyle } from "../../../classes";
 import { MapContext } from "../../../components/contexts";
 import { RemoveLayerIcon, VectorLayerIcon } from "../../../components/buttons";
 import { ChangeLayerStylePopup } from "../../../components/pop-ups";
+import { useForceUpdate } from "../../../utils";
 import styles from "./DragAndDrop.module.scss";
 
 
@@ -14,15 +15,14 @@ const DroppedItem: React.FC<{
     layer
 }) => {
     const [name, _] = id.split('_');
-    const [__, setRevision] = useState<number>(0);
+    const forceUpdate = useForceUpdate();
     const map = useContext(MapContext);
 
     useEffect(() => {
-        function changeStyle(){ setRevision(revision => revision + 1) }
         //@ts-ignore
-        layer.on("change-style", changeStyle);
+        layer.on("change-style", forceUpdate);
         //@ts-ignore
-        return () => { layer.un("change-style", changeStyle) }
+        return () => { layer.un("change-style", forceUpdate) }
     }, []);
 
     function zoom(){    

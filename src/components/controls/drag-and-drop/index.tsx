@@ -3,6 +3,7 @@ import { Feature } from "ol";
 import { KML } from "ol/format";
 import { DragAndDrop as Interaction } from "ol/interaction";
 import { MapContext } from "../../../components/contexts";
+import { useForceUpdate } from "../../../utils";
 import BaseControl from "../BaseControl";
 import DroppedItem from "./DroppedItem";
 import createLayer from "./createLayer";
@@ -27,7 +28,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({
 }) => {
     const ref = useRef<HTMLDivElement>(null);
     const map = useContext(MapContext);
-    const [revision, setRevision] = useState(0);
+    const forceUpdate = useForceUpdate();
     const files: React.ReactElement[] = useMemo(() => [], []);
 
     const interaction = useMemo(() => new Interaction({
@@ -58,7 +59,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({
                 });
                 
                 files.push(<DroppedItem key={id} id={id} layer={layer} />);
-                setRevision(revision => revision + 1);
+                forceUpdate();
             }
         });
     }, []);
@@ -69,7 +70,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({
             const idx = files.findIndex(file => file.props.id === evt.detail);
             map?.removeLayer(files[idx].props.layer);
             files.splice(idx, 1);
-            setRevision(revision => revision + 1);
+            forceUpdate();
         }) as EventListener);
     }, [ref.current]);
 
@@ -77,7 +78,6 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({
         <>
             { showControl &&
                 <BaseControl
-                    key={revision}
                     className={className} 
                     collapsable={collapsable}
                     collapseImage={collapseImage}

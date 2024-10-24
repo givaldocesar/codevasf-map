@@ -1,10 +1,8 @@
 node_modules/
 
-#DIST FOLDER
+#BUILD
+dist/*.d.ts
 dist/index.*
-dist/controls.d.ts
-dist/tile-layers.d.ts
-dist/vector-layers.d.ts
 dist/styles_components.css
 
 #MISC

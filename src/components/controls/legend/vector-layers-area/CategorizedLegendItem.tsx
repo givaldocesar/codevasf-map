@@ -7,7 +7,6 @@ import styles from "../Legend.module.scss";
 
 const CategorizedLegendItem: React.FC<{layer: CustomLayer}> = ({layer}) => {
     const style = layer.getBaseStyle() as CustomCategorizedStyle;
-    
     const [collapsed, setCollapsed] = useState(style.getCollapsed());
     const [layerStatus, setStatus] = useState<LayerStatus>('loading');
 

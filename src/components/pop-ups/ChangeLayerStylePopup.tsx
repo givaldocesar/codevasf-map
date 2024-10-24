@@ -4,8 +4,6 @@ import { CustomLayer, CustomSimpleStyle } from "../../classes";
 import Form, { FormRow, FormTitle } from "./form";
 
 const ChangeLayerStylePopup: React.FC<{layer: CustomLayer}> = ({layer}) => {
-   
-    
     function close(evt: React.MouseEvent<HTMLOrSVGElement, MouseEvent>){
         evt.target.dispatchEvent(new CustomEvent('show-popup', {
             detail: null,
