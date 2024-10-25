@@ -36,6 +36,7 @@ const AddFeatures: React.FC = () => {
     const addFeaturesToMap = useCallback((evt: AddFeaturesEvent) => {
         const layer = createRandomLayer({
             map: map,
+            title: evt.detail.layerTitle,
             features: evt.detail.features as Feature[],
             showProperties: true
         });

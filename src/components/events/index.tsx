@@ -5,3 +5,5 @@ const Events: React.FC<{children?: React.ReactNode}> = ({children}) => {
 export default Events;
 export { Events };
 export * from "./AddFeatures";
+export * from "./FitToFeatures";
+export * from "./RemoveLayer";

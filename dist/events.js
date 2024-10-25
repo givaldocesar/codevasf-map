@@ -1,5 +1,9 @@
 export {
     Events as default,
     AddFeatures,
-    AddFeaturesEvent
+    AddFeaturesEvent,
+    FitToFeatures,
+    FitToFeaturesEvent,
+    RemoveLayer,
+    RemoveLayerEvent
 } from "./index.js";

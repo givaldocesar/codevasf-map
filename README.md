@@ -38,12 +38,23 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
 
         É possivel controlar a posição dos controles através do atributo 'className' com CSS ou tailwind.
 
-    ╚> Events:                  Agrupa os eventos externos que interagem com o mapa.
-        --AddFeatures:          Adiciona um 'listener' ao mapa, que a ouvir um evento do 'AddFeatureEvent', adiciona as feições fornecidas.
-        --AddFeaturesEvent:     Evento que quando disparado adiciona feições ao mapa, casa este possua o evento 'AddFeautres'.    
+    ╚> Events:                              Agrupa os eventos externos que interagem com o mapa.
+        --AddFeatures:                      Adiciona um 'listener' ao mapa, que a ouvir um evento do 'AddFeatureEvent', adiciona as feições fornecidas.
+        --AddFeaturesEvent:                 Evento que quando disparado adiciona feições ao mapa, caso este possua o evento 'AddFeatures'.    
             -->features:    <Feature[]>     Feições a serem adicionadas. 
             -->layerTitle?: <string>        Titulo da camada que será criada.
              -->zoomTo?:    <boolean>       Ao adicionar, dá zoom nas feições adicionadas.
+        
+        --FitToFeatures:                    Adiciona um 'listener' ao mapa, que a ouvir um evento do 'FitToFeatureEvent', dá zoom nas feições fornecidas.
+        --FitToFeaturesEvent:               Evento que quando disparado faz com que o mapa centre nas feições fornecidas, caso este possua o evento
+                                            'FitToFeatures'.
+            -->features:    <Feature[]>     Feições a serem exibidas.  
+
+        --RemoveLayer:                      Adiciona um 'listener' ao mapa, que a ouvir um evento do 'RemoveLayerEvent', remove todas as camada com o 
+                                            titulo fornecido.
+        --RemoveLayerEvent:                 Evento que quando disparado remove todas as camadas com o título fornecido, necessário que o mapa tenha o evento
+                                            'RemoveLayer'.
+            -->layerTitle:  <string>        Título das camadas que serão removidas.
     
     ╚> TileLayers:             Agrupa as camadas de base. (Ajuda a organizar o código)
         -- OpenStreetLayer:     Adiciona uma camada OSM ao mapa.
