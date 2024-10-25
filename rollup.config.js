@@ -28,6 +28,7 @@ export default [
     },
     rollupTypes({input: "src/components/index.ts", name: "index"}),
     rollupTypes({input: "src/components/controls/index.tsx", name: "controls"}),
+    rollupTypes({input: "src/components/events/index.tsx", name: "events"}),
     rollupTypes({input: "src/components/tile-layers/index.tsx", name: "tile-layers"}),
     rollupTypes({input: "src/components/vector-layers/index.tsx", name: "vector-layers"}),
 ]

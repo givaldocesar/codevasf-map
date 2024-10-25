@@ -1,5 +1,5 @@
 import { FlatText, Rule, StringExpression } from "ol/style/flat";
-import { extractStringFromExpression } from "../../utils";
+import extractStringFromExpression from "../../utils/extractStringExpressionFromExpression";
 import CategoryStyle from "./CategoryStyle";
 
 export default class CustomCategorizedStyle {

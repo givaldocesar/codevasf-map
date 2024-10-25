@@ -2,20 +2,20 @@ import { Feature, Overlay } from "ol";
 import { Select } from "ol/interaction";
 import { never, pointerMove } from "ol/events/condition";
 import { Style, Stroke, Fill, Circle } from "ol/style";
-import { CustomLayer, CustomMap } from "../../../classes";
-import { randomColor } from "../../../utils";
-import updatePopup from "./updatePopup";
-import styles from "./DragAndDrop.module.scss";
+import { CustomLayer, CustomMap } from "../classes";
+import updatePopup from "../components/controls/drag-and-drop/updatePopup";
+import randomColor from "./randomColor";
+import styles from "./Utils.module.scss";
 
 
-export default function createLayer({
+export default function createRandomLayer({
     map, 
     title, 
     features, 
     showProperties
 } : {
     map?: CustomMap | null; 
-    title: string;
+    title?: string;
     features: Feature[];
     showProperties?: boolean;
 }){
@@ -36,9 +36,6 @@ export default function createLayer({
     layer.set('ignore', true);
     layer.set('title', title);
     layer.getSource()?.addFeatures(features); 
-
-    map?.addLayer(layer);
-    map?.fit(layer.getSource()?.getExtent());
 
     //HOVER SHOWING PROPERTIES
     if(showProperties && map){

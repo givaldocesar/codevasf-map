@@ -8,30 +8,13 @@
   ],
   "exports": {
     "./styles": "./dist/styles.css",
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    },
-    "./controls": {
-      "types": "./dist/controls.d.ts",
-      "import": "./dist/controls.js"
-    },
-    "./tile-layers": {
-      "types": "./dist/tile-layers.d.ts",
-      "import": "./dist/tile-layers.js"
-    },
-    "./vector-layers": {
-      "types": "./dist/vector-layers.d.ts",
-      "import": "./dist/vector-layers.js"
-    },
-    "./vector-layers/styles": {
-      "types": "./dist/vector-layers.d.ts",
-      "import": "./dist/vector-styles.js"
-    },
-    "./vector-layers/interactions": {
-      "types": "./dist/vector-layers.d.ts",
-      "import": "./dist/vector-interactions.js"
-    }
+    ".":                {"types": "./dist/index.d.ts", "import": "./dist/index.js"},
+    "./controls":       {"types": "./dist/controls.d.ts", "import": "./dist/controls.js" },
+    "./events":         {"types": "./dist/events.d.ts", "import": "./dist/events.js" },
+    "./tile-layers":    { "types": "./dist/tile-layers.d.ts", "import": "./dist/tile-layers.js" },
+    "./vector-layers":  {"types": "./dist/vector-layers.d.ts", "import": "./dist/vector-layers.js" },
+    "./vector-layers/styles":       { "types": "./dist/vector-layers.d.ts", "import": "./dist/vector-styles.js" },
+    "./vector-layers/interactions": {"types": "./dist/vector-layers.d.ts", "import": "./dist/vector-interactions.js" }
   },
   "scripts": {
     "build": "rollup -c",

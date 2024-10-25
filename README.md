@@ -37,6 +37,13 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
             -->active:  <boolean>                                   Indica que a ferramenta está ativa.
 
         É possivel controlar a posição dos controles através do atributo 'className' com CSS ou tailwind.
+
+    ╚> Events:                  Agrupa os eventos externos que interagem com o mapa.
+        --AddFeatures:          Adiciona um 'listener' ao mapa, que a ouvir um evento do 'AddFeatureEvent', adiciona as feições fornecidas.
+        --AddFeaturesEvent:     Evento que quando disparado adiciona feições ao mapa, casa este possua o evento 'AddFeautres'.    
+            -->features:    <Feature[]>     Feições a serem adicionadas. 
+            -->layerTitle?: <string>        Titulo da camada que será criada.
+             -->zoomTo?:    <boolean>       Ao adicionar, dá zoom nas feições adicionadas.
     
     ╚> TileLayers:             Agrupa as camadas de base. (Ajuda a organizar o código)
         -- OpenStreetLayer:     Adiciona uma camada OSM ao mapa.

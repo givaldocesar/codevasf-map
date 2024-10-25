@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { CustomLayer, CustomSimpleStyle } from "../../../classes";
 import { MapContext } from "../../../components/contexts";
 import { RemoveLayerIcon, VectorLayerIcon } from "../../../components/buttons";

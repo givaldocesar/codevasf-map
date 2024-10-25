@@ -3,10 +3,9 @@ import { Feature } from "ol";
 import { KML } from "ol/format";
 import { DragAndDrop as Interaction } from "ol/interaction";
 import { MapContext } from "../../../components/contexts";
-import { useForceUpdate } from "../../../utils";
+import { useForceUpdate, createRandomLayer } from "../../../utils";
 import BaseControl from "../BaseControl";
 import DroppedItem from "./DroppedItem";
-import createLayer from "./createLayer";
 import styles from "./DragAndDrop.module.scss";
 
 
@@ -51,12 +50,15 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({
                 map?.fit(file.props.layer.getSource()?.getExtent());
             
             } else {
-                const layer = createLayer({
+                const layer = createRandomLayer({
                     map: map,
                     title: evt.file.name, 
                     features: evt.features as Feature[],
                     showProperties: showFeaturesProperties
                 });
+                
+                map?.addLayer(layer);
+                map?.fit(layer.getSource()?.getExtent());
                 
                 files.push(<DroppedItem key={id} id={id} layer={layer} />);
                 forceUpdate();

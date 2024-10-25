@@ -2,7 +2,8 @@ import { FeatureLike } from "ol/Feature";
 import { Geometry } from "ol/geom";
 import { Style, Stroke, Fill, Circle, Text } from "ol/style";
 import ImageStyle from "ol/style/Image";
-import { clipFeature, getFeatureLabel } from "../../utils";
+import clipFeature from "../../utils/clipFeature";
+import getFeatureLabel from "../../utils/getFeatureLabel";
 import CustomSelect from "../CustomSelect";
 
 interface Props {

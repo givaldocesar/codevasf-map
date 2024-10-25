@@ -1,5 +1,5 @@
 import { FlatFill, FlatStroke, FlatStyle, FlatStyleLike, FlatText, StringExpression } from "ol/style/flat";
-import { extractStringFromExpression } from "../../utils";
+import extractStringFromExpression from "../../utils/extractStringExpressionFromExpression";
 
 export const defaultStyle: FlatStyle = {
     "stroke-color": "black",

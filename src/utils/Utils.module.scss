@@ -1,0 +1,27 @@
+@use "../styles/colors";
+
+.popup {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: white;
+    font-size: small;
+    text-align: right;
+
+    table {
+        padding: 5px;
+        border: 2px solid colors.$std;
+        border-collapse: collapse;
+        border-radius: 5px;
+    }
+
+    .label {
+        padding: 5px;
+        font-weight: bold;
+        border: 1px solid black;
+    }
+
+    .value {
+        padding: 5px;
+        border: 1px solid black;
+    }
+}
