@@ -1,10 +1,8 @@
 import React from "react";
 
-const TileLayers: React.FC<{children?: React.ReactNode}> = ({children}) => {
+export default function TileLayers({children} : {children?: React.ReactNode }){
     return <>{children}</>
 }
-
-export default TileLayers;
 
 export { TileLayers };
 export { default as OpenStreetLayer } from "./OpenStreetLayer";

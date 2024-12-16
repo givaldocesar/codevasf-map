@@ -5,5 +5,7 @@ export {
     FitToFeatures,
     FitToFeaturesEvent,
     RemoveLayer,
-    RemoveLayerEvent
+    RemoveLayerEvent,
+    RemoveFeatures,
+    RemoveFeaturesEvent
 } from "./index.js";

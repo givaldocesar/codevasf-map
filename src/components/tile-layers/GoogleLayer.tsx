@@ -1,4 +1,4 @@
-import React, { useContext, useState, useMemo, useEffect } from "react";
+import { useContext, useState, useMemo, useEffect } from "react";
 import Image, { StaticImageData } from "next/image";
 import TileLayer from "ol/layer/Tile";
 import { Google, XYZ } from "ol/source";
@@ -35,17 +35,17 @@ class CustomGoogle extends Google {
     }
 }
 
-const GoogleLayer: React.FC<{
-    standard?: boolean,
-    order?: number,
-    zIndex?: number,
-    mapType?: 'hybrid' | 'roadmap' | 'satellite' | 'terrain'
-}> = ({
+export default function GoogleLayer({
     standard=false, 
     order, 
     zIndex, 
     mapType='satellite'
-}) => {
+}: {
+    standard?: boolean,
+    order?: number,
+    zIndex?: number,
+    mapType?: 'hybrid' | 'roadmap' | 'satellite' | 'terrain'
+}){
     const map = useContext(MapContext);
     const [showLogo, setShow] = useState(standard);
     
@@ -142,9 +142,8 @@ const GoogleLayer: React.FC<{
                 width={119}
                 height={36}
                 alt="google-logo"
+                style={{pointerEvents: "none"}}
             />
         </BaseControl>
     );
 }
-
-export default GoogleLayer;

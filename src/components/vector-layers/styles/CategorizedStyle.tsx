@@ -3,17 +3,17 @@ import { CustomCategorizedStyle as CCS, SelectStyle } from "../../../classes";
 import { LayerContext, StyleContext, InteractionContext } from "../../contexts";
 
 
-const CategorizedStyle: React.FC<{
-    children?: React.ReactNode;
-    field: string;
-    visible?: boolean;
-    collapsed?: boolean;
-}> = ({
+function CategorizedStyle({
     children, 
     field, 
     visible=true,
     collapsed
-}) => {
+} : {
+    children?: React.ReactNode;
+    field: string;
+    visible?: boolean;
+    collapsed?: boolean;
+}){
     const layer = useContext(LayerContext);
     const interaction = useContext(InteractionContext);
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useContext } from "react";
+import { useEffect, useMemo, useContext } from "react";
 import { CustomLayer, LayerCache } from "../../classes";
 import { MapContext } from "../contexts";
 import Layer, { BaseLayerProps } from "./Layer";
@@ -12,7 +12,14 @@ interface APIDataLayerProps extends BaseLayerProps {
    groupField: string;
 }
 
-const APIDataLayer: React.FC<APIDataLayerProps> = ({children, database, urlInit, groupField, fit, ...props}) => {
+function APIDataLayer({
+    children, 
+    database, 
+    urlInit, 
+    groupField, 
+    fit, 
+    ...props
+} : APIDataLayerProps){
     const map = useContext(MapContext);
     const projection = map?.getView().getProjection();
     const layer = useMemo(() => new CustomLayer(props), []);

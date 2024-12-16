@@ -1,13 +1,17 @@
-import React, { useMemo, useContext, useEffect } from "react";
+import { useMemo, useContext, useEffect } from "react";
 import TileLayer from "ol/layer/Tile";
 import { OSM } from "ol/source";
 import { MapContext } from "../contexts";
 
-const OpenStreetLayer: React.FC<{
+export default function OpenStreetLayer({
+    standard=false, 
+    order, 
+    zIndex
+}:{
     standard?: boolean,
     order?: number,
     zIndex?: number
-}> = ({standard=false, order, zIndex}) => {
+}){
     const map = useContext(MapContext);
     
     const layer = useMemo(() =>{ 
@@ -34,5 +38,3 @@ const OpenStreetLayer: React.FC<{
     
     return <></>
 }
-
-export default OpenStreetLayer;

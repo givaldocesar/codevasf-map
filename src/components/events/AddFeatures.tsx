@@ -32,12 +32,7 @@ class AddFeaturesEvent extends CustomEvent<{
     }
 }
 
-const AddFeatures: React.FC<{
-    label?: {
-        text?: FlatText
-        expression: string
-    }
-}> = ({label}) => {
+function AddFeatures({label} : {label?: {text?: FlatText; expression: string}}){
     const map = useContext(MapContext);
 
     const addFeaturesToMap = useCallback((evt: AddFeaturesEvent) => {

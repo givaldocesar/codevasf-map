@@ -1,6 +1,6 @@
 import React from "react";
 
-const VectorLayers: React.FC<{children?: React.ReactNode}> = ({children}) => {
+function VectorLayers({children} : {children?: React.ReactNode}){
     return <>{children}</>
 }
 

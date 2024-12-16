@@ -6,10 +6,11 @@ import { TextLoader } from "./loaders";
 import { MapContext } from "./contexts";
 import styles from "./Components.module.scss";
 
-
 registerProjections();
 
 interface MapProps {
+    children?:      React.ReactNode; 
+    className?:     string; 
     projection?:    "EPSG:31983" | "EPSG:31984" | "EPSG:4674" | "EPSG:4326";
     center?:        [number, number];
     zoom?:          number;
@@ -17,7 +18,7 @@ interface MapProps {
     maxZoom?:       number;
 }
 
-const Map: React.FC<React.HTMLAttributes<HTMLDivElement>&MapProps> = ({
+function Map({
     children,
     className="",
     projection,
@@ -25,7 +26,7 @@ const Map: React.FC<React.HTMLAttributes<HTMLDivElement>&MapProps> = ({
     zoom,
     minZoom,
     maxZoom
-}) => {
+}: MapProps){
     const ref = useRef<HTMLDivElement>(null);
     const [popup, setPopup] = useState<React.ReactNode>(null);
 

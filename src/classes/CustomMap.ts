@@ -27,12 +27,12 @@ class CustomMap extends Map {
         });
     }
 
-    fit(extent?: Extent | null){
+    fit(extent?: Extent | null, maxZoom?: number){
         if(extent && !isEmpty(extent)){
             this.getView().fit(extent, {
                 padding: [50, 50, 50, 50],
                 duration: 500,
-                maxZoom: 15
+                maxZoom: maxZoom || 15
             });
         }
     }

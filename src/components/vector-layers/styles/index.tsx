@@ -3,13 +3,13 @@ import { SelectStyle } from "../../../classes";
 import { LayerContext, StyleContext, InteractionContext } from "../../contexts";
 
 
-const SimpleStyle: React.FC<{
-    children?: React.ReactNode, 
-    visible?: boolean
-}> = ({
+function SimpleStyle({
     children, 
     visible=true
-}) => {
+} : {
+    children?: React.ReactNode, 
+    visible?: boolean
+}){
     const layer = useContext(LayerContext);
     const interaction = useContext(InteractionContext);
     

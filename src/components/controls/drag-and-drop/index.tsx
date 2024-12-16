@@ -28,7 +28,7 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({
     const ref = useRef<HTMLDivElement>(null);
     const map = useContext(MapContext);
     const forceUpdate = useForceUpdate();
-    const files: React.ReactElement[] = useMemo(() => [], []);
+    const files: React.JSX.Element[] = useMemo(() => [], []);
 
     const interaction = useMemo(() => new Interaction({
         formatConstructors: [new KML({extractStyles: false})]

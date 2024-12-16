@@ -20,7 +20,7 @@ export default function createRandomLayer({
     showProperties?: boolean;
 }){
     const stroke = randomColor("HEX", 0.75);
-    const fill = randomColor("HEX", 0.75);
+    const fill = randomColor("HEX", 0.50);
     
     //LAYER
     const layer = new CustomLayer({

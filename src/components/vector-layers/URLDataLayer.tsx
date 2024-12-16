@@ -11,7 +11,13 @@ interface URLDataLayerProps extends BaseLayerProps {
     urlInit?: RequestInit;
 }
 
-const URLDataLayer: React.FC<URLDataLayerProps> = ({children, url, urlInit, fit, ...props}) => {
+function URLDataLayer({
+    children, 
+    url, 
+    urlInit, 
+    fit, 
+    ...props
+} : URLDataLayerProps){
     const map = useContext(MapContext);
     const layer = useMemo(() => new CustomLayer(props), []);
 

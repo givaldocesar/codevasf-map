@@ -5,8 +5,7 @@ import { LayerContext, StyleContext } from "../../contexts";
 import { convertFlatFill } from "../utils/convert-flat-styles";
 
 
-
-const Fill: React.FC<FlatFill> = (props) => {
+function Fill(props : FlatFill){
     //melhorar solução
     const layer = useContext(LayerContext);
     const style = useContext(StyleContext);

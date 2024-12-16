@@ -7,3 +7,4 @@ export { Events };
 export * from "./AddFeatures";
 export * from "./FitToFeatures";
 export * from "./RemoveLayer";
+export * from "./RemoveFeatures";

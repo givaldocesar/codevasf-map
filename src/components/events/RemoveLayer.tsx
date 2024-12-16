@@ -13,7 +13,7 @@ class RemoveLayerEvent extends CustomEvent<string> {
     }
 }
 
-const RemoveLayer: React.FC = () => {
+function RemoveLayer(){
     const map = useContext(MapContext);
 
     const removeLayer = useCallback((evt: RemoveLayerEvent) => {
