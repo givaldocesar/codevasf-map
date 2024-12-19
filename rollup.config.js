@@ -25,8 +25,7 @@ export default [
             typescript({ tsconfig: './tsconfig.json' }),
             postcss( {
                 extract: 'styles_components.css',
-                use: { sass: { silenceDeprecations: ['legacy-js-api'] },
-             }
+                use: { sass: { silenceDeprecations: ['legacy-js-api'] }}
             }) 
         ]
     },

@@ -5,11 +5,12 @@ import VectorSource from "ol/source/Vector";
 import { AttributionLike } from "ol/source/Source";
 import { FlatStyle } from "ol/style/flat";
 import { Filter, Geometries, LayerStatus } from "../interfaces";
+import { LayerProgressEvent, LayerStatusEvent } from "../components/vector-layers/events";
 import SimpleStyle from "./styles/CustomSimpleStyle";
 import CategorizedStyle from "./styles/CustomCategorizedStyle";
 
 
-class CustomLayer extends VectorImageLayer {
+export default class CustomLayer extends VectorImageLayer {
     private geometry_: Geometries | undefined;
     private status_: LayerStatus;
     private lodingProgress_: number;
@@ -116,13 +117,13 @@ class CustomLayer extends VectorImageLayer {
 
     setLoadingProgress(value: number){
         this.lodingProgress_ = value;
+        document.dispatchEvent(new LayerProgressEvent(this.get('title'), value));
         this.dispatchEvent('progress-changed');
     }
 
     setStatus(status: LayerStatus){
         this.status_ = status;
+        document.dispatchEvent(new LayerStatusEvent(this.get('title'), status));
         this.dispatchEvent('status-changed');
     }
 }
-
-export default CustomLayer;

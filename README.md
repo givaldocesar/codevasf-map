@@ -39,18 +39,23 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
         É possivel controlar a posição dos controles através do atributo 'className' com CSS ou tailwind.
 
     ╚> Events:                              Agrupa os eventos externos que interagem com o mapa.
-        --AddFeatures:                      Adiciona um 'listener' ao mapa, que a ouvir um evento do 'AddFeatureEvent', adiciona as feições fornecidas.
+        --AddFeatures:                      Adiciona um 'listener' ao mapa, que ao ouvir um evento do tipo 'AddFeatureEvent' adiciona as feições fornecidas.
         --AddFeaturesEvent:                 Evento que quando disparado adiciona feições ao mapa, caso este possua o evento 'AddFeatures'.    
             -->features:    <Feature[]>     Feições a serem adicionadas. 
             -->layerTitle?: <string>        Titulo da camada que será criada.
              -->zoomTo?:    <boolean>       Ao adicionar, dá zoom nas feições adicionadas.
         
-        --FitToFeatures:                    Adiciona um 'listener' ao mapa, que a ouvir um evento do 'FitToFeatureEvent', dá zoom nas feições fornecidas.
+        --FitToFeatures:                    Adiciona um 'listener' ao mapa, que ao ouvir um evento do tipo 'FitToFeatureEvent' executa zoom nas feições fornecidas.
         --FitToFeaturesEvent:               Evento que quando disparado faz com que o mapa centre nas feições fornecidas, caso este possua o evento
                                             'FitToFeatures'.
             -->features:    <Feature[]>     Feições a serem exibidas.  
-
-        --RemoveLayer:                      Adiciona um 'listener' ao mapa, que a ouvir um evento do 'RemoveLayerEvent', remove todas as camada com o 
+        --RemoveFeatures:                   Adiciona um 'listener' ao mapa, que ao ouvir um evento do tipo 'RemoveFeaturesEvent' remove as feições fornecidas da
+                                            camada fornecida.
+        --RemoveFeaturesEvent:              Evento que quando disparado remove as feições fornecidas da camada presente no mapa, caso este possua o evento
+                                            'Removefeature'.
+            -->layerTitle:  <string>        Título da camada para remover feições.
+            -->features:    <Feature[]>     Feições a serem removidas.
+        --RemoveLayer:                      Adiciona um 'listener' ao mapa, que ao ouvir um evento do tipo 'RemoveLayerEvent' remove todas as camada com o 
                                             titulo fornecido.
         --RemoveLayerEvent:                 Evento que quando disparado remove todas as camadas com o título fornecido, necessário que o mapa tenha o evento
                                             'RemoveLayer'.
@@ -139,8 +144,17 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
                         --->labelClassName: <string>    Classname CSS para a label.    
                         --->collapsable:    <boolean>   Adicona um botão para colapsar o 'control'. 
 
-                    OBS: 'SimpleStyle' e 'CategorizedStyle' também podem ser utilizados como filhos de 'Hover' e 'Click'.          
+                    OBS: 'SimpleStyle' e 'CategorizedStyle' também podem ser utilizados como filhos de 'Hover' e 'Click'.
 
+            ╚> events:        
+                --LayerProgressEvent:                       Evento para ouvir o progresso de carregamento de uma camada.
+                    -->layerTitle:          <string>        Título da camada que emitiu o evento.
+                    -->progress             <number>        Progresso do carregamento. 
+                --LayerStatusEvent:                         Evento para ouvir o status de carregamento de uma camada.
+                    -->layerTitle:          <string>        Título da camada que emitiu o evento.
+                    -->status               "loading" |     Status da camada. 
+                                            "complete |
+                                            "error"                  
         
         -- URLDataLayer:            Extensão de "Layer". Usa dados adquiridos de uma URL:
             --> url:        <string>        URL para aquisição dos dados.

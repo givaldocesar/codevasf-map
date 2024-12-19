@@ -1,14 +1,15 @@
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { CustomSelect } from "../../../classes";
 import { MapContext, InteractionContext } from "../../../components/contexts";
 
 
-interface Props {
+export default function BaseInteraction({
+    children, 
+    interaction
+} : {
     children?: React.ReactNode; 
     interaction: CustomSelect;
-}
-
-const BaseInteraction: React.FC<Props> = ({children, interaction}) => {
+}){
     const map = useContext(MapContext);
 
     useEffect(() => {
@@ -22,5 +23,3 @@ const BaseInteraction: React.FC<Props> = ({children, interaction}) => {
         </InteractionContext.Provider>
     );
 }
-
-export default BaseInteraction;

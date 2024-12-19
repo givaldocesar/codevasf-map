@@ -28,6 +28,10 @@
       "types": "./dist/vector-layers.d.ts",
       "import": "./dist/vector-layers.js"
     },
+    "./vector-layers/events": {
+      "types": "./dist/vector-layers.d.ts",
+      "import": "./dist/vector-events.js"
+    },
     "./vector-layers/styles": {
       "types": "./dist/vector-layers.d.ts",
       "import": "./dist/vector-styles.js"

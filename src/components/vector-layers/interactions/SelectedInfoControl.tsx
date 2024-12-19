@@ -4,21 +4,21 @@ import { SelectEvent } from "ol/interaction/Select";
 import { InteractionContext, LayerContext } from "../../contexts";
 import { BaseControl } from "../../controls";
 
-interface SelectedInfoControlProps {
+interface SelectedInfoControlProps extends React.HTMLAttributes<HTMLDivElement>{
     collapsable?: boolean;
     collapseImage?: string;
     collapsePositionButton?: "top_right" | "top_left";
     factory: (features: Feature[]) => React.ReactElement; 
 }
 
-const SelectedInfoControl: React.FC<React.HTMLAttributes<HTMLDivElement>&SelectedInfoControlProps> = ({
+export default function SelectedInfoControl ({
     children,
     collapsable,
     collapseImage,
     collapsePositionButton,
     factory,
     ...props
-}) => {
+} : SelectedInfoControlProps){
     const layer = useContext(LayerContext);
     const interaction = useContext(InteractionContext);
     const [features, setFeatures] = useState<Feature[]>([]);
@@ -45,5 +45,3 @@ const SelectedInfoControl: React.FC<React.HTMLAttributes<HTMLDivElement>&Selecte
         throw new Error(`LAYER ${layer?.get('title')}: no factory is provided for 'SelectedInfoControl'.`);
     }
 }
-
-export default SelectedInfoControl;

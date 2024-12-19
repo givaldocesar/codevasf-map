@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useContext, useMemo, useState } from "react";
+import { useEffect, useCallback, useContext } from "react";
 import { Feature } from "ol";
 import { MapContext } from "../contexts";
 import { createRandomLayer } from "../../utils";

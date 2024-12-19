@@ -1,19 +1,20 @@
 import { CacheIndex } from "../interfaces";
 
-interface Props {
-    name: string;
-    keyPath?: string;
-    indexes?: CacheIndex[];
-}
-
-class LayerCache {
+export default class LayerCache {
     database_: IDBDatabase | null;
     name_: string;
     keyPath_?: string;
     indexes_: CacheIndex[];
 
-
-    constructor({name, keyPath, indexes=[]} : Props){
+    constructor({
+        name, 
+        keyPath, 
+        indexes=[]
+    } : {
+        name: string;
+        keyPath?: string;
+        indexes?: CacheIndex[];
+    }){
         this.database_ = null;
         this.name_ = name;
         this.keyPath_ = keyPath;
@@ -90,5 +91,3 @@ class LayerCache {
         });
     }
 }
-
-export default LayerCache;

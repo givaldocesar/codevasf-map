@@ -13,3 +13,4 @@ export { default as APIDataLayer } from "./APIDataLayer";
 
 export * from "./styles";
 export * from "./interactions";
+export * from "./events";

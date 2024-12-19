@@ -1,8 +1,8 @@
-import { Map, View } from "ol";
+import { Map as OLMap, View } from "ol";
 import { Extent, isEmpty } from "ol/extent";
 import { defaults } from "ol/interaction/defaults";
 
-class CustomMap extends Map {
+export default class CustomMap extends OLMap {
     constructor({
         projection='EPSG:4674',
         center=[0,0],
@@ -37,5 +37,3 @@ class CustomMap extends Map {
         }
     }
 }
-
-export default CustomMap;

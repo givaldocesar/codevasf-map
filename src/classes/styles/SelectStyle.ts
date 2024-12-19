@@ -14,7 +14,7 @@ interface Props {
     zIndex?: number;
 }
 
-class SelectStyle extends Style{
+export default class SelectStyle extends Style{
     private expression_?: string;
     private select_: CustomSelect;
     
@@ -86,5 +86,3 @@ class SelectStyle extends Style{
         if(text) this.setText(text);
     }
 }
-
-export default SelectStyle;

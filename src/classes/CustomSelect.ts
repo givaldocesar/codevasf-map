@@ -1,27 +1,23 @@
 import { Feature } from "ol";
 import { Select } from "ol/interaction";
-import { SelectEvent } from "ol/interaction/Select";
 import BaseEvent from "ol/events/Event";
 import { Condition, never } from "ol/events/condition";
 import CustomLayer from "./CustomLayer";
 import { SelectStyle } from "./styles";
 
 
-interface Props {
-    condition?: Condition;
-    layers?: CustomLayer[];
-    style?: SelectStyle;
-}
-
-
-class CustomSelect extends Select{
+export default class CustomSelect extends Select{
     private baseStyle_: SelectStyle;
 
     constructor({
         condition,
         layers,
         style
-    }: Props){
+    }: {
+        condition?: Condition;
+        layers?: CustomLayer[];
+        style?: SelectStyle;
+    }){
         super({
             toggleCondition: never,
             condition,
@@ -46,5 +42,3 @@ class CustomSelect extends Select{
         this.getFeatures().extend(features || []); 
     }
 }
-
-export default CustomSelect;

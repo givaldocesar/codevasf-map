@@ -1,8 +1,9 @@
-import React, { useEffect, useMemo, useContext } from "react";
+import { useEffect, useMemo, useContext } from "react";
 import { GeoJSON } from "ol/format";
 import { CustomLayer, LayerCache } from "../../classes";
+import { BaseLayerProps } from "../../interfaces";
 import { MapContext } from "../contexts";
-import Layer, { BaseLayerProps } from "./Layer";
+import Layer from "./Layer";
 import { getFormatFromContent } from "./utils";
 
 

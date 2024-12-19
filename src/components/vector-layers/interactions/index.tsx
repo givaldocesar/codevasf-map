@@ -1,6 +1,6 @@
 import React from "react";
 
-const Interactions: React.FC<{children?: React.ReactNode}> = ({children}) => {
+export default function Interactions({children} : {children?: React.ReactNode}){
     return children;
 }
 

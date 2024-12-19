@@ -5,7 +5,7 @@ import { MapContext, LayerContext } from "../../../components/contexts";
 import BaseInteraction from "./BaseInteraction";
 
 
-const Hover: React.FC<{children?: React.ReactNode;}> = ({children}) => {
+export default function Hover({children} : {children?: React.ReactNode}){
     const map = useContext(MapContext) as CustomMap;
     const layer = useContext(LayerContext) as CustomLayer;
     
@@ -33,5 +33,3 @@ const Hover: React.FC<{children?: React.ReactNode;}> = ({children}) => {
         </BaseInteraction>
     );
 }
-
-export default Hover;

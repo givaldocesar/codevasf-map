@@ -1,22 +1,13 @@
 import React, { useEffect, useMemo, useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import { CustomMap } from "../classes";
+import { CRS } from "../interfaces";
 import { registerProjections } from "../utils";
 import { TextLoader } from "./loaders";
 import { MapContext } from "./contexts";
 import styles from "./Components.module.scss";
 
 registerProjections();
-
-interface MapProps {
-    children?:      React.ReactNode; 
-    className?:     string; 
-    projection?:    "EPSG:31983" | "EPSG:31984" | "EPSG:4674" | "EPSG:4326";
-    center?:        [number, number];
-    zoom?:          number;
-    minZoom?:       number;
-    maxZoom?:       number;
-}
 
 function Map({
     children,
@@ -26,7 +17,15 @@ function Map({
     zoom,
     minZoom,
     maxZoom
-}: MapProps){
+}: {
+    children?:      React.ReactNode; 
+    className?:     string; 
+    projection?:    CRS;
+    center?:        [number, number];
+    zoom?:          number;
+    minZoom?:       number;
+    maxZoom?:       number;
+}){
     const ref = useRef<HTMLDivElement>(null);
     const [popup, setPopup] = useState<React.ReactNode>(null);
 

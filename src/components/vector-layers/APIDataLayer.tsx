@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useContext } from "react";
 import { CustomLayer, LayerCache } from "../../classes";
+import { BaseLayerProps } from "../../interfaces";
 import { MapContext } from "../contexts";
-import Layer, { BaseLayerProps } from "./Layer";
+import Layer from "./Layer";
 import { processAPIData, BASE_URL } from "./utils";
 
 const PROMISES_LIMIT = 1;

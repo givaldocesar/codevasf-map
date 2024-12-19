@@ -1,32 +1,25 @@
-import React, { useMemo, useContext, useEffect } from "react";
+import { useMemo, useContext, useEffect } from "react";
 import { Feature } from "ol";
 import { GeoJSON } from "ol/format";
-import { AttributionLike } from "ol/source/Source";
 import { CustomLayer } from "../../classes";
-import { Geometries } from "../../interfaces";
+import { BaseLayerProps } from "../../interfaces";
 import { MapContext, LayerContext } from "../contexts";
 
 
 const FORMAT = new GeoJSON();
-
-export interface BaseLayerProps {
-    children?: React.ReactNode;
-    attributions?: AttributionLike;
-    maxZoom?: number;
-    minZoom?: number;
-    zIndex?: number;
-    fit?: boolean;
-    title?: string;
-    order?: number;
-    geometry: Geometries;
-}
 
 interface LayerProps extends BaseLayerProps {
     data?: {[property: string]: any} | {[property: string]: any}[];
     layer?: CustomLayer;
 }
 
-const Layer: React.FC<LayerProps> = ({children, data, layer, fit, ...props}) => {
+export default function Layer({
+    children, 
+    data, 
+    layer, 
+    fit, 
+    ...props
+} : LayerProps){
     const map = useContext(MapContext);
     const base = useMemo(() => {
         try{            
@@ -61,5 +54,3 @@ const Layer: React.FC<LayerProps> = ({children, data, layer, fit, ...props}) => 
         </LayerContext.Provider>
     );
 }
-
-export default Layer;

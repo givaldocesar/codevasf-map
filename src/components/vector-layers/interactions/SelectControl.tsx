@@ -10,7 +10,7 @@ import { Select } from "../../pop-ups/form";
 import styles from "./Interaction.module.scss";
 
 
-interface SelectedControlProps {
+interface SelectedControlProps extends React.HTMLAttributes<HTMLDivElement> {
     fieldValue: string;
     expression?: string;
     label?: string; 
@@ -18,7 +18,7 @@ interface SelectedControlProps {
     collapsable?: boolean;
 }
 
-const SelectControl: React.FC<React.HTMLAttributes<HTMLDivElement>&SelectedControlProps> = ({
+export default function SelectControl({
     children,
     className="",
     fieldValue,
@@ -27,7 +27,8 @@ const SelectControl: React.FC<React.HTMLAttributes<HTMLDivElement>&SelectedContr
     labelClassName,
     collapsable=true,
     ...props
-}) => {
+} : SelectedControlProps){
+
     const ref = useRef<HTMLSelectElement>(null);
     const layer = useContext(LayerContext);
     const interaction = useContext(InteractionContext);
@@ -35,7 +36,7 @@ const SelectControl: React.FC<React.HTMLAttributes<HTMLDivElement>&SelectedContr
     const [collapsed, setCollapsed] = useState<boolean>(false);
     const [options, setOptions] = useState<React.ReactElement[]>([]);
 
-    //@ts-expect-error
+    //@ts-ignore
     layer.on('status-changed', () => setStatus(layer.getStatus()));
     
     useEffect(() => {
@@ -75,13 +76,15 @@ const SelectControl: React.FC<React.HTMLAttributes<HTMLDivElement>&SelectedContr
                 else if(a.value < b.value){ return -1 } 
                 return 0
             }).forEach(optionData => {
-                options_.push(<option 
-                    value={optionData.value} 
-                    key={optionData.value}
-                >
-                    {optionData.text || optionData.value}
-                </option>
-            )});
+                options_.push(
+                    <option 
+                        value={optionData.value} 
+                        key={optionData.value}
+                    >
+                        {optionData.text || optionData.value}
+                    </option>
+                )
+            });
             
             setOptions(options_);
         }
@@ -124,5 +127,3 @@ const SelectControl: React.FC<React.HTMLAttributes<HTMLDivElement>&SelectedContr
         </BaseControl>
     );
 } 
-
-export default SelectControl;

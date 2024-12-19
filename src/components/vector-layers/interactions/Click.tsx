@@ -6,15 +6,15 @@ import { MapContext, LayerContext } from "../../../components/contexts";
 import BaseInteraction from "./BaseInteraction";
 
 
-const Click: React.FC<{
-    children?: React.ReactNode; 
-    noClick?: boolean;
-    zoomToFeature?: boolean;
-}> = ({
+export default function Click({
     children, 
     noClick,
     zoomToFeature
-}) => {
+} : {
+    children?: React.ReactNode; 
+    noClick?: boolean;
+    zoomToFeature?: boolean;
+}){
     const map = useContext(MapContext);
     const layer = useContext(LayerContext) as CustomLayer;
     
@@ -37,5 +37,3 @@ const Click: React.FC<{
         </BaseInteraction>
     );
 }
-
-export default Click;
