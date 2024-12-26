@@ -7,7 +7,9 @@
     "dist"
   ],
   "exports": {
-    "./styles": "./dist/styles.css",
+    "./styles": {
+      "import": "./dist/styles.css"
+    },
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
@@ -23,6 +25,10 @@
     "./tile-layers": {
       "types": "./dist/tile-layers.d.ts",
       "import": "./dist/tile-layers.js"
+    },
+    "./utils": {
+      "types": "./dist/utils.d.ts",
+      "import": "./dist/utils.js"
     },
     "./vector-layers": {
       "types": "./dist/vector-layers.d.ts",
@@ -74,6 +80,7 @@
     "@types/openlayers": "^4.6.23",
     "@types/proj4": "^2.5.5",
     "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
     "rollup": "^4.22.0",
     "rollup-plugin-dts": "^6.1.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",

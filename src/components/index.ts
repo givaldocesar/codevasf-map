@@ -7,4 +7,6 @@ export * from "./events";
 export * from "./tile-layers";
 export * from "./vector-layers";
 
+export { CustomLayer } from "../classes";
+export { MapContext } from "../components/contexts";
 export { type CRS, type LayerStatus } from "../interfaces";

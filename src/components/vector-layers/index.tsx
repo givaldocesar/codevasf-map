@@ -7,6 +7,7 @@ function VectorLayers({children} : {children?: React.ReactNode}){
 export default VectorLayers;
 
 export { VectorLayers };
+export { default as AttributeTable } from "./attributes-table";
 export { default as Layer } from "./Layer";
 export { default as URLDataLayer } from "./URLDataLayer";
 export { default as APIDataLayer } from "./APIDataLayer";

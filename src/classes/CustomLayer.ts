@@ -11,7 +11,7 @@ import CategorizedStyle from "./styles/CustomCategorizedStyle";
 
 
 export default class CustomLayer extends VectorImageLayer {
-    private geometry_: Geometries | undefined;
+    private geometry_?: Geometries;
     private status_: LayerStatus;
     private lodingProgress_: number;
     private baseStyle_: SimpleStyle | CategorizedStyle;
@@ -123,7 +123,7 @@ export default class CustomLayer extends VectorImageLayer {
 
     setStatus(status: LayerStatus){
         this.status_ = status;
-        document.dispatchEvent(new LayerStatusEvent(this.get('title'), status));
         this.dispatchEvent('status-changed');
+        document.dispatchEvent(new LayerStatusEvent(this));
     }
 }

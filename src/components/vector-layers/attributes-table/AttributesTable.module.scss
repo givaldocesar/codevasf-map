@@ -1,0 +1,205 @@
+@use "../../../styles/breakpoints";
+@use "../../../styles/widths";
+@use "../../../styles/colors";
+
+.no_features {
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.no_header {
+    background-color: white;
+    border: none;
+}
+
+.area {
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 5px;
+}
+
+.title {
+    margin:0;
+    font-weight: bold;
+    font-size: large;
+    border-bottom: 2px solid black;
+}
+
+.wrapper {
+    flex: 1;
+    width: 100%;
+    overflow: auto;
+
+    table {
+        position: relative;
+        width: 100%;
+        height: fit-content;
+        border-collapse: collapse;
+    }
+
+    thead {
+        position: sticky;
+        top: 0;
+        background-color: colors.$std;
+    }
+}
+
+.loader {
+    font-size: large;
+    color: colors.$std;
+}
+
+//HEADER && ROW----------------------------------------------------------
+.header, .row {
+    padding: 2px 5px;
+    height: 20px;
+    border: 1px solid black;
+    text-align: center;
+    min-width: fit-content;
+    font-size: x-small;
+}
+
+.header div{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    color: white;
+}
+
+//SORTER---------------------------------------------------------------
+.sorter {
+    padding: 0;
+    width: 15px;
+    height: 15px;
+    border: none;
+    background: transparent;
+}
+
+.sorter:hover {
+    cursor: pointer;
+}
+
+.sorter svg {
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    transition: transform 500ms;
+}
+
+.sorter svg line {
+    stroke-width: 10;
+    stroke: white;
+    stroke-linecap: round;
+}
+
+.ascendent {
+    transform: rotate(180deg);
+}
+
+.descendent {
+    transform: rotate(0deg);
+}
+
+//ZOOM BUTTON-------------------------------------------------------
+.zoom_button {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        width: 75%;
+        height: 75%;
+    }
+}
+
+.zoom_button:hover{
+    background-color: colors.$hover;
+
+    img {
+        filter: invert(1);
+    }
+}
+
+//FIELD-------------------------------------------------------------
+.field {
+    width: 100%;
+    height: 100%;
+    border: none; 
+}
+
+.field[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.field:focus {
+    outline-color: colors.$active;
+    background-color: #eafeea;
+}
+
+//PAGINATION----------------------------------------------------------
+.pagination {
+    width: 100%;
+    padding: 2px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    
+}
+
+.pagination button {
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 10px;
+    background-color: colors.$std;
+    font-size: small;
+    color: white
+
+}
+
+.pagination button:hover {
+    cursor: pointer;
+    background-color: colors.$hover;
+}
+
+.pagination button.active {
+    background-color: colors.$active;
+}
+
+//RESPONSIVE-------------------------------------------------------------
+
+@media (min-width: breakpoints.$break-large){
+    .title {
+        font-size: x-large;
+    }
+
+    .header, .row {
+        font-size: medium;
+        height: 30px;
+    }
+
+    .pagination button {
+        width: 32px;
+        height: 32px;
+        font-size: large;
+    }
+
+    .zoom_button {
+        width: 24px;
+        height: 24px;
+    }
+}

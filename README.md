@@ -9,6 +9,7 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
 
 ## Componentes
     ╚> Map: Cria o objeto Map do OL.
+        -->name:        <sting>                 Seta um nome para o mapa. Necessário pra usar alguns eventos.
         -->center:      [<number>,<number>]     Ponto central inicial do mapa.
         -->zoom:        <number>                Zoom inicial do mapa.
         -->minZoom:     <number>                Zoom mínimo permitido pelo mapa.
@@ -92,6 +93,11 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
                                  'LineString' |         Não altera a exibição, apenas utilizada pra definir o ícone que aparecerá na legenda.
                                  'Polygon' | 
                                  undefined>
+            ╚> AttributesTable:                         Exibe um popup com informações sobre as feições. É possível dar zoom em feições específicas, através de
+                                                        filtros e botões.
+                -->layer:       <CustomLayer>           Camada do map que terá as informações exibidas.
+                -->header:      <boolean>               Exibe ou não o cabeçãrio da tabela.
+                -->fields:      <FieldType[]>           Lista de campos que serão exibidos como colunas. Há várias opções de customização.
 
             ╚> style:
                 --Style:                        Disponibiliza o estilo da camada para os elementos-filhos.

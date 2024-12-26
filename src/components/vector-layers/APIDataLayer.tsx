@@ -5,7 +5,7 @@ import { MapContext } from "../contexts";
 import Layer from "./Layer";
 import { processAPIData, BASE_URL } from "./utils";
 
-const PROMISES_LIMIT = 1;
+const PROMISES_LIMIT = 25;
 
 interface APIDataLayerProps extends BaseLayerProps {
    database: string;
@@ -67,6 +67,7 @@ function APIDataLayer({
 
         layer.setStatus('loading');
         getData(); 
+        
     }, []);
     
     return (

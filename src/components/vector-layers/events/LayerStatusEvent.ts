@@ -1,18 +1,12 @@
-import { LayerStatus } from "../../../interfaces";
+import { CustomLayer } from "../../../classes";
 
-export default class LayerStatusEvent extends CustomEvent<{layerTitle: string; status: LayerStatus}>{
+export default class LayerStatusEvent extends CustomEvent<CustomLayer>{
     static type: string = 'layer-status-event';
     
-    constructor(
-        layerTitle: string,
-        status: LayerStatus
-    ){
+    constructor(layer: CustomLayer){
         super('layer-status-event', {
             bubbles: true,
-            detail: {
-                layerTitle: layerTitle,
-                status: status
-            }
+            detail: layer
         });
     }
 }

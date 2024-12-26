@@ -5,8 +5,6 @@ import { Google, XYZ } from "ol/source";
 import { MapContext } from "../contexts";
 import { BaseControl }  from "../controls";
 import styles from "./Tiles.module.scss";
-
-
 import google from "../../assets/google.png";
 import google_white from "../../assets/google_white.png";
 

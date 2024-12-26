@@ -16,7 +16,8 @@ function Map({
     center,
     zoom,
     minZoom,
-    maxZoom
+    maxZoom,
+    name
 }: {
     children?:      React.ReactNode; 
     className?:     string; 
@@ -25,6 +26,7 @@ function Map({
     zoom?:          number;
     minZoom?:       number;
     maxZoom?:       number;
+    name?:          string;
 }){
     const ref = useRef<HTMLDivElement>(null);
     const [popup, setPopup] = useState<React.ReactNode>(null);
@@ -36,6 +38,8 @@ function Map({
         minZoom: minZoom,
         maxZoom: maxZoom
     }), []);
+
+    map.set('name', name);
 
     useEffect(() => {
         map.setTarget(ref?.current || undefined);

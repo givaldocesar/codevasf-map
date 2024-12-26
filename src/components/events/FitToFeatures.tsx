@@ -4,12 +4,21 @@ import { MapContext } from "../contexts";
 import { getFeaturesExtent } from "../../utils";
 
 
-class FitToFeaturesEvent extends CustomEvent<{features: Feature[]; maxZoom?: number}> {
+class FitToFeaturesEvent extends CustomEvent<{mapName: string, features: Feature[]; maxZoom?: number}> {
     static type: string = 'map-fit-to-feature-event';
 
-    constructor(features: Feature[], maxZoom?: number){
+    constructor({
+        mapName,
+        features,
+        maxZoom
+    } :{
+        mapName: string,
+        features: Feature[],
+        maxZoom?: number
+    }){
         super('map-fit-to-feature-event', {
             detail: {
+                mapName: mapName,
                 features: features,
                 maxZoom: maxZoom
             },
@@ -21,9 +30,13 @@ class FitToFeaturesEvent extends CustomEvent<{features: Feature[]; maxZoom?: num
 function FitToFeatures(){
     const map = useContext(MapContext);
 
+    if(!map?.get('name')) throw new Error("FIT TO FEATURES: Map name is required. Please set map name.");
+
     const fitToFeatures = useCallback((evt: FitToFeaturesEvent) => {
-        const extent = getFeaturesExtent(evt.detail.features);
-        map?.fit(extent, evt.detail.maxZoom);
+        if(evt.detail.mapName === map.get('name')){
+            const extent = getFeaturesExtent(evt.detail.features);
+            map?.fit(extent, evt.detail.maxZoom);
+        }
     }, []);
 
     useEffect(() => {

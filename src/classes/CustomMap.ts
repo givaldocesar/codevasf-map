@@ -27,6 +27,17 @@ export default class CustomMap extends OLMap {
         });
     }
 
+    getLayerByTitle(layerTitle: string){
+        const layers = this.getAllLayers();
+        for(let i = 0; i < layers.length; i++){
+            if(layers[i].get("title") === layerTitle){
+                return layers[i];
+            }
+        }
+
+        return null;
+    }
+
     fit(extent?: Extent | null, maxZoom?: number){
         if(extent && !isEmpty(extent)){
             this.getView().fit(extent, {
