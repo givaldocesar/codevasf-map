@@ -13,9 +13,11 @@ import styles from "./AttributesTable.module.scss";
 export default function AttributesTable({
     layer,
     headers=true,
+    filters=true,
     fields=[]
 } : { 
-    layer?: CustomLayer,
+    layer?: CustomLayer;
+    filters?: boolean;
     headers?: boolean;
     fields?: FieldType[];
 }){
@@ -65,6 +67,7 @@ export default function AttributesTable({
     }
 
     if(popup && layer){
+        //ATUALIZA OS CAMPOS
         if(fields.length === 0 && features.length > 0) {
             const { geometry, ...properties } = features[0].getProperties();
             fields = Object.keys(properties).map(key => ({name: key, editable: false})); 
@@ -84,34 +87,35 @@ export default function AttributesTable({
         return createPortal(
             <div className={styles.area}>
                 <h3 className={styles.title}>{layer.get("title")}</h3>
-                    <Suspense fallback={
-                        <div style={{width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center"}}>
-                            <TextLoader className={styles.loader}>CARREGANDO FEIÇÕES</TextLoader>
-                        </div>
-                    }>
-                        <div className={styles.wrapper}>
-                            <table>
-                                { headers && 
-                                    <TableHead 
-                                        fields={fields}
-                                        sortFeatures={sortFeatures}
-                                    /> 
-                                }
-                                <tbody>
-                                    { createRows(features, page) }
-                                </tbody>
-                            </table>
-                        </div>
-                        <Pagination 
-                            total={features.length} 
-                            current={page}
-                            changePage={(evt) => {
-                                const button = (evt.target) as HTMLButtonElement;
-                                const page = parseInt(button.innerText);
-                                setPage(page);
-                            }}
-                        />
-                    </Suspense>
+                {filters }
+                <Suspense fallback={
+                    <div style={{width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center"}}>
+                        <TextLoader className={styles.loader}>CARREGANDO FEIÇÕES</TextLoader>
+                    </div>
+                }>
+                    <div className={styles.wrapper}>
+                        <table>
+                            { headers && 
+                                <TableHead 
+                                    fields={fields}
+                                    sortFeatures={sortFeatures}
+                                /> 
+                            }
+                            <tbody>
+                                { createRows(features, page) }
+                            </tbody>
+                        </table>
+                    </div>
+                    <Pagination 
+                        total={features.length} 
+                        current={page}
+                        changePage={(evt) => {
+                            const button = (evt.target) as HTMLButtonElement;
+                            const page = parseInt(button.innerText);
+                            setPage(page);
+                        }}
+                    />
+                </Suspense>
             </div>,
             popup.document.body
         );
