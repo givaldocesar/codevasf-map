@@ -1,6 +1,7 @@
-@use "../../../styles/breakpoints";
-@use "../../../styles/widths";
-@use "../../../styles/colors";
+@use "../../../../styles/breakpoints";
+@use "../../../../styles/widths";
+@use "../../../../styles/colors";
+@use "../../../../styles/animations";
 
 .no_features {
     font-weight: bold;
@@ -8,30 +9,21 @@
 }
 
 .no_header {
-    background-color: white;
-    border: none;
+    pointer-events: none;
 }
 
-.area {
-    padding: 5px;
+.container {
+    flex: 1;
     width: 100%;
     height: 100%;
-
     display: flex;
     flex-flow: column nowrap;
     gap: 5px;
-}
-
-.title {
-    margin:0;
-    font-weight: bold;
-    font-size: large;
-    border-bottom: 2px solid black;
+    overflow: hidden;
 }
 
 .wrapper {
-    flex: 1;
-    width: 100%;
+    flex:1;
     overflow: auto;
 
     table {
@@ -44,8 +36,34 @@
     thead {
         position: sticky;
         top: 0;
-        background-color: colors.$std;
+        z-index: 99;
     }
+}
+
+tr.edited {
+    background-color: lightgoldenrodyellow;
+    color: goldenrod;
+}
+
+tr.excluded {
+    background-color: lightgray;
+    color: dimgray;
+    opacity: 0.5;
+}
+
+tr.loading {
+    animation: animations.$pulse;
+}
+
+tr.updated {
+    background-color: #2e8b567c;
+    color: green;
+}
+
+tr.error {
+    background-color: indianred;
+    color: red;
+    opacity: 0.5;
 }
 
 .loader {
@@ -61,6 +79,10 @@
     text-align: center;
     min-width: fit-content;
     font-size: x-small;
+}
+
+.header {
+    background-color: colors.$std;
 }
 
 .header div{
@@ -91,7 +113,7 @@
     pointer-events: none;
     width: 100%;
     height: 100%;
-    transition: transform 500ms;
+    transition: transform 500ms linear;
 }
 
 .sorter svg line {
@@ -108,11 +130,13 @@
     transform: rotate(0deg);
 }
 
-//ZOOM BUTTON-------------------------------------------------------
-.zoom_button {
+//BUTTON-------------------------------------------------------
+.button {
     width: 20px;
     height: 20px;
+    border: 1px solid black;
     border-radius: 5px;
+    background-color: lightgray;
 
     display: flex;
     align-items: center;
@@ -124,11 +148,37 @@
     }
 }
 
-.zoom_button:hover{
+.button:hover {
     background-color: colors.$hover;
 
     img {
         filter: invert(1);
+    }
+
+    .close_icon {
+        line {
+            stroke: white;
+        }
+    }
+}
+
+.button.active {
+    background-color: colors.$active;
+    
+    img {
+        filter: invert(1);
+    }
+}
+
+.table_button {
+    background-color: transparent;
+    border: none
+}
+
+.button .close_icon {
+    line {
+        stroke: red;
+        stroke-width: 6;
     }
 }
 
@@ -136,11 +186,16 @@
 .field {
     width: 100%;
     height: 100%;
-    border: none; 
+    border: none;
+    background: transparent;
 }
 
 .field[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
+}
+
+.disabled, .field:disabled {
+    background-color: lightgray;
 }
 
 .field:focus {
@@ -198,8 +253,13 @@
         font-size: large;
     }
 
-    .zoom_button {
+    .button {
         width: 24px;
         height: 24px;
+    }
+
+    .toolbar {
+        width: 100%;
+        height: 30px;
     }
 }

@@ -1,5 +1,6 @@
 $pulse: pulse 1s ease-in-out infinite;
 $rotate: rotate 1s linear infinite;
+$running: running 2s linear infinite forwards;
 
 @keyframes pulse {
     0% { 
@@ -21,4 +22,13 @@ $rotate: rotate 1s linear infinite;
     100%{
         rotate: 360deg;
     }
+}
+
+@keyframes running {
+    0% {
+		background-position: -500px 0; 
+	}
+	100% {
+		background-position: 500px 0;
+	}
 }

@@ -95,9 +95,19 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
                                  undefined>
             ╚> AttributesTable:                         Exibe um popup com informações sobre as feições. É possível dar zoom em feições específicas, através de
                                                         filtros e botões.
-                -->layer:       <CustomLayer>           Camada do map que terá as informações exibidas.
-                -->header:      <boolean>               Exibe ou não o cabeçãrio da tabela.
-                -->fields:      <FieldType[]>           Lista de campos que serão exibidos como colunas. Há várias opções de customização.
+                -->popup:           <Window>            Se fornecido, vincula todos os eventos a esta janela.
+                -->mapName:         <string>            Requerido para manipulação de eventos de interação entre a tabela e o mapa.
+                -->layer:           <CustomLayer>       Camada do map que terá as informações exibidas.
+                -->fields:          <FieldType[]>       Lista de campos que serão exibidos como colunas. Há várias opções de customização.
+                                                        Caso não seja fornecido, todos os campos existentes serão exibidos.
+                -->options:
+                    -allowDelete:       <boolean>       Permite apagar feições.      
+                    -allowDownload:     <boolean>       Permite baixar a camada como um arquivo KML.
+                    -apiURL:            <string>        URL que permite salvar as edições para o banco de dados na API da CODEVASF.  
+                    -filters            <boolean>       Adiciona ferramentas de filtro a tabela.  
+                    -header:            <boolean>       Exibe ou não o cabeçãrio da tabela.
+                    -multipleEdit:      <boolean>       Permite alterar atributos de multiplas feições.    
+                    
 
             ╚> style:
                 --Style:                        Disponibiliza o estilo da camada para os elementos-filhos.
@@ -169,12 +179,12 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
                                                 >application/vnd.google-earth.kml+xml:  para dados KML;      
             --> urlInit:    <RequestInit>   Opções para a função 'fetch'.
         
-        -- APIDataLayer:            Extensão de "Layer". Usa dados adquiridos de uma URL:
+        -- APIDataLayer:                        Extensão de "Layer". Usa dados adquiridos de uma URL:
             --> database:       <string>        Tabela do banco de dados presente na API da CODEVASF.
             --> urlInit:        <RequestInit>   Opções para a função 'fetch'.
             --> groupField:     <string>        Campo para adquirir as versões dos dados do banco de dados.
                                                 P.ex: A área de atuação está presente no banco de dados na tabela 'municipios',
-                                                suas versões são consideradas utilizando o coluna "code".
+                                                suas versões são consideradas utilizando o coluna "codigo".
                                                 Consulte a API para obter mais informações.
 
                 

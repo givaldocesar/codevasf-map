@@ -5,7 +5,7 @@ import { MapContext } from "../contexts";
 import Layer from "./Layer";
 import { processAPIData, BASE_URL } from "./utils";
 
-const PROMISES_LIMIT = 25;
+const PROMISES_LIMIT = 30;
 
 interface APIDataLayerProps extends BaseLayerProps {
    database: string;
@@ -24,7 +24,9 @@ function APIDataLayer({
     const map = useContext(MapContext);
     const projection = map?.getView().getProjection();
     const layer = useMemo(() => new CustomLayer(props), []);
+    let isLoading = false;
 
+    //LOAD LAYER
     useEffect(() => {
         async function getData(){
             try{
@@ -65,10 +67,22 @@ function APIDataLayer({
             }
         }
 
-        layer.setStatus('loading');
-        getData(); 
+        if(!isLoading){
+            isLoading = true;
+            layer.setStatus('loading');
+            getData(); 
+        }
         
     }, []);
+
+    //HANDLE DELETE FEATURE
+    useEffect(() => {
+        layer.getSource()?.on('removefeature', async (evt) => {
+            const cache = new LayerCache({name: database, keyPath: groupField});
+            await cache.connect();
+            await cache.delete(evt.feature.get(groupField));
+        });
+    });
     
     return (
         <Layer layer={layer} {...props} >

@@ -90,4 +90,23 @@ export default class LayerCache {
             }
         });
     }
+
+    async delete(key: string){
+        return new Promise<any>((resolve, reject) => {
+            const transaction = this.database_?.transaction(['features'], "readwrite") as IDBTransaction;
+            const store = transaction.objectStore('features');
+            const request = store.delete(key);
+
+            request.onsuccess = (evt) => {
+                evt.stopPropagation();
+                const target = evt.target as IDBRequest;
+                resolve(target.result);
+            }
+
+            request.onerror = (evt) => {
+                evt.stopPropagation();
+                reject(evt);
+            }
+        });
+    }
 }
