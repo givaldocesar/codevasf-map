@@ -3,18 +3,18 @@ import BaseControl from "../BaseControl";
 import TileLayersArea from "./tile-layers-area";
 import VectorLayersArea from "./vector-layers-area";
 
-interface LegendProps extends React.HTMLAttributes<HTMLDivElement>{
-    collapsable?: boolean;
-    collapseImage?: string;
-    collapsePositionButton?: 'top_right' | 'top_left';
-}
 
-const Legend: React.FC<LegendProps> = ({
-    className, 
+export default function Legend({
+    className,
     collapsable=false, 
     collapseImage, 
     collapsePositionButton ='top_right'
-}) => {
+}: {
+    className?: string;
+    collapsable?: boolean;
+    collapseImage?: string;
+    collapsePositionButton?: 'top_right' | 'top_left';
+}){
     return (
         <BaseControl 
             className={className} 
@@ -27,5 +27,3 @@ const Legend: React.FC<LegendProps> = ({
         </BaseControl>
     );
 }
-
-export default Legend;

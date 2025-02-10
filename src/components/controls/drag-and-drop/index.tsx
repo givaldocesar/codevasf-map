@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState, useRef } from "react";
+import React, { useContext, useEffect, useMemo, useRef } from "react";
 import { Feature } from "ol";
 import { KML } from "ol/format";
 import { DragAndDrop as Interaction } from "ol/interaction";
@@ -9,22 +9,21 @@ import DroppedItem from "./DroppedItem";
 import styles from "./DragAndDrop.module.scss";
 
 
-interface DragAndDropProps extends React.HTMLAttributes<HTMLDivElement>{
-    collapsable?: boolean;
-    collapseImage?: string;
-    collapsePositionButton?: 'top_right' | 'top_left';
-    showControl?: boolean;
-    showFeaturesProperties?: boolean;
-}
-
-const DragAndDrop: React.FC<DragAndDropProps> = ({
-    className, 
+export default function DragAndDrop({
+    className,
     collapsable=false, 
     collapseImage, 
     collapsePositionButton ='top_right',
     showControl=true,
     showFeaturesProperties=false
-}) => {
+} : {
+    className?: string;
+    collapsable?: boolean;
+    collapseImage?: string;
+    collapsePositionButton?: 'top_right' | 'top_left';
+    showControl?: boolean;
+    showFeaturesProperties?: boolean;
+}){
     const ref = useRef<HTMLDivElement>(null);
     const map = useContext(MapContext);
     const forceUpdate = useForceUpdate();
@@ -95,5 +94,3 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({
         </>
     );
 }
-
-export default DragAndDrop;

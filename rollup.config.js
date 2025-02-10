@@ -4,7 +4,16 @@ import typescript from '@rollup/plugin-typescript';
 import external from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 import image from '@rollup/plugin-image';
-import rollupTypes from './rollup-types.js';
+import { dts } from 'rollup-plugin-dts';
+
+function types(input, output){
+    return {
+        input: input,
+        output: [{ file: output, format: "esm" }],
+        external: [/\.css$/],
+        plugins: [dts()],
+    }
+}
 
 export default [
     {
@@ -29,10 +38,5 @@ export default [
             }) 
         ]
     },
-    rollupTypes({input: "src/components/index.ts", name: "index"}),
-    rollupTypes({input: "src/components/controls/index.tsx", name: "controls"}),
-    rollupTypes({input: "src/components/events/index.tsx", name: "events"}),
-    rollupTypes({input: "src/components/tile-layers/index.tsx", name: "tile-layers"}),
-    rollupTypes({input: "src/components/vector-layers/index.tsx", name: "vector-layers"}),
-    rollupTypes({input: "src/components/utils.ts", name: "utils"}),
+    types("src/components/index.ts", "dist/index.d.ts"),
 ]

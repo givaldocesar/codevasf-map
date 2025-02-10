@@ -1,14 +1,14 @@
 import classNames from "classnames";
 import styles from "./Toolbar.module.scss";
 
-const Tool: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>&{
-    active?: boolean;
-}> = ({
+export default function Tool({
     children,
     className="",
     active,
     ...props
-}) => {
+} : React.ButtonHTMLAttributes<HTMLButtonElement>&{
+    active?: boolean;
+}){
     return (
         <button
             { ...props } 
@@ -22,5 +22,3 @@ const Tool: React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>&{
         </button>
     );
 }
-
-export default Tool;

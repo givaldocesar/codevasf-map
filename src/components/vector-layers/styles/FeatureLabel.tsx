@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { CustomSimpleStyle, SelectStyle, CustomCategorizedStyle } from "../../../classes";
 import { LayerContext, StyleContext } from "../../../components/contexts";
 import { convertFlatText } from "../utils/convert-flat-styles";
 
 
-const FeatureLabel: React.FC<{expression?: string;}> = ({expression, ...props}) => {
+export default function FeatureLabel({expression, ...props}: {expression?: string;}){
     const layer = useContext(LayerContext);
     const style = useContext(StyleContext);
     
@@ -20,4 +20,3 @@ const FeatureLabel: React.FC<{expression?: string;}> = ({expression, ...props}) 
     return <></>;
 }
 
-export default FeatureLabel;

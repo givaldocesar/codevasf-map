@@ -1,8 +1,7 @@
-const Events: React.FC<{children?: React.ReactNode}> = ({children}) => {
+export default function Events({children} : {children?: React.ReactNode}){
     return <>{children}</>
 }
 
-export default Events;
 export { Events };
 export * from "./AddFeatures";
 export * from "./FitToFeatures";

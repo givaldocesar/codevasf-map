@@ -4,4 +4,4 @@ export {
     Hover,
     SelectedInfoControl,
     SelectControl
-} from "./index.js";
+} from "../../index.js";

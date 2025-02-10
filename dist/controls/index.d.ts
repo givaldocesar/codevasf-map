@@ -1,7 +1,5 @@
-import { Controls } from "./index.js";
-export default Controls;
-
 export {
+    Controls as default,
     BaseControl,
     Attributions,
     DragAndDrop,
@@ -10,4 +8,4 @@ export {
     Title,
     Toolbar,
     Tool
-} from "./index.js";
+} from "../index.js";

@@ -1,7 +1,6 @@
 node_modules/
 
 #BUILD
-dist/*.d.ts
 dist/index.*
 dist/styles_components.css
 

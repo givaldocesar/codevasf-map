@@ -16,7 +16,7 @@ export default function createRandomLayer({
 } : {
     map?: CustomMap | null; 
     title?: string;
-    features: Feature[];
+    features?: Feature[];
     showProperties?: boolean;
 }){
     const stroke = randomColor("HEX", 0.75);
@@ -35,7 +35,7 @@ export default function createRandomLayer({
     });
     layer.set('ignore', true);
     layer.set('title', title);
-    layer.getSource()?.addFeatures(features); 
+    if(features) layer.getSource()?.addFeatures(features); 
 
     //HOVER SHOWING PROPERTIES
     if(showProperties && map){

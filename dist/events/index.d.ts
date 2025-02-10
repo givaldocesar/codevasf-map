@@ -8,4 +8,4 @@ export {
     RemoveLayerEvent,
     RemoveFeatures,
     RemoveFeaturesEvent
-} from "./index.js";
+} from "../index.js";

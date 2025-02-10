@@ -1,4 +1,4 @@
 export {
     LayerProgressEvent,
     LayerStatusEvent
-} from "./index.js";
+} from "../../index.js";

@@ -28,7 +28,7 @@ const VectorLayerIcon: React.FC<VectorLayerIconProps> = ({
                         <circle 
                             cx={25}
                             cy={25}
-                            r={ flat['circle-radius'] }
+                            r={ flat['circle-radius'] as number }
                             stroke={ flat['circle-stroke-color'] as string }
                             strokeWidth={ flat['circle-stroke-width'] as number }
                             fill={ flat['circle-fill-color'] as string }

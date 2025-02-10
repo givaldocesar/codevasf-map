@@ -5,13 +5,11 @@ import { CollapseButton } from "../buttons";
 import styles from "./Controls.module.scss";
 
 
-interface BaseControlProps extends React.HTMLAttributes<HTMLDivElement> {
+const BaseControl = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>&{
     collapsable?: boolean;
     collapsePositionButton?: 'top_right' | 'top_left';
     collapseImage?: string;
-}
-
-const BaseControl = forwardRef<HTMLDivElement, BaseControlProps>(({
+}>(({
     children, 
     className="", 
     collapsable, 

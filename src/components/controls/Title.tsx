@@ -2,12 +2,14 @@ import React from "react";
 import BaseControl from "./BaseControl";
 import styles from "./Controls.module.scss";
 
-const Title:React.FC<React.HTMLAttributes<HTMLHeadingElement>&{textClassName?: string}> = ({
+export default function Title({
     children, 
     className='', 
     textClassName,
     ...props
-}) => {   
+} : React.HTMLAttributes<HTMLHeadingElement>&{
+    textClassName?: string
+}){   
     return (
         <BaseControl className={`ol-unselectable ${styles.title} ${className}`}>
             <h2 className={textClassName} {...props}>
@@ -16,5 +18,3 @@ const Title:React.FC<React.HTMLAttributes<HTMLHeadingElement>&{textClassName?: s
         </BaseControl>
     );
 }
-
-export default Title;

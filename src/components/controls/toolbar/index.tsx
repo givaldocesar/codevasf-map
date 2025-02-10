@@ -1,10 +1,10 @@
 import BaseControl from "../BaseControl";
 import styles from "./Toolbar.module.scss";
 
-const Toolbar: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+export default function Toolbar({
     children,
     className=""
-}) => {
+}: React.HTMLAttributes<HTMLDivElement>){
     return (
         <BaseControl className={`${styles.toolbar} ${className}`}>
             { children }
@@ -12,6 +12,5 @@ const Toolbar: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
     );
 }
 
-export default Toolbar;
 export { Toolbar };
 export { default as Tool } from "./Tool";

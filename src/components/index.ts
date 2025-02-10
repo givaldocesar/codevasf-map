@@ -10,3 +10,4 @@ export * from "./vector-layers";
 export { CustomLayer } from "../classes";
 export { MapContext } from "../components/contexts";
 export { type CRS, type LayerStatus } from "../interfaces";
+export { createRandomLayer } from "../utils";

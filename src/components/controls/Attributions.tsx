@@ -1,14 +1,14 @@
-import React, { useMemo, useContext, useEffect } from "react";
+import { useMemo, useContext, useEffect } from "react";
 import { Attribution } from "ol/control";
 import { MapContext } from "../contexts";
 
-const Attributions: React.FC<{
-    className?: string,
-    collapsible?: boolean
-}> = ({
+export default function Attributions({
     className='',
     collapsible=true
-}) => {
+}: {
+    className?: string,
+    collapsible?: boolean
+}){
     const map = useContext(MapContext);
     
     const attribution = useMemo(() => {
@@ -26,5 +26,3 @@ const Attributions: React.FC<{
     
     return <></>;
 }
-
-export default Attributions;

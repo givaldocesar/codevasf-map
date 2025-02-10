@@ -5,4 +5,4 @@ export {
     FeatureLabel,
     Fill,
     Stroke
-} from "./index.js";
+} from "../../index.js";

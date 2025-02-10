@@ -1,9 +1,12 @@
-import React, { useMemo, useContext, useEffect } from "react";
+import { useMemo, useContext, useEffect } from "react";
 import { ScaleLine } from "ol/control";
 import { MapContext } from "../contexts";
 
 
-const Scale: React.FC<{
+export default function Scale({
+    className, 
+    ...props
+} : {
     className?: string;
     minWidth?: number;
     maxWidth?: number;
@@ -13,10 +16,7 @@ const Scale: React.FC<{
     steps?: number;
     text?: boolean;
     dpi?: number;
-}> = ({
-    className, 
-    ...props
-}) => {
+}){
     const map = useContext(MapContext);
     const scale = useMemo(() => {
         return new ScaleLine({
@@ -32,5 +32,3 @@ const Scale: React.FC<{
     
     return <></>;
 }
-
-export default Scale;
