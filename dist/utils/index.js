@@ -1,5 +1,9 @@
 export {
-    MapContext,
+    calculateArea,
+    createRandomLayer,
+    registerProjections,
     CustomLayer,
-    createRandomLayer
+    MapContext,
+    STATUS,
+    ERROR
 } from "../index.js"

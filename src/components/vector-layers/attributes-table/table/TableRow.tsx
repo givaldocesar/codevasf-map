@@ -22,7 +22,7 @@ export default function TableRow({
     allowDelete?: boolean;
 }){
     const [status, setStatus] = useState<FeatureStatus>(feature.get(STATUS));
-    const [error, setError] = useState<string>();
+    const [error, setError] = useState<string>(feature.get(ERROR));
 
     useEffect(() => {
         function updateStatus(evt: ObjectEvent){
@@ -133,7 +133,10 @@ export default function TableRow({
                 
                 return (
                     <td key={field.name} className={styles.row}>
-                        {feature.get(field.name)}
+                        {
+                            //@ts-expect-error ol_uid undefined
+                            field.name === 'ol_uid' ? feature.ol_uid : feature.get(field.name)
+                        }
                     </td>
                 );
             })}

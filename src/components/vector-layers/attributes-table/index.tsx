@@ -5,10 +5,19 @@ import { CustomLayer } from "../../../classes";
 import { FitToFeaturesEvent } from "../../events";
 import Table, { TableLoader } from "./table";
 import Toolbar, { FilterEvent, EditEvent } from "./toolbar";
-import { FieldType, STATUS, updateFeature, deleteFeature } from "./utils";
+import { FieldType, STATUS, ERROR, updateFeature, deleteFeature, FeatureStatus } from "./utils";
 import styles from "./Attributes.module.scss";
 import formStyles from "./toolbar/Form.module.scss";
 
+export {
+    STATUS,
+    ERROR
+}
+
+export type {
+    FieldType,
+    FeatureStatus
+}
 
 export default function AttributesTable({
     popup,

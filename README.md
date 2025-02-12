@@ -44,7 +44,13 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
         --AddFeaturesEvent:                 Evento que quando disparado adiciona feições ao mapa, caso este possua o evento 'AddFeatures'.    
             -->features:    <Feature[]>     Feições a serem adicionadas. 
             -->layerTitle?: <string>        Titulo da camada que será criada.
-             -->zoomTo?:    <boolean>       Ao adicionar, dá zoom nas feições adicionadas.
+            -->zoomTo?:     <boolean>       Ao adicionar, dá zoom nas feições adicionadas.
+
+        --AddLayer:                         Adiciona um 'listener' ao mapa, que ao ouvir um evento do tipo 'AddLayerEvent' adiciona a camada fornecida.
+        --AddLayerEvent:                    Evento que quando disparado adiciona uma camada ao mapa, caso este possua o evento 'AddLayer'.    
+            -->layer:       <CustomLayer>   Camada a ser adicionada.
+            -->mapName:     <string>        ID do mapa que a camada será adicionada.
+            -->zoomTo?:     <boolean>       Ao adicionar, dá zoom na camada adicionadas.
         
         --FitToFeatures:                    Adiciona um 'listener' ao mapa, que ao ouvir um evento do tipo 'FitToFeatureEvent' executa zoom nas feições fornecidas.
         --FitToFeaturesEvent:               Evento que quando disparado faz com que o mapa centre nas feições fornecidas, caso este possua o evento

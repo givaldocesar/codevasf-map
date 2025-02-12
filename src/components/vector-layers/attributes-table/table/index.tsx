@@ -44,6 +44,16 @@ export default function Table({
             evt.stopPropagation();
             const { type, field } = evt.detail;
 
+            if(field === 'ol_uid'){
+                current.sort((A, B) => {
+                    //@ts-expect-error ol_uid undefined
+                    if(A.ol_uid > B.ol_uid) return type === "ascendent" ?  1 : -1;
+                    //@ts-expect-error ol_uid undefined
+                    if(A.ol_uid < B.ol_uid) return type === "ascendent" ? -1 :  1;
+                    return 0;
+                });
+            }
+
             current.sort((A, B) => {
                 if(!A.get(field) && !B.get(field)) return 0;
                 if(A.get(field) && !B.get(field)) return type === "ascendent" ?  1 : -1;
