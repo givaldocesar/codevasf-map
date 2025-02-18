@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState, useMemo, useCallback } from "react";
+import { useEffect, useContext, useMemo, useCallback } from "react";
 import { getUid } from "ol";
 import { CollectionEvent } from "ol/Collection";
 import BaseLayer from "ol/layer/Base";
@@ -8,7 +8,7 @@ import { useForceUpdate } from "../../../../utils";
 import VectorLayerItem from "./VectorLayerItem";
 import LayersArea from "../LayersArea";
 
-const VectorLayersArea: React.FC = () => {
+export default function VectorLayersArea(){
     const map = useContext(MapContext);
     let layers = useMemo<CustomLayer[]>(() => [], []);
     const forceUpdate = useForceUpdate();
@@ -45,5 +45,3 @@ const VectorLayersArea: React.FC = () => {
         </LayersArea>
     );
 }
-
-export default VectorLayersArea;

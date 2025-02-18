@@ -1,9 +1,9 @@
-import TileLayer from "ol/layer/Tile";
 import { getUid } from "ol";
+import TileLayer from "ol/layer/Tile";
 import styles from "../Legend.module.scss";
 
 
-const TileLayerItem: React.FC<{layer: TileLayer}> = ({layer}) => {
+export default function TileLayerItem({layer} : {layer: TileLayer}){
     const id = getUid(layer);
     
     return (
@@ -19,6 +19,3 @@ const TileLayerItem: React.FC<{layer: TileLayer}> = ({layer}) => {
         </div>
     );
 }
-
-
-export default TileLayerItem;

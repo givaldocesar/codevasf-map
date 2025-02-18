@@ -1,6 +1,7 @@
 export {
     calculateArea,
     calculateLength,
+    checkFeaturesIntersect,
     createRandomLayer,
     registerProjections,
     CustomLayer,

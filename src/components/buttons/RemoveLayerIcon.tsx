@@ -1,11 +1,11 @@
 import BaseIcon from "./BaseIcon";
 import styles from "./Button.module.scss";
 
-const RemoveLayerIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({
+export default function RemoveLayerIcon({
     className="",
     title="Remover camada",
     onClick
-}) => {
+} : React.HTMLAttributes<HTMLOrSVGElement>){
     return (
         <BaseIcon 
             className={`${styles.remove_icon} ${className}`} 
@@ -17,5 +17,3 @@ const RemoveLayerIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({
         </BaseIcon>
     );
 }
-
-export default RemoveLayerIcon;

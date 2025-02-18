@@ -8,9 +8,9 @@
   ],
   "exports": {
     "./styles": "./dist/styles.css",
-    ".":  "./dist/index.js",
-    "./controls":"./dist/controls/index.js",
-    "./events":"./dist/events/index.js",
+    ".": "./dist/index.js",
+    "./controls": "./dist/controls/index.js",
+    "./events": "./dist/events/index.js",
     "./tile-layers": "./dist/tile-layers/index.js",
     "./utils": "./dist/utils/index.js",
     "./vector-layers": "./dist/vector-layers/index.js",
@@ -34,6 +34,7 @@
   "license": "ISC",
   "peerDependencies": {
     "@turf/bbox-clip": "^7.1.0",
+    "@turf/boolean-intersects": "^7.2.0",
     "@turf/truncate": "^7.1.0",
     "classnames": "^2.5.1",
     "next": "^15.1.0",

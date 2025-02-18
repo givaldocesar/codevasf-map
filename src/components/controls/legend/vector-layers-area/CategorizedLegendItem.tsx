@@ -1,11 +1,12 @@
 import { useState } from "react";
-import {  CustomLayer, CustomCategorizedStyle, NO_CATEGORY } from "../../../../classes";
+import { CustomLayer, CustomCategorizedStyle, NO_CATEGORY } from "../../../../classes";
 import { LayerStatus } from "../../../../interfaces";
 import { VectorLayerIcon, CollpaseLayerIcon } from "../../../buttons";
 import LoadingItem from "./LoadingItem";
+import ErrorItem from "./ErrorItem";
 import styles from "../Legend.module.scss";
 
-const CategorizedLegendItem: React.FC<{layer: CustomLayer}> = ({layer}) => {
+export default function CategorizedLegendItem({layer} : {layer: CustomLayer}){
     const style = layer.getBaseStyle() as CustomCategorizedStyle;
     const [collapsed, setCollapsed] = useState(style.getCollapsed());
     const [layerStatus, setStatus] = useState<LayerStatus>('loading');
@@ -15,6 +16,9 @@ const CategorizedLegendItem: React.FC<{layer: CustomLayer}> = ({layer}) => {
 
     //LOADING
     if(layerStatus === 'loading') return <LoadingItem layer={layer} />;
+
+    //ERROR
+    if(layerStatus === 'error') return <ErrorItem layer={layer} />;
 
     function changeVisibility(evt: React.ChangeEvent<HTMLInputElement>){
        evt.stopPropagation();
@@ -97,5 +101,3 @@ const CategorizedLegendItem: React.FC<{layer: CustomLayer}> = ({layer}) => {
         </form>
     );
 }
-
-export default CategorizedLegendItem;

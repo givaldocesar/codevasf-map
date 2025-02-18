@@ -1,4 +1,3 @@
-import React from "react";
 import BaseControl from "../BaseControl";
 import TileLayersArea from "./tile-layers-area";
 import VectorLayersArea from "./vector-layers-area";

@@ -8,7 +8,7 @@ import LayersArea from "../LayersArea";
 import TileLayerItem from "./TileLayerItem";
 
 
-const TileLayersArea: React.FC = () => {
+export default function TileLayersArea(){
     const ref = useRef<HTMLDivElement>(null);
     const map = useContext(MapContext);
     const layers = useMemo<TileLayer[]>(() => [], []);
@@ -45,5 +45,3 @@ const TileLayersArea: React.FC = () => {
         </LayersArea>
     );
 }
-
-export default TileLayersArea;

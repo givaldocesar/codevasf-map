@@ -2,19 +2,17 @@ import { CategoryStyle, CustomSimpleStyle } from "../../classes";
 import BaseIcon from "./BaseIcon";
 
 
-interface VectorLayerIconProps {
-    className?: string;
-    style: CustomSimpleStyle | CategoryStyle;
-    geometry: string | undefined;
-    onClick?: (evt: React.MouseEvent<HTMLOrSVGElement, MouseEvent>) => void;
-}
-
-const VectorLayerIcon: React.FC<VectorLayerIconProps> = ({
+export default function VectorLayerIcon({
     className="",
     style,
     geometry,
     onClick
-}) => {
+} : {
+    className?: string;
+    style: CustomSimpleStyle | CategoryStyle;
+    geometry: string | undefined;
+    onClick?: (evt: React.MouseEvent<HTMLOrSVGElement, MouseEvent>) => void;
+}){
     let flat = style.getStyle();
     
     return (
@@ -62,5 +60,3 @@ const VectorLayerIcon: React.FC<VectorLayerIconProps> = ({
         </BaseIcon>
     );
 }
-
-export default VectorLayerIcon;

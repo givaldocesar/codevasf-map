@@ -65,6 +65,8 @@ function APIDataLayer({
                 layer.setStatus('complete');
             } catch (err) {
                 const error = err as Error;
+                layer.setStatus('error');
+                layer.set('error', error.message)
                 throw new Error(`LAYER ${props.title} => ${error.message}`);
             }
         }

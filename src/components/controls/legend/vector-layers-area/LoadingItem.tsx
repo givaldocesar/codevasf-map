@@ -3,7 +3,7 @@ import { CustomLayer } from "../../../../classes";
 import { LoadingIcon } from "../../../buttons";
 import styles from "../Legend.module.scss";
 
-const LoadingItem: React.FC<{layer: CustomLayer}> = ({layer}) => {
+export default function LoadingItem({layer}:{layer: CustomLayer}){
     const [progress, setProgress] = useState<number>(0);
 
     //@ts-expect-error
@@ -18,5 +18,3 @@ const LoadingItem: React.FC<{layer: CustomLayer}> = ({layer}) => {
         </div>
     )
 }
-
-export default LoadingItem;
