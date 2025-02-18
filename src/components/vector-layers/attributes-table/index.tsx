@@ -164,7 +164,7 @@ export default function AttributesTable({
                 button.disabled = true;
     
                 if(options.apiURL){
-                    const features = layer.getSource()?.getFeatures() as Feature[];
+                    const features = layer?.getSource()?.getFeatures() as Feature[];
                     let updates: Promise<boolean>[] = [];
                     
                     for(let i = 0; i < features.length; i++){

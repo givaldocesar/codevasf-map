@@ -30,13 +30,12 @@ function APIDataLayer({
     useEffect(() => {
         async function getData(){
             try{
-                const versionsResponse = await fetch(BASE_URL + `/${database}/versions`, urlInit);
-
+                const response = await fetch(BASE_URL + `/${database}/versions`, urlInit);
                 const cache = new LayerCache({name: database, keyPath: groupField});
                 await cache.connect();
                 
-                if(versionsResponse.ok){
-                    const versions = await versionsResponse.json();
+                if(response.ok){
+                    const versions = await response.json();
                     layer.setLoadingProgress(5);
                     
                     let promises: Promise<boolean>[] = [];
@@ -57,6 +56,9 @@ function APIDataLayer({
 
                     await Promise.all(promises);
                     layer.setLoadingProgress(100); 
+                } else {
+                    const result = await response.json();
+                    throw new Error(result);
                 }
                 
                 if(fit) map?.fit(layer.getSource()?.getExtent());

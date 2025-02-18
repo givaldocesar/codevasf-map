@@ -1,5 +1,6 @@
 export * from "./constants";
 export { default as calculateArea } from "./calculateArea";
+export { default as calculateLength } from "./calculateLength";
 export { default as clipFeature } from "./clipFeature";
 export { default as createRandomLayer } from "./createRandomLayer";
 export { default as getFeaturesExtent } from "./getFeaturesExtent";

@@ -2,6 +2,7 @@ export {
     MapContext,
     CustomLayer,
     calculateArea,
+    calculateLength,
     createRandomLayer,
     registerProjections,
     STATUS, 

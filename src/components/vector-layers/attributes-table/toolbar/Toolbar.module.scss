@@ -43,6 +43,7 @@
 }
 
 .tool:hover{
+    cursor: pointer;
     background-color: colors.$hover;
     
     img {

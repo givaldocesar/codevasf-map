@@ -118,15 +118,15 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
             ╚> style:
                 --Style:                        Disponibiliza o estilo da camada para os elementos-filhos.
                     -->visible:     <boolean>   Define se a camada será exibidade por padrão.
-                    --Stroke:                       Altera a linha da camada. 
-                                                    Utilizar as propriedades de ['FlatStroke do OL'](https://openlayers.org/en/latest/apidoc/module-ol_style_flat.html#~FlatStroke).
-                    --Fill:                         Altera o preenchimento da camada.
-                                                    Utilizar as propriedades de ['FlatFill do OL'](https://openlayers.org/en/latest/apidoc/module-ol_style_flat.html#~FlatFill).
-                    --FeatureLabel:                 Adiciona rótulos as feições de um estilo. 
-                        -->expression:  <string>        Template para criar os rótulos. Para utilizar valores presentes nas feições utilize o template 
-                                                        '{propriedade}'. P.ex: a expressão '{municipio}' exibirá 'valor_propriedade_municipio', para as feições que possuirem a prorpriedade 'municipio'.
-                        OBS: Utilizar as propriedades de ['FlatText do OL'](https://openlayers.org/en/latest/apidoc/module-ol_style_flat.html#~FlatText).
-                            É possível adicionar uma padrão pra todas as categorias, colocando o elemento 'FeatureLabel' como filho de 'CategorizedStyle'.
+                --Stroke:                       Altera a linha da camada. 
+                                                Utilizar as propriedades de ['FlatStroke do OL'](https://openlayers.org/en/latest/apidoc/module-ol_style_flat.html#~FlatStroke).
+                --Fill:                         Altera o preenchimento da camada.
+                                                Utilizar as propriedades de ['FlatFill do OL'](https://openlayers.org/en/latest/apidoc/module-ol_style_flat.html#~FlatFill).
+                --FeatureLabel:                 Adiciona rótulos as feições de um estilo. 
+                    -->expression:  <string>        Template para criar os rótulos. Para utilizar valores presentes nas feições utilize o template 
+                                                    '{propriedade}'. P.ex: a expressão '{municipio}' exibirá 'valor_propriedade_municipio', para as feições que possuirem a prorpriedade 'municipio'.
+                    OBS: Utilizar as propriedades de ['FlatText do OL'](https://openlayers.org/en/latest/apidoc/module-ol_style_flat.html#~FlatText).
+                        É possível adicionar uma padrão pra todas as categorias, colocando o elemento 'FeatureLabel' como filho de 'CategorizedStyle'.
 
                 --CategorizedStyle:                         Cria um estilo categorizado para a camada. Necessário adicionar elementos "Category" para estilizar.
                     -->collapsed:   <boolean>               Define se o item na legenda começara ou não colapsado.
