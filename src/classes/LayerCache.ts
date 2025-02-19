@@ -72,12 +72,17 @@ export default class LayerCache {
         });
     }
 
-    async get(key: string){
+    async get(key?: string){
         return new Promise<any>((resolve, reject) => {
             const transaction = this.database_?.transaction(['features']) as IDBTransaction;
             const store = transaction.objectStore('features');
-            const request = store.get(key);
-
+            let request;
+            if(key){
+                request = store.get(key);
+            } else {
+                request = store.getAll();
+            }
+            
             request.onsuccess = (evt) => {
                 evt.stopPropagation();
                 const target = evt.target as IDBRequest;

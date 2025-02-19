@@ -185,6 +185,8 @@ export default function AttributesTable({
                             updates = [];
                         }
                     }
+
+                    await Promise.all(updates);
                 }
     
                 currentWindow.document.body.style.cursor = "default";

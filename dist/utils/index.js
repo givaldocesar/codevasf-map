@@ -1,11 +1,12 @@
 export {
+    CustomLayer,
+    LayerCache,
+    MapContext,
+    STATUS,
+    ERROR,
     calculateArea,
     calculateLength,
     checkFeaturesIntersect,
     createRandomLayer,
-    registerProjections,
-    CustomLayer,
-    MapContext,
-    STATUS,
-    ERROR
+    registerProjections
 } from "../index.js"

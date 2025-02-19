@@ -7,12 +7,13 @@ export * from "./events";
 export * from "./tile-layers";
 export * from "./vector-layers";
 
-export { CustomLayer } from "../classes";
 export { MapContext } from "../components/contexts";
 export { type CRS, type LayerStatus } from "../interfaces";
+export { CustomLayer, LayerCache } from "../classes";
 export {
     calculateArea, 
     calculateLength, 
     checkFeaturesIntersect,
     createRandomLayer, 
-    registerProjections } from "../utils";
+    registerProjections 
+} from "../utils";
