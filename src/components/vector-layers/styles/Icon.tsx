@@ -1,21 +1,24 @@
 import { useContext } from "react";
-import { FlatStroke } from "ol/style/flat";
+import { FlatIcon } from "ol/style/flat";
+import ImageStyle from "ol/style/Image";
 import { CustomSimpleStyle, SelectStyle } from "../../../classes";
 import { LayerContext, StyleContext } from "../../contexts";
-import { convertFlatStroke } from "../utils/convert-flat-styles";
+import { convertFlatIcon } from "../utils/convert-flat-styles";
 
 
-export default function Stroke(props: FlatStroke){
+export default function Icon(props: FlatIcon){
     //melhorar solução
     const layer = useContext(LayerContext);
     const style = useContext(StyleContext);
 
     if(style instanceof CustomSimpleStyle){
-        style.setStroke(props);
+        style.setIcon(props);
         layer?.dispatchEvent('change-style');
        
     } else if(style instanceof SelectStyle) {
-        style.setStroke(convertFlatStroke(props));
+        const icon = convertFlatIcon(props) as ImageStyle;
+        icon.load();
+        style.setImage(icon);
     }
    
     return <></>;

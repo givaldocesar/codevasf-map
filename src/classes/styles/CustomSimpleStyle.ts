@@ -1,4 +1,4 @@
-import { FlatFill, FlatStroke, FlatStyle, FlatStyleLike, FlatText, StringExpression } from "ol/style/flat";
+import { FlatCircle, FlatFill, FlatIcon, FlatStroke, FlatStyle, FlatStyleLike, FlatText, StringExpression } from "ol/style/flat";
 import extractStringFromExpression from "../../utils/extractStringExpressionFromExpression";
 
 export const defaultStyle: FlatStyle = {
@@ -21,8 +21,8 @@ export default class CustomSimpleStyle {
             ...options
         }
     }
-
-    flatten(field?: string): FlatStyleLike {
+    
+    flatten(): FlatStyleLike {
         return this.style_;
     }
 
@@ -30,9 +30,15 @@ export default class CustomSimpleStyle {
         return this.style_;
     }
 
+    setIcon(icon: FlatIcon){
+        this.style_ = {
+            ...this.style_,
+            ...icon
+        }
+    }
+
     setFill(fill: FlatFill){
-        const circle = {};
-        //@ts-ignore
+        const circle : FlatCircle = {};
         if(fill['fill-color']) circle['circle-fill-color'] = fill['fill-color']
         
         this.style_ = {
@@ -43,7 +49,7 @@ export default class CustomSimpleStyle {
     }
 
     setStroke(stroke: FlatStroke){
-        const circle = {};
+        const circle: FlatCircle = {};
         //@ts-ignore
         for(let property in stroke){ circle[`circle-${property}`] = stroke[property] }
         

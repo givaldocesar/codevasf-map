@@ -13,6 +13,7 @@
     gap: 5px;
 
     h3{
+        padding-right: 30px;
         font-weight: bold;
         font-size: small;
     }
@@ -20,12 +21,20 @@
 
 .items {
     padding-left: 15px;
-    max-height: 500px;
+    max-height: 750px;
     overflow: hidden;
     transition: max-height 250ms ease-in-out;
 
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: column wrap;
+}
+
+.items.collapsed {
+    max-height: 0;
+
+    .item {
+        display: none;
+    }
 }
 
 .categorized_item {
@@ -36,7 +45,7 @@
 .categories {
     padding-left: 20px;
     overflow: hidden;
-    transition: max-height 250ms ease-in-out;
+    transition: max-height 500ms ease-in-out;
 }
 
 .item {

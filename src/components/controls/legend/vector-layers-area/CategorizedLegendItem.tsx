@@ -21,7 +21,7 @@ export default function CategorizedLegendItem({layer} : {layer: CustomLayer}){
     if(layerStatus === 'error') return <ErrorItem layer={layer} />;
 
     function changeVisibility(evt: React.ChangeEvent<HTMLInputElement>){
-       evt.stopPropagation();
+        evt.stopPropagation();
         const elements = evt.target.form?.elements as HTMLFormControlsCollection;
         
         if(evt.target.name === 'main'){

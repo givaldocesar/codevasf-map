@@ -4,5 +4,6 @@ export {
     Category,
     FeatureLabel,
     Fill,
+    Icon,
     Stroke
 } from "../../index.js";

@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { FlatFill } from "ol/style/flat";
 import { SelectStyle, CustomSimpleStyle } from "../../../classes";
 import { LayerContext, StyleContext } from "../../contexts";
 import { convertFlatFill } from "../utils/convert-flat-styles";
 
 
-function Fill(props : FlatFill){
+export default function Fill(props : FlatFill){
     //melhorar solução
     const layer = useContext(LayerContext);
     const style = useContext(StyleContext);
@@ -20,5 +20,3 @@ function Fill(props : FlatFill){
    
     return <></>;
 }
-
-export default Fill;

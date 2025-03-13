@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import classNames from "classnames";
 import Image from "next/image";
-import { Feature } from "ol";
+import { Feature, getUid } from "ol";
 import { ObjectEvent } from "ol/Object";
 import { FitToFeaturesEvent } from "../../../events";
 import { FieldType, FeatureStatus, STATUS, ERROR } from "../utils";
@@ -60,7 +60,7 @@ export default function TableRow({
     function zoom(){
         document.dispatchEvent(new FitToFeaturesEvent({
             features: [feature],
-            maxZoom: 17,
+            maxZoom: 15,
             mapName: mapName
         }));
     }
@@ -130,12 +130,21 @@ export default function TableRow({
                         </td>
                     );
                 }
-                
+
+                if(field.type === 'number' && field.decimals){
+                    return (
+                        <td key={field.name} className={styles.row}>
+                            {
+                                field.name === 'ol_uid' ? getUid(feature) : feature.get(field.name).toFixed(field.decimals)
+                            }
+                        </td>
+                    );
+                }
+
                 return (
                     <td key={field.name} className={styles.row}>
                         {
-                            //@ts-expect-error ol_uid undefined
-                            field.name === 'ol_uid' ? feature.ol_uid : feature.get(field.name)
+                            field.name === 'ol_uid' ? getUid(feature) : feature.get(field.name)
                         }
                     </td>
                 );

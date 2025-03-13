@@ -23,7 +23,8 @@ export type FieldType = {
     columnWidth?: string,
     type?: 'text' | 'number' | 'file',
     maxLength?: number,
-    editable?: boolean
+    editable?: boolean,
+    decimals?: number
 }
 
 //SORTER------------------------------------------------------------------------------------

@@ -13,5 +13,6 @@ export default function convertFlatStroke(flatStroke: FlatStroke){
     }
     
     if(JSON.stringify(props) !== '{}') return new Stroke(props);
+    
     return null;
 }

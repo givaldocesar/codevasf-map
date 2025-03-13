@@ -40,7 +40,7 @@ export default class CustomCategorizedStyle {
         
         this.categories_.forEach(category => style = [ 
             ...style, 
-            ...category.flatten(this.field_, this.baseText_)
+            ...category.flattenCategory(this.field_, this.baseText_)
         ]);
         
         return style;

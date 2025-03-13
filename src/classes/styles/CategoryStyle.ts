@@ -28,10 +28,10 @@ export default class CategoryStyle extends SimpleStyle{
         this.visible_ = (visible === undefined ? true : visible);
     }
 
-    flatten(field: string, baseText?: FlatText): Rule[] {
+    flattenCategory(field: string, baseText?: FlatText): Rule[] {
         return [{
             filter: ['==', ['get', field], this.value_],
-            style: this.visible_ || true ? {...baseText, ...super.flatten()} as FlatStyle : {}
+            style: this.visible_ ? {...baseText, ...super.flatten()} as FlatStyle : {}
         }];
     }
 

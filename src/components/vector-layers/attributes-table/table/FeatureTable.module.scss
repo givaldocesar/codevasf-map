@@ -149,6 +149,7 @@ tr.error {
 }
 
 .button:hover {
+    cursor: pointer;
     background-color: colors.$hover;
 
     img {
