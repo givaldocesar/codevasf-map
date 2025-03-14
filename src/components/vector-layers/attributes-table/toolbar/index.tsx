@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState} from "react";
 import { CustomLayer } from "../../../../classes";
-import { FieldType } from "../utils";
+import { FieldType, APIType } from "../utils";
 import { Filters, FiltersTools, FilterEvent } from "./filters";
 import { MultipleEdit, MultipleEditTool, EditEvent } from "./multiple-edit";
 import DownloadTool from "./DownloadTool";
@@ -27,7 +27,7 @@ export default function Toolbar({
     options?: {
         allowDelete?: boolean;
         allowDownload?: boolean;
-        apiURL?: string;
+        api?: APIType;
         filters?: boolean;
         multipleEdit?: boolean;
     }
@@ -84,7 +84,7 @@ export default function Toolbar({
                 }
                 { options?.multipleEdit && <MultipleEditTool /> }
                 { options?.allowDownload && <DownloadTool /> }
-                { options?.apiURL && <SaveTool /> }
+                { options?.api && <SaveTool /> }
             </div>
             { options?.filters && 
                 <Filters 

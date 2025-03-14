@@ -11,6 +11,11 @@ export const ERROR = "3RR0R";
 
 export type FeatureStatus = "edited" | "excluded" | "loading" | "error" | "updated" | "removed" | null;
 
+export type APIType = {
+    url: string;
+    token?: string;
+}
+
 export type FilterType = {
     type: "NULL_VALUE" | "number" | "text" | "checkbox";
     name: string;
@@ -88,7 +93,7 @@ export function convertToFilter(field: HTMLInputElement): FilterType | null {
     }
 }
 
-export async function updateFeature(feature: Feature, url?: string){
+export async function updateFeature(feature: Feature, api?: APIType){
     const format = new WKT({splitCollection: true});
     const { geometry, createdAt, updatedAt, ...properties } = feature.getProperties();
     delete properties[STATUS];
@@ -99,15 +104,20 @@ export async function updateFeature(feature: Feature, url?: string){
         ...properties
     }
 
-    if(url){
+    if(api){
         feature.set(STATUS, "loading");
 
-        const response = await fetch(url, {
+        const response = await fetch(api.url, {
             method: "PUT",
+            headers: {'Authorization': api.token as string},
             body: JSON.stringify(data)
         });
 
         switch(response.status){
+            case 403:
+                feature.set(STATUS, "error");
+                feature.set(ERROR, "Operação não permitida para o usuário.");
+                break;
             case 404:
                 feature.set(STATUS, "error");
                 feature.set(ERROR, "invalid API URL.");
@@ -122,24 +132,30 @@ export async function updateFeature(feature: Feature, url?: string){
                 return true;
             default:
                 feature.set(STATUS, "error");
+                feature.set(ERROR, "Erro desconhecido");
         }
     }  
 
     return false;
 }
 
-export async function deleteFeature(layer: CustomLayer, feature: Feature, url?: string){
+export async function deleteFeature(layer: CustomLayer, feature: Feature, api?: APIType){
     const { geometry, createdAt, updatedAt, ...properties } = feature.getProperties();
 
-    if(url){
+    if(api){
         feature.set(STATUS, "loading");
 
-        const response = await fetch(url, {
+        const response = await fetch(api.url, {
             method: "DELETE",
+            headers: {'Authorization': api.token as string},
             body: JSON.stringify(properties)
         });
 
         switch(response.status){
+            case 403:
+                feature.set(STATUS, "error");
+                feature.set(ERROR, "Operação não permitida para o usuário.");
+                break;
             case 404:
                 feature.set(STATUS, "error");
                 feature.set(ERROR, "invalid API URL.");

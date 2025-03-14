@@ -19,6 +19,7 @@ export {
     default as AttributesTable, 
     STATUS, ERROR,
     type FieldType, 
-    type FeatureStatus 
+    type FeatureStatus,
+    type APIType,
 } from "./attributes-table";
 

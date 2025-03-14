@@ -5,7 +5,7 @@ import { CustomLayer } from "../../../classes";
 import { FitToFeaturesEvent } from "../../events";
 import Table, { TableLoader } from "./table";
 import Toolbar, { FilterEvent, EditEvent } from "./toolbar";
-import { FieldType, STATUS, ERROR, updateFeature, deleteFeature, FeatureStatus } from "./utils";
+import { FieldType, STATUS, ERROR, updateFeature, deleteFeature, FeatureStatus, APIType } from "./utils";
 import styles from "./Attributes.module.scss";
 import formStyles from "./toolbar/Form.module.scss";
 
@@ -16,7 +16,8 @@ export {
 
 export type {
     FieldType,
-    FeatureStatus
+    FeatureStatus,
+    APIType
 }
 
 export default function AttributesTable({
@@ -28,19 +29,18 @@ export default function AttributesTable({
         headers: true,
         filters: true,
     }
-} : { 
+} : {  
     popup?: Window;
     mapName: string;
     layer: CustomLayer;
     fields?: FieldType[];
     options?: {
+        api?: APIType; 
         allowDelete?: boolean;
         allowDownload?: boolean;
-        apiURL?: string;
         filters?: boolean;
         headers?: boolean;
-        multipleEdit?: boolean;
-        
+        multipleEdit?: boolean; 
     }
 }){
     const ref = useRef<HTMLDivElement>(null);
@@ -163,17 +163,17 @@ export default function AttributesTable({
                 const button = evt.target as HTMLButtonElement;
                 button.disabled = true;
     
-                if(options.apiURL){
+                if(options.api?.url){
                     const features = layer?.getSource()?.getFeatures() as Feature[];
                     let updates: Promise<boolean>[] = [];
                     
                     for(let i = 0; i < features.length; i++){
                         switch(features[i].get(STATUS)){
                             case 'edited':
-                                updates.push(updateFeature(features[i], options.apiURL));
+                                updates.push(updateFeature(features[i], options.api));
                                 break;
                             case 'excluded':
-                                updates.push(deleteFeature(layer, features[i], options.apiURL));
+                                updates.push(deleteFeature(layer, features[i], options.api));
                                 break;
                             default:
                                 continue;

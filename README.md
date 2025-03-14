@@ -109,7 +109,9 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
                 -->options:
                     -allowDelete:       <boolean>       Permite apagar feições.      
                     -allowDownload:     <boolean>       Permite baixar a camada como um arquivo KML.
-                    -apiURL:            <string>        URL que permite salvar as edições para o banco de dados na API da CODEVASF.  
+                    -api:                               Permite usar uma api.
+                        -->url:         <string>        URL que permite salvar as edições para o banco de dados na API da CODEVASF. 
+                        -->token:       <string>        Token de acesso do usuário, caso necessário. 
                     -filters            <boolean>       Adiciona ferramentas de filtro a tabela.  
                     -header:            <boolean>       Exibe ou não o cabeçãrio da tabela.
                     -multipleEdit:      <boolean>       Permite alterar atributos de multiplas feições.    

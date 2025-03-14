@@ -13,5 +13,6 @@ export {
 
 export type {
     FieldType,
-    FeatureStatus
+    FeatureStatus,
+    APIType
 } from "../index.d.ts";

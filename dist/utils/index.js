@@ -8,5 +8,5 @@ export {
     calculateLength,
     checkFeaturesIntersect,
     createRandomLayer,
-    registerProjections
+    registerProjections,
 } from "../index.js"
