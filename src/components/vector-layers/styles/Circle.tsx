@@ -1,12 +1,12 @@
 import { useContext } from "react";
-import { FlatIcon } from "ol/style/flat";
+import { FlatCircle } from "ol/style/flat";
 import ImageStyle from "ol/style/Image";
 import { CustomSimpleStyle, SelectStyle } from "../../../classes";
 import { LayerContext, StyleContext } from "../../contexts";
-import { convertFlatIcon } from "../utils/convert-flat-styles";
+import { convertFlatCircle } from "../utils/convert-flat-styles";
 
 
-export default function Icon(props: FlatIcon){
+export default function Circle(props: FlatCircle){
     //melhorar solução
     const layer = useContext(LayerContext);
     const style = useContext(StyleContext);
@@ -16,9 +16,8 @@ export default function Icon(props: FlatIcon){
         layer?.dispatchEvent('change-style');
        
     } else if(style instanceof SelectStyle) {
-        const icon = convertFlatIcon(props) as ImageStyle;
-        icon.load();
-        style.setImage(icon);
+        const circle = convertFlatCircle(props) as ImageStyle;
+        style.setImage(circle);
     }
    
     return <></>;

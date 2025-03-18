@@ -30,10 +30,10 @@ export default class CustomSimpleStyle {
         return this.style_;
     }
 
-    setIcon(icon: FlatIcon){
+    setImage(image: FlatCircle | FlatIcon){
         this.style_ = {
             ...this.style_,
-            ...icon
+            ...image
         }
     }
 

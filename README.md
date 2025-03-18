@@ -124,6 +124,8 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
                                                 Utilizar as propriedades de ['FlatStroke do OL'](https://openlayers.org/en/latest/apidoc/module-ol_style_flat.html#~FlatStroke).
                 --Fill:                         Altera o preenchimento da camada.
                                                 Utilizar as propriedades de ['FlatFill do OL'](https://openlayers.org/en/latest/apidoc/module-ol_style_flat.html#~FlatFill).
+                --Circle:                       Faz o estilo da camada ser um Círculo.
+                                                Utilizar as propriedades de ['FlatCircle do OL'](https://openlayers.org/en/latest/apidoc/module-ol_style_flat.html#~FlatCircle).
                 --Icon:                         Faz o estilo da camada ser um Ícone.
                                                 Utilizar as propriedades de ['FlatIcon do OL'](https://openlayers.org/en/latest/apidoc/module-ol_style_flat.html#~FlatIcon).
                 --FeatureLabel:                 Adiciona rótulos as feições de um estilo. 

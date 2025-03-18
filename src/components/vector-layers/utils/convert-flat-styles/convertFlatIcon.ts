@@ -13,7 +13,7 @@ export default function convertFlatIcon(flatIcon: FlatIcon){
         opacity: flatIcon['icon-opacity'] as number
     }
 
-    if(JSON.stringify(flatIcon) !== '{}') return new Icon(props);
+    if(JSON.stringify(props) !== '{}') return new Icon(props);
     
     return null;
 }
