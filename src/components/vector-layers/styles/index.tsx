@@ -31,6 +31,7 @@ function SimpleStyle({
 export { SimpleStyle };
 export { default as CategorizedStyle } from "./CategorizedStyle";
 export { default as Category } from "./Category";
+export { default as Circle } from "./Circle";
 export { default as Stroke } from "./Stroke";
 export { default as Fill } from "./Fill";
 export { default as Icon } from "./Icon";
