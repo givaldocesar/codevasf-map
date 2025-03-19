@@ -192,6 +192,7 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
             --> urlInit:    <RequestInit>   Opções para a função 'fetch'.
         
         -- APIDataLayer:                        Extensão de "Layer". Usa dados adquiridos de uma URL:
+            --> apiURL:         <string>        API URL para coletar informações.
             --> database:       <string>        Tabela do banco de dados presente na API da CODEVASF.
             --> urlInit:        <RequestInit>   Opções para a função 'fetch'.
             --> groupField:     <string>        Campo para adquirir as versões dos dados do banco de dados.
