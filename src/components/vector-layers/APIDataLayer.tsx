@@ -31,6 +31,11 @@ function APIDataLayer({
     //LOAD LAYER
     useEffect(() => {
         async function getData(){
+            if(!apiURL){
+                layer.setStatus('error');
+                layer.set('error', 'apiURL indefinida');
+            }
+            
             try{
                 const response = await fetch(apiURL + `/${database}/versions`, urlInit);
                 const cache = new LayerCache({name: database, keyPath: groupField});
