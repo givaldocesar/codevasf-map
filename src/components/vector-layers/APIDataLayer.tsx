@@ -3,18 +3,20 @@ import { CustomLayer, LayerCache } from "../../classes";
 import { BaseLayerProps } from "../../interfaces";
 import { MapContext } from "../contexts";
 import Layer from "./Layer";
-import { processAPIData, BASE_URL } from "./utils";
+import { processAPIData } from "./utils";
 
 const PROMISES_LIMIT = 30;
 
 interface APIDataLayerProps extends BaseLayerProps {
+   apiURL: string;
    database: string;
    urlInit?: RequestInit;
    groupField: string;
 }
 
 function APIDataLayer({
-    children, 
+    children,
+    apiURL, 
     database, 
     urlInit, 
     groupField, 
@@ -30,7 +32,7 @@ function APIDataLayer({
     useEffect(() => {
         async function getData(){
             try{
-                const response = await fetch(BASE_URL + `/${database}/versions`, urlInit);
+                const response = await fetch(apiURL + `/${database}/versions`, urlInit);
                 const cache = new LayerCache({name: database, keyPath: groupField});
                 await cache.connect();
                 
@@ -43,7 +45,7 @@ function APIDataLayer({
                     const total = Math.floor(versions.length / PROMISES_LIMIT) + 1;
 
                     for(let i = 0; i < versions.length; i++){
-                        const getter = processAPIData({layer, database, projection, cache, groupField, version: versions[i]});
+                        const getter = processAPIData({layer, apiURL, database, projection, cache, groupField, version: versions[i]});
                         promises.push(getter);
 
                         if(promises.length === PROMISES_LIMIT){
