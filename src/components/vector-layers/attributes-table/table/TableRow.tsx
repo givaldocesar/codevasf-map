@@ -51,10 +51,9 @@ export default function TableRow({
     function handleExclude(evt: React.MouseEvent<HTMLButtonElement, MouseEvent>){
         if(status === 'excluded'){
             feature.set(STATUS, 'edited');
-            return ;
-        } 
-
-        feature.set(STATUS, "excluded");
+        } else {
+            feature.set(STATUS, "excluded");
+        }
     }
 
     function zoom(){
@@ -132,20 +131,18 @@ export default function TableRow({
                 }
 
                 if(field.type === 'number' && field.decimals){
+                    let value = field.calculate ? field.calculate(feature) : feature.get(field.name) ? parseFloat(feature.get(field.name)) : 0;
+                    
                     return (
                         <td key={field.name} className={styles.row}>
-                            {
-                                field.name === 'ol_uid' ? getUid(feature) : feature.get(field.name).toFixed(field.decimals)
-                            }
+                            { value.toFixed(field.decimals) }
                         </td>
                     );
                 }
 
                 return (
                     <td key={field.name} className={styles.row}>
-                        {
-                            field.name === 'ol_uid' ? getUid(feature) : feature.get(field.name)
-                        }
+                        { field.name === 'ol_uid' ? getUid(feature) : feature.get(field.name) }
                     </td>
                 );
             })}

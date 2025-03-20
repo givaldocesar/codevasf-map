@@ -23,13 +23,14 @@ export type FilterType = {
 }
 
 export type FieldType = {
-    name: string,
-    label?: string,
-    columnWidth?: string,
-    type?: 'text' | 'number' | 'file',
-    maxLength?: number,
-    editable?: boolean,
-    decimals?: number
+    name: string;
+    label?: string;
+    columnWidth?: string;
+    type?: 'text' | 'number' | 'file';
+    maxLength?: number;
+    editable?: boolean;
+    decimals?: number;
+    calculate?: (feature: Feature) => number;
 }
 
 //SORTER------------------------------------------------------------------------------------
