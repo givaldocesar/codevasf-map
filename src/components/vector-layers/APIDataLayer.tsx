@@ -46,19 +46,17 @@ function APIDataLayer({
                     layer.setLoadingProgress(5);
                     
                     let promises: Promise<boolean>[] = [];
-                    let count = 0;
-                    const total = Math.floor(versions.length / PROMISES_LIMIT) + 1;
-
+                    
                     for(let i = 0; i < versions.length; i++){
                         const getter = processAPIData({layer, apiURL, database, projection, cache, groupField, version: versions[i]});
                         promises.push(getter);
 
                         if(promises.length === PROMISES_LIMIT){
                             await Promise.all(promises);
-                            promises = [];
-                            count += 1;
-                            layer.setLoadingProgress(count/total*100);
+                            promises = []; 
                         }
+
+                        layer.setLoadingProgress((i*95/versions.length) + 5);
                     } 
 
                     await Promise.all(promises);
