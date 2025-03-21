@@ -1,8 +1,7 @@
 import React from "react";
-import classNames from "classnames";
 import styles from "./FeatureTable.module.scss";
 
-export const PAGE_LIMIT = 100;
+export const PAGE_LIMIT = 200;
 
 export default function Pagination({
     total,
@@ -17,23 +16,22 @@ export default function Pagination({
     if(pages <= 1) return null;
     
     //CRIAR OS BOTOES
-    const buttons: React.ReactNode[] = [];
+    const options: React.ReactNode[] = [];
     
    for(let i = 1; i <= pages; i++){
-        buttons.push(
-            <button 
-                key={i} 
-                className={classNames({[styles.active]: current === i})}
-                onClick={evt => {evt.target.dispatchEvent(new Event("change-page", {bubbles: true}))}}
-            >
-                {i}
-            </button>
-        );
+        options.push(<option key={i}value={i}>{i}</option>);
     }
     
     return (
-        <div className={styles.pagination}>
-            { buttons }
-        </div>
+        <>
+            <hr />
+            <div className={styles.pagination}>
+                <span>Página</span>
+                <select onChange={evt => {evt.target.dispatchEvent(new Event("change-page", {bubbles: true}))}}>
+                    { options }
+                </select>
+                <span>de {pages}</span>
+            </div>
+        </>
     );
 }

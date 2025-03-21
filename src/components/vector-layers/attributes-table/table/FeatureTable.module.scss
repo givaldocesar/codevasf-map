@@ -209,31 +209,12 @@ tr.error {
     width: 100%;
     padding: 2px;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
     gap: 5px;
-    
-}
 
-.pagination button {
-    width: 24px;
-    height: 24px;
-    border: none;
-    border-radius: 10px;
-    background-color: colors.$std;
-    font-size: small;
-    color: white
-
-}
-
-.pagination button:hover {
-    cursor: pointer;
-    background-color: colors.$hover;
-}
-
-.pagination button.active {
-    background-color: colors.$active;
+    span, input, select { font-size: small }
 }
 
 //RESPONSIVE-------------------------------------------------------------
@@ -248,10 +229,8 @@ tr.error {
         height: 30px;
     }
 
-    .pagination button {
-        width: 32px;
-        height: 32px;
-        font-size: large;
+    .pagination {
+        span, input, select { font-size:  medium}
     }
 
     .button {

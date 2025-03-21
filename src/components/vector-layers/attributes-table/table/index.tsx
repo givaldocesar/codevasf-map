@@ -29,8 +29,8 @@ export default function Table({
     useEffect(() => {
         function changePage(evt: Event){
             evt.stopPropagation();
-            const button = (evt.target) as HTMLButtonElement;
-            setPage(parseInt(button.innerText));
+            const select = (evt.target) as HTMLSelectElement;
+            setPage(parseInt(select.value));
         }
 
         const element = ref.current;
