@@ -7,6 +7,7 @@ import { useForceUpdate, createRandomLayer } from "../../../utils";
 import BaseControl from "../BaseControl";
 import DroppedItem from "./DroppedItem";
 import styles from "./DragAndDrop.module.scss";
+import icon from "../../../assets/kml-file.png";
 
 
 export default function DragAndDrop({
@@ -81,7 +82,7 @@ export default function DragAndDrop({
                 <BaseControl
                     className={className} 
                     collapsable={collapsable}
-                    collapseImage={collapseImage}
+                    collapseImage={collapseImage || icon}
                     collapsePositionButton={collapsePositionButton}
                     style={{display: files.length > 0 ? 'block' : 'none'}}
                 >

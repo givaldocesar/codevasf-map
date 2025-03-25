@@ -8,22 +8,36 @@
     overflow: hidden;
 }
 
-.hidden {
-    gap: 0px;
-}
-
 .select {
     flex: 1;
+    display: flex;
+    max-width: 85%;
     height: 20px;
+    align-items: center;
     gap: 5px;
 
     select {
+        max-width: 70%;
         height: 100%;
     }
 }
 
+.hidden {
+    gap: 0px;
+
+    .select {
+        display: none;
+    }
+}
+
+
 @media (min-width: breakpoints.$break-large){
     .select {
+        max-width: 100%;
         height: 24px;
+
+        select {
+            max-width: 100%;
+        }
     }
 }

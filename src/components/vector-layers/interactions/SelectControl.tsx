@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
+import classNames from "classnames";
 import { Feature } from "ol";
 import { SelectEvent } from "ol/interaction/Select";
 import { LayerStatus } from "../../../interfaces";
@@ -106,10 +107,14 @@ export default function SelectControl({
 
     return (
         <BaseControl 
-            className={`${styles.control} ${collapsed ? styles.hidden : ""} ${className}`} 
+            className={classNames({
+                [styles.control]: true,
+                [styles.hidden]: collapsed,
+                [className]: className !== '' ? true : false
+            })}
             {...props}
         >
-            <div className={styles.select} style={{display: collapsed ? "none" : "flex"}}>
+            <div className={styles.select}>
                 <span className={labelClassName}>{label}</span>
                 <Select onChange={selected} ref={ref}>
                     <option value="NO_ONE">Nenhum selecionado</option>
@@ -120,8 +125,11 @@ export default function SelectControl({
             { collapsable && 
                 <ArrowButton 
                     title= {collapsed ? "Expandir" : "Ocultar"}
-                    style={{rotate: collapsed ? "270deg" : "90deg"}}
                     onClick={() => setCollapsed(!collapsed)}
+                    style={{
+                        height: '28px',
+                        rotate: collapsed ? "270deg" : "90deg"
+                    }}
                 /> 
             }
         </BaseControl>

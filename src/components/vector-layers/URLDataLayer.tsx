@@ -12,7 +12,7 @@ interface URLDataLayerProps extends BaseLayerProps {
     urlInit?: RequestInit;
 }
 
-function URLDataLayer({
+export default function URLDataLayer({
     children, 
     url, 
     urlInit, 
@@ -82,11 +82,8 @@ function URLDataLayer({
                             layer.setLoadingProgress(95);   
                         }
                     }
-
-                    if(response.status === 404){
-                        layer.setStatus('error');
-                        layer.set('error', 'URL não encontrada.');
-                    }
+                    
+                    if(response.status === 404) throw new Error('URL não encontrada.');
                 }
 
                 if(fit) map?.fit(layer.getSource()?.getExtent());
@@ -94,6 +91,8 @@ function URLDataLayer({
                 layer.setStatus('complete');
             } catch (err) {
                 const error = err as Error;
+                layer.setStatus('error');
+                layer.set('error', error.message);
                 throw new Error(`LAYER ${props.title} => ${error.message}`);
             }
         }
@@ -108,5 +107,3 @@ function URLDataLayer({
         </Layer>
     );
 }
-
-export default URLDataLayer;

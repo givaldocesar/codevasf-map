@@ -1,14 +1,16 @@
 import React, { forwardRef, useRef, useContext, useEffect, useState } from "react";
+import { StaticImageData } from "next/image";
 import Control from "ol/control/Control";
 import { MapContext } from "../contexts";
 import { CollapseButton } from "../buttons";
 import styles from "./Controls.module.scss";
 
 
+
 const BaseControl = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>&{
     collapsable?: boolean;
     collapsePositionButton?: 'top_right' | 'top_left';
-    collapseImage?: string;
+    collapseImage?: string | StaticImageData;
 }>(({
     children, 
     className="", 

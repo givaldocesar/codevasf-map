@@ -9,7 +9,8 @@ import styles from "../Legend.module.scss";
 
 export default function SimpleLegendItem({layer} : {layer: CustomLayer}){
     const [layerStatus, setStatus] = useState<LayerStatus>('loading');
-    
+    console.log(layer.get('title'), layerStatus)
+
     //@ts-expect-error
     layer.on('status-changed', () => setStatus(layer.getStatus()));
 

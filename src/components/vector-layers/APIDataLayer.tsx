@@ -12,6 +12,7 @@ interface APIDataLayerProps extends BaseLayerProps {
    database: string;
    urlInit?: RequestInit;
    groupField: string;
+   noCache?: boolean;
 }
 
 function APIDataLayer({
@@ -21,6 +22,7 @@ function APIDataLayer({
     urlInit, 
     groupField, 
     fit, 
+    noCache,
     ...props
 } : APIDataLayerProps){
     const map = useContext(MapContext);
@@ -38,8 +40,7 @@ function APIDataLayer({
             
             try{
                 const response = await fetch(apiURL + `/${database}/versions`, urlInit);
-                const cache = new LayerCache({name: database, keyPath: groupField});
-                await cache.connect();
+                const cache = noCache ? undefined : new LayerCache({name: database, keyPath: groupField});
                 
                 if(response.ok){
                     const versions = await response.json();

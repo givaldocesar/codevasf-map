@@ -17,13 +17,14 @@ export default function processAPIData({
     apiURL: string;
     database: string;
     projection?: Projection;
-    cache: LayerCache; 
+    cache?: LayerCache; 
     version: {updatedAt: string; [field: string]: string; }; 
     groupField: string;
 }){
     return new Promise<boolean>(async (resolve, reject) => {
         try{
-            const cacheData = await cache.get(version[groupField]);
+            await cache?.connect();
+            const cacheData = await cache?.get(version[groupField]);
 
             if(cacheData?.lastModified === version.updatedAt) {
                 //CACHE FEATURES           
@@ -40,7 +41,7 @@ export default function processAPIData({
                     layer.getSource()?.addFeatures(features);
     
                     const jsonFeatures = new GeoJSON().writeFeaturesObject(features);
-                    await cache.insert({
+                    await cache?.insert({
                         lastModified: version.updatedAt,
                         [groupField]: version[groupField],
                         features: jsonFeatures

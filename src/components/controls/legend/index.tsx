@@ -1,7 +1,7 @@
 import BaseControl from "../BaseControl";
 import TileLayersArea from "./tile-layers-area";
 import VectorLayersArea from "./vector-layers-area";
-
+import icon from "../../../assets/legend.png";
 
 export default function Legend({
     className,
@@ -18,7 +18,7 @@ export default function Legend({
         <BaseControl 
             className={className} 
             collapsable={collapsable}
-            collapseImage={collapseImage}
+            collapseImage={collapseImage || icon}
             collapsePositionButton={collapsePositionButton}
         >
             <TileLayersArea />
