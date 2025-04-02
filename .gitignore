@@ -7,3 +7,4 @@ dist/styles_components.css
 #MISC
 .tsbuildinfo
 .rollup.cache
+package-lock.json
