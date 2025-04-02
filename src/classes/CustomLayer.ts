@@ -6,7 +6,7 @@ import { AttributionLike } from "ol/source/Source";
 import { FlatStyle } from "ol/style/flat";
 import { Filter, Geometries, LayerStatus } from "../interfaces";
 import { LayerProgressEvent, LayerStatusEvent } from "../components/vector-layers/events";
-import SimpleStyle from "./styles/CustomSimpleStyle";
+import CustomSimpleStyle from "./styles/CustomSimpleStyle";
 import CategorizedStyle from "./styles/CustomCategorizedStyle";
 
 
@@ -14,7 +14,7 @@ export default class CustomLayer extends VectorImageLayer {
     private geometry_?: Geometries;
     private status_: LayerStatus;
     private lodingProgress_: number;
-    private baseStyle_: SimpleStyle | CategorizedStyle;
+    private baseStyle_: CustomSimpleStyle | CategorizedStyle;
     
     constructor({
         attributions, 
@@ -32,7 +32,7 @@ export default class CustomLayer extends VectorImageLayer {
         title?: string;
         order?: number;
         visible?: boolean; 
-        style?: FlatStyle;
+        style?: FlatStyle[];
         zIndex?: number;
     }){
         super({
@@ -40,8 +40,8 @@ export default class CustomLayer extends VectorImageLayer {
             ...props
         });
      
-        this.baseStyle_ = new SimpleStyle(style);
-        this.setStyle(this.baseStyle_.flatten() as FlatStyle);
+        this.baseStyle_ = new CustomSimpleStyle(style);
+        this.setStyle(this.baseStyle_.flatten());
         
         this.geometry_ = geometry;
         this.status_ = 'loading';
@@ -107,7 +107,7 @@ export default class CustomLayer extends VectorImageLayer {
         return this.status_;
     }
 
-    setBaseStyle(style: SimpleStyle | CategorizedStyle){
+    setBaseStyle(style: CustomSimpleStyle | CategorizedStyle){
         this.baseStyle_ = style;
     }
 

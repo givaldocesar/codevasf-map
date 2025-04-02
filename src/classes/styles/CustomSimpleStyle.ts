@@ -13,26 +13,26 @@ export const defaultStyle: FlatStyle = {
 
 
 export default class CustomSimpleStyle {
-    private style_: FlatStyle;
+    private style: FlatStyle[];
+    private standard: FlatStyle;
 
-    constructor(options?: FlatStyle){
-        this.style_ = {
-            ...defaultStyle,
-            ...options
-        }
+    constructor(options?: FlatStyle[]){
+        this.standard = {...defaultStyle};
+        this.style = [this.standard];
+        if(options) this.style.concat(options);
     }
     
-    flatten(): FlatStyleLike {
-        return this.style_;
+    flatten(): FlatStyle[] {
+        return this.style;
     }
 
     getStyle(){
-        return this.style_;
+        return this.style;
     }
 
     setImage(image: FlatCircle | FlatIcon){
-        this.style_ = {
-            ...this.style_,
+        this.standard = {
+            ...this.standard,
             ...image
         }
     }
@@ -41,8 +41,8 @@ export default class CustomSimpleStyle {
         const circle : FlatCircle = {};
         if(fill['fill-color']) circle['circle-fill-color'] = fill['fill-color']
         
-        this.style_ = {
-            ...this.style_,
+        this.standard = {
+            ...this.standard,
             ...fill,
             ...circle
         }
@@ -53,8 +53,8 @@ export default class CustomSimpleStyle {
         //@ts-ignore
         for(let property in stroke){ circle[`circle-${property}`] = stroke[property] }
         
-        this.style_ = {
-            ...this.style_,
+        this.standard = {
+            ...this.standard,
             ...stroke,
             ...circle
         }
@@ -64,8 +64,8 @@ export default class CustomSimpleStyle {
         const textValue: {'text-value'?: StringExpression} = {};
         if(expression) textValue['text-value'] = extractStringFromExpression(expression);
 
-        this.style_ = {
-            ...this.style_,
+        this.standard = {
+            ...this.standard,
             ...text,
             ...textValue,
         }

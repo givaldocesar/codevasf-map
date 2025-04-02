@@ -26,12 +26,12 @@ export default function createRandomLayer({
     const layer = new CustomLayer({
         geometry: 'Polygon',
         zIndex: 9999,
-        style: {
+        style: [{
             "stroke-color": stroke,
             "circle-stroke-color": stroke,
             "fill-color": fill,
             "circle-fill-color": fill
-        }
+        }]
     });
     layer.set('ignore', true);
     layer.set('title', title);

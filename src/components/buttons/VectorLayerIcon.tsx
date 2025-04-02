@@ -13,7 +13,7 @@ export default function VectorLayerIcon({
     geometry: string | undefined;
     onClick?: (evt: React.MouseEvent<HTMLOrSVGElement, MouseEvent>) => void;
 }){
-    let flat = style.getStyle();
+    let flat = style.getStyle()[0];
     
     return (
         <BaseIcon className={className} onClick={onClick}>

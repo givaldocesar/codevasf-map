@@ -17,7 +17,7 @@ export default class CategoryStyle extends SimpleStyle{
     } : {
         value: any;
         label?: string;
-        options?: FlatStyle;
+        options?: FlatStyle[];
         geometry?: Geometries;
         visible?: boolean;
     }){
@@ -28,10 +28,10 @@ export default class CategoryStyle extends SimpleStyle{
         this.visible_ = (visible === undefined ? true : visible);
     }
 
-    flattenCategory(field: string, baseText?: FlatText): Rule[] {
+    flattenCategory(field: string, baseText?: FlatText): Rule[] { 
         return [{
             filter: ['==', ['get', field], this.value_],
-            style: this.visible_ ? {...baseText, ...super.flatten()} as FlatStyle : {}
+            style: this.visible_ ? [...super.flatten(), baseText || {}] : {}
         }];
     }
 
