@@ -29,9 +29,12 @@ export default class CategoryStyle extends SimpleStyle{
     }
 
     flattenCategory(field: string, baseText?: FlatText): Rule[] { 
+        const style = super.flatten();
+        if(baseText) style.push(baseText); 
+
         return [{
             filter: ['==', ['get', field], this.value_],
-            style: this.visible_ ? [...super.flatten(), baseText || {}] : {}
+            style: this.visible_ ? style : {}
         }];
     }
 

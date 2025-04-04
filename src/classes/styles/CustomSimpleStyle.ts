@@ -13,26 +13,25 @@ export const defaultStyle: FlatStyle = {
 
 
 export default class CustomSimpleStyle {
-    private style: FlatStyle[];
-    private standard: FlatStyle;
+    private secondary: FlatStyle[];
+    private primary: FlatStyle;
 
     constructor(options?: FlatStyle[]){
-        this.standard = {...defaultStyle};
-        this.style = [this.standard];
-        if(options) this.style.concat(options);
+        this.primary = {...defaultStyle};
+        this.secondary = [];
+        if(options) this.secondary.concat(options);
     }
     
     flatten(): FlatStyle[] {
-        return this.style;
+        return [this.primary, ...this.secondary];
     }
 
     getStyle(){
-        return this.style;
+        return [this.primary, ...this.secondary];
     }
 
     setImage(image: FlatCircle | FlatIcon){
-        this.standard = {
-            ...this.standard,
+        this.primary = {
             ...image
         }
     }
@@ -41,8 +40,8 @@ export default class CustomSimpleStyle {
         const circle : FlatCircle = {};
         if(fill['fill-color']) circle['circle-fill-color'] = fill['fill-color']
         
-        this.standard = {
-            ...this.standard,
+        this.primary = {
+            ...this.primary,
             ...fill,
             ...circle
         }
@@ -53,8 +52,8 @@ export default class CustomSimpleStyle {
         //@ts-ignore
         for(let property in stroke){ circle[`circle-${property}`] = stroke[property] }
         
-        this.standard = {
-            ...this.standard,
+        this.primary = {
+            ...this.primary,
             ...stroke,
             ...circle
         }
@@ -64,8 +63,8 @@ export default class CustomSimpleStyle {
         const textValue: {'text-value'?: StringExpression} = {};
         if(expression) textValue['text-value'] = extractStringFromExpression(expression);
 
-        this.standard = {
-            ...this.standard,
+        this.primary = {
+            ...this.primary,
             ...text,
             ...textValue,
         }

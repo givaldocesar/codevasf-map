@@ -10,12 +10,19 @@ export interface APIData {
 
 function conversor(data : APIData, projection?: Projection){
     const {crs, geometry, ...properties } = data
-     
-    return new Feature({
-        geometry: new WKT().readGeometry(geometry, {
+    
+    let convertedGeometry;
+    try{
+        convertedGeometry = new WKT().readGeometry(geometry, {
             dataProjection: crs,
             featureProjection: projection
-        }),
+        });
+    } catch {
+    
+    }
+
+    return new Feature({
+        geometry: convertedGeometry,
         ...properties
     });
 }
