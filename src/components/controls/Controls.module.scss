@@ -35,8 +35,47 @@
     left: 4px;
 }
 
+.select {
+    flex: 1;
+    display: flex;
+    max-width: 85%;
+    height: 20px;
+    align-items: center;
+    gap: 5px;
+
+    select {
+        max-width: 70%;
+        height: 100%;
+    }
+}
+
+.select_control {
+    display: flex;
+    align-items: center;
+    flex-flow: row nowrap;
+    gap: 15px;
+    overflow: hidden;
+}
+
+.select_hidden {
+    gap: 0px;
+
+    .select {
+        display: none;
+    }
+}
+
 @media (min-width: breakpoints.$break-large){
     .title {
         display: block;
+    }
+
+    .select {
+        max-width: 100%;
+        height: 24px;
+
+        select {
+            max-width: 100%;
+        }
     }
 }

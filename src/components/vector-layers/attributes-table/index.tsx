@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useMemo, Suspense } from "react";
 import { Feature } from "ol";
 import { KML } from "ol/format";
 import { CustomLayer } from "../../../classes";
-import { FitToFeaturesEvent } from "../../events";
+import { FitToFeaturesEvent } from "../../events/FitToFeatures";
 import Table, { TableLoader } from "./table";
 import Toolbar, { FilterEvent, EditEvent } from "./toolbar";
 import { FieldType, STATUS, ERROR, updateFeature, deleteFeature, FeatureStatus, APIType } from "./utils";

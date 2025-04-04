@@ -1,4 +1,4 @@
-import { FlatStyle, FlatText, Rule } from "ol/style/flat";
+import { FlatStyle, FlatText, Rule, FlatCircle, FlatIcon } from "ol/style/flat";
 import { Geometries } from "../../interfaces";
 import SimpleStyle from "./CustomSimpleStyle";
 
@@ -48,6 +48,10 @@ export default class CategoryStyle extends SimpleStyle{
 
     getValue(){
         return this.value_;
+    }
+
+    getVisible(){
+        return this.visible_;
     }
 
     setVisible(visible: boolean){

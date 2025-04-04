@@ -2,10 +2,10 @@ import { Feature, Overlay } from "ol";
 import { Select } from "ol/interaction";
 import { never, pointerMove } from "ol/events/condition";
 import { Style, Stroke, Fill, Circle } from "ol/style";
-import { CustomLayer, CustomMap } from "../classes";
-import updatePopup from "../components/controls/drag-and-drop/updatePopup";
-import randomColor from "./randomColor";
-import styles from "./Utils.module.scss";
+import { CustomLayer, CustomMap } from "../../classes";
+import updatePopup from "../controls/drag-and-drop/updatePopup";
+import randomColor from "../../utils/randomColor";
+import styles from "../Components.module.scss";
 
 
 export default function createRandomLayer({

@@ -1,9 +1,7 @@
 import { useContext } from "react";
 import { FlatCircle } from "ol/style/flat";
-import ImageStyle from "ol/style/Image";
-import { CustomSimpleStyle, SelectStyle } from "../../../classes";
+import { CustomSimpleStyle } from "../../../classes";
 import { LayerContext, StyleContext } from "../../contexts";
-import { convertFlatCircle } from "../utils/convert-flat-styles";
 
 
 export default function Circle(props: FlatCircle){
@@ -14,10 +12,8 @@ export default function Circle(props: FlatCircle){
     if(style instanceof CustomSimpleStyle){
         style.setImage(props);
         layer?.dispatchEvent('change-style');
-       
-    } else if(style instanceof SelectStyle) {
-        const circle = convertFlatCircle(props) as ImageStyle;
-        style.setImage(circle);
+    } else {
+        console.error(`CAMADA ${layer?.get("title")}: invalid style provided for Circle.`);
     }
    
     return <></>;

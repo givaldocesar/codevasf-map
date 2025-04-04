@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { SelectStyle } from "../../../classes";
+import { CustomSimpleStyle } from "../../../classes";
 import { LayerContext, StyleContext, InteractionContext } from "../../contexts";
 
 
@@ -15,7 +15,7 @@ function SimpleStyle({
     
     let style;
     if(interaction){
-        style = interaction.getStyle() as SelectStyle;
+        style = interaction.getBaseStyle() as CustomSimpleStyle;
     } else {
         layer?.setVisible(visible);
         style = layer?.getBaseStyle();

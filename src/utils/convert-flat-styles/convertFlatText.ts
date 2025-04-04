@@ -7,7 +7,6 @@ import convertFlatStroke from "./convertFlatStroke";
 export default function convertFlatText(flatText: FlatText){
     if(flatText && Object.keys(flatText).length > 0){
         return new Text({
-            text: flatText['text-value'],	
             font: flatText['text-font'] as string,
             maxAngle: flatText['text-max-angle'] as number,	
             offsetX: flatText['text-offset-x'] as number,
@@ -49,6 +48,4 @@ export default function convertFlatText(flatText: FlatText){
             }) || undefined,
         });
     }
-
-    return null;
 }

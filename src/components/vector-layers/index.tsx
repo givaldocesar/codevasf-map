@@ -10,6 +10,7 @@ export { VectorLayers };
 export { default as Layer } from "./Layer";
 export { default as URLDataLayer } from "./URLDataLayer";
 export { default as APIDataLayer } from "./APIDataLayer";
+export { default as createRandomLayer } from "./createRandomLayer";
 
 export * from "./styles";
 export * from "./interactions";

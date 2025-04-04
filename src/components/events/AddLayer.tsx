@@ -34,9 +34,15 @@ class AddLayerEvent extends CustomEvent<{
 function AddLayer({label} : {label?: {text?: FlatText; expression: string}}){
     const map = useContext(MapContext);
 
+    if(!map?.get('name')) throw new Error("ADD LAYER: Map name is required. Please set map name.");
+
     const addLayerToMap = useCallback((evt: AddLayerEvent) => {
         if(map?.get('name') === evt.detail.mapName){
-            try{ map?.addLayer(evt.detail.layer) } catch {};
+            try{ 
+                map?.addLayer(evt.detail.layer);
+            } catch (err){
+                console.error(`MAP ${map.get('name')}: Erro ao adicionar camada ${evt.detail.layer.get("title") || ""} por evento.`)
+            };
     
             if(label){
                 const style = evt.detail.layer.getBaseStyle() as CustomSimpleStyle; 

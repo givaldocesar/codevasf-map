@@ -1,13 +1,20 @@
+import { Feature } from "ol";
+import { Style, Text } from "ol/style";
 import { FlatText, Rule, StringExpression } from "ol/style/flat";
-import extractStringFromExpression from "../../utils/extractStringExpressionFromExpression";
+import {extractStringFromExpression, convertFlatStyle, getFeatureLabel, convertFlatText} from "../../utils/";
 import CategoryStyle from "./CategoryStyle";
 
 export default class CustomCategorizedStyle {
+    private styles_: {[key:string] : Style[]};
     private categories_: CategoryStyle[];
     private field_: string;
-    private baseText_?: FlatText; 
     private defaultVisible_: boolean;
     private collapsed_: boolean;
+    private label_: {
+        flatText?: FlatText;
+        expression?: string;
+        text?: Text;
+    };
 
     constructor({
         field, 
@@ -20,10 +27,13 @@ export default class CustomCategorizedStyle {
         visible?: boolean;
         collapsed?: boolean;
     }){
+        this.styles_ = {};
+        this.label_ = {};
         this.field_ = field;
         this.categories_ = categories || [];
         this.collapsed_ = collapsed || false;
         this.defaultVisible_ = (visible === undefined ? true : visible);
+        this.renderFunction = this.renderFunction.bind(this);
     }
 
     addStyle(style: CategoryStyle){
@@ -33,6 +43,7 @@ export default class CustomCategorizedStyle {
         } else {
             this.categories_.push(style);
         }
+        this.updateStyles();
     }
 
     flatten(){
@@ -40,7 +51,7 @@ export default class CustomCategorizedStyle {
         
         this.categories_.forEach(category => style = [ 
             ...style, 
-            ...category.flattenCategory(this.field_, this.baseText_)
+            ...category.flattenCategory(this.field_, this.label_?.flatText)
         ]);
         
         return style;
@@ -66,6 +77,21 @@ export default class CustomCategorizedStyle {
         return this.categories_;
     }
 
+    renderFunction(feature: Feature){
+        const style = this.styles_[feature.get(this.field_)];
+
+        if(style && this.label_.expression && this.label_.text){
+            const primary = style[0].clone();
+            primary.setText(this.label_.text.clone());
+            
+            const label = getFeatureLabel(feature, this.label_.expression);
+            primary.getText()?.setText(label);
+            
+            return [primary, ...style.slice(1)];
+        }
+        return style;
+    }
+
     setCollapsed(collapsed: boolean){
         this.collapsed_ = collapsed;
     }
@@ -73,7 +99,12 @@ export default class CustomCategorizedStyle {
     setText(text: FlatText, expression?: string){
         const textValue: {'text-value'?: StringExpression} = {};
         if(expression) textValue['text-value'] = extractStringFromExpression(expression);
-        this.baseText_ = {...text, ...textValue };
+        
+        this.label_ ={
+            expression: expression,
+            flatText: {...text, ...textValue },
+            text: convertFlatText(text)
+        }
     }
 
     setVisible(visible: boolean, category?: string){
@@ -83,5 +114,15 @@ export default class CustomCategorizedStyle {
         } else {
             this.categories_.forEach(category => category.setVisible(visible));
         }
+
+        this.updateStyles();
+    }
+
+    updateStyles(){
+        this.getStyles().forEach(category => {
+            if(category.getVisible()){
+                this.styles_[category.getValue()] = category.flatten().map(style => convertFlatStyle(style));
+            }
+        });
     }
 }

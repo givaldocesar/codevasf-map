@@ -2,13 +2,13 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import classNames from "classnames";
 import { Feature } from "ol";
 import { SelectEvent } from "ol/interaction/Select";
-import { LayerStatus } from "../../../interfaces";
-import { getFeatureLabel } from "../../../utils";
-import { LayerContext, InteractionContext } from "../../contexts";
-import { BaseControl } from "../../controls";
-import { ArrowButton } from "../../buttons";
-import { Select } from "../../pop-ups/form";
-import styles from "./Interaction.module.scss";
+import { LayerStatus } from "../../interfaces";
+import { getFeatureLabel } from "../../utils";
+import { LayerContext, InteractionContext } from "../contexts";
+import BaseControl from "./BaseControl";
+import { ArrowButton } from "../buttons";
+import { Select } from "../pop-ups/form";
+import styles from "./Controls.module.scss";
 
 
 interface SelectedControlProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -108,8 +108,8 @@ export default function SelectControl({
     return (
         <BaseControl 
             className={classNames({
-                [styles.control]: true,
-                [styles.hidden]: collapsed,
+                [styles.select_control]: true,
+                [styles.select_hidden]: collapsed,
                 [className]: className !== '' ? true : false
             })}
             {...props}

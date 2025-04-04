@@ -1,15 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Feature } from "ol";
 import { SelectEvent } from "ol/interaction/Select";
-import { InteractionContext, LayerContext } from "../../contexts";
-import { BaseControl } from "../../controls";
+import { InteractionContext, LayerContext } from "../contexts";
+import BaseControl from "./BaseControl";
 
-interface SelectedInfoControlProps extends React.HTMLAttributes<HTMLDivElement>{
-    collapsable?: boolean;
-    collapseImage?: string;
-    collapsePositionButton?: "top_right" | "top_left";
-    factory: (features: Feature[]) => React.ReactElement; 
-}
 
 export default function SelectedInfoControl ({
     children,
@@ -18,7 +12,12 @@ export default function SelectedInfoControl ({
     collapsePositionButton,
     factory,
     ...props
-} : SelectedInfoControlProps){
+} : React.HTMLAttributes<HTMLDivElement>&{
+    collapsable?: boolean;
+    collapseImage?: string;
+    collapsePositionButton?: "top_right" | "top_left";
+    factory: (features: Feature[]) => React.ReactElement;
+}){
     const layer = useContext(LayerContext);
     const interaction = useContext(InteractionContext);
     const [features, setFeatures] = useState<Feature[]>([]);

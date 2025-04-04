@@ -1,22 +1,19 @@
 import { useContext } from "react";
-import { CustomSimpleStyle, SelectStyle, CustomCategorizedStyle } from "../../../classes";
+import { CustomCategorizedStyle, CustomSimpleStyle } from "@/classes";
 import { LayerContext, StyleContext } from "../../../components/contexts";
-import { convertFlatText } from "../utils/convert-flat-styles";
+import { FlatText } from "ol/style/flat";
 
 
-export default function FeatureLabel({expression, ...props}: {expression?: string;}){
+export default function FeatureLabel({expression, ...props}: FlatText&{expression?: string;}){
     const layer = useContext(LayerContext);
     const style = useContext(StyleContext);
-    
-    if(style instanceof CustomSimpleStyle || style instanceof CustomCategorizedStyle){
-        style.setText(props, expression);
-        layer?.dispatchEvent('change-style');
-    
-    } else if(style instanceof SelectStyle){
-        const text = convertFlatText(props);
-        style.setLabel({expression, text});
-    }
 
+    if(style instanceof CustomSimpleStyle || style instanceof CustomCategorizedStyle){
+        style?.setText(props, expression);
+        layer?.dispatchEvent('change-style');
+    } else {
+        console.error(`CAMADA ${layer?.get("title")}: invalid style provided for FeatureLabel.`);
+    }
+    
     return <></>;
 }
-

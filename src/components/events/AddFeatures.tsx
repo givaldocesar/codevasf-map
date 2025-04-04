@@ -1,7 +1,7 @@
 import { useEffect, useCallback, useContext } from "react";
 import { Feature } from "ol";
 import { MapContext } from "../contexts";
-import { createRandomLayer } from "../../utils";
+import { createRandomLayer } from "../vector-layers";
 import { CustomSimpleStyle } from "../../classes";
 import { FlatText } from "ol/style/flat";
 
@@ -36,29 +36,34 @@ function AddFeatures({label} : {label?: {text?: FlatText; expression: string}}){
     const map = useContext(MapContext);
 
     const addFeaturesToMap = useCallback((evt: AddFeaturesEvent) => {
-        const layer = createRandomLayer({
-            map: map,
-            title: evt.detail.layerTitle,
-            features: evt.detail.features as Feature[],
-            showProperties: true
-        });
+        try{ 
+            const layer = createRandomLayer({
+                map: map,
+                title: evt.detail.layerTitle,
+                features: evt.detail.features as Feature[],
+                showProperties: true
+            });
 
-        try{ map?.addLayer(layer) } catch {};
+            map?.addLayer(layer);
 
-        if(label){
-            const style = layer.getBaseStyle() as CustomSimpleStyle; 
-            style.setText(label.text || {
-                "text-fill-color": "black",
-                "text-stroke-color": "white",
-                "text-stroke-width": 2,
-                "text-scale": 1.5
-            }, label.expression);
-            layer.dispatchEvent('change-style');
-        }
-        
-        if(evt.detail.zoomTo){
-            layer.getFeaturesExtent().then(extent => map?.fit(extent));
-        }
+            if(label){
+                const style = layer.getBaseStyle() as CustomSimpleStyle; 
+                style.setText(label.text || {
+                    "text-fill-color": "black",
+                    "text-stroke-color": "white",
+                    "text-stroke-width": 2,
+                    "text-scale": 1.5
+                }, label.expression);
+                layer.dispatchEvent('change-style');
+            }
+            
+            if(evt.detail.zoomTo){
+                layer.getFeaturesExtent().then(extent => map?.fit(extent));
+            }
+        } 
+        catch {
+            console.error("ADD-FEATURES-EVENT: erro ao adicionar feições.");
+        };
     }, []);
 
     useEffect(() => {

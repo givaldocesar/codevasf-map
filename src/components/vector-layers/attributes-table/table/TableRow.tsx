@@ -3,7 +3,7 @@ import classNames from "classnames";
 import Image from "next/image";
 import { Feature, getUid } from "ol";
 import { ObjectEvent } from "ol/Object";
-import { FitToFeaturesEvent } from "../../../events";
+import { FitToFeaturesEvent } from "../../../events/FitToFeatures";
 import { FieldType, FeatureStatus, STATUS, ERROR } from "../utils";
 import styles from "./FeatureTable.module.scss";
 import zoom_icon from "../../../../assets/zoom.png";

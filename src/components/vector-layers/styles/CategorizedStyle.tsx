@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { CustomCategorizedStyle, SelectStyle } from "../../../classes";
+import { CustomCategorizedStyle } from "../../../classes";
 import { LayerContext, StyleContext, InteractionContext } from "../../contexts";
 
 
@@ -17,11 +17,10 @@ function CategorizedStyle({
     const layer = useContext(LayerContext);
     const interaction = useContext(InteractionContext);
 
-    let style;
+    const style = new CustomCategorizedStyle({field, visible, collapsed});
     if(interaction){
-        style = interaction.getStyle() as SelectStyle;
+        interaction?.setBaseStyle(style);
     } else {
-        style = new CustomCategorizedStyle({field, visible, collapsed});
         layer?.setBaseStyle(style);
     }
 
