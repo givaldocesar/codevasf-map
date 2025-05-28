@@ -1,1 +1,0 @@
-export const FIELD_REGEX = /\{[\w]+\}/gi;

@@ -1,25 +1,29 @@
-import React, { forwardRef, useRef, useContext, useEffect, useState } from "react";
+import { forwardRef, useContext, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { StaticImageData } from "next/image";
+import classNames from "classnames";
 import Control from "ol/control/Control";
+import { useInnerRef } from "@/hooks";
 import { MapContext } from "../contexts";
 import { CollapseButton } from "../buttons";
 import styles from "./Controls.module.scss";
 
 
-
-const BaseControl = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>&{
+export default forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>&{
     collapsable?: boolean;
-    collapsePositionButton?: 'top_right' | 'top_left';
-    collapseImage?: string | StaticImageData;
+    collapseButtonClassName?: string;
+    collapseIcon?: string | StaticImageData;
+    contentClassName?: string;
 }>(({
-    children, 
-    className="", 
-    collapsable, 
-    collapsePositionButton='top_right', 
-    collapseImage,
+    children,
+    className,
+    collapsable,
+    collapseButtonClassName,
+    collapseIcon,
+    contentClassName,
     ...props
 }, ref) => {
-    const controlRef = useRef<HTMLDivElement>(null);
+    const innerRef = useInnerRef(ref);
+
     const map = useContext(MapContext);
     const [collapsed, setCollapsed] = useState<boolean>(false);
 
@@ -28,40 +32,30 @@ const BaseControl = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEleme
     }, []);
 
     useEffect(() => {
-        if(!controlRef.current){ return }
+        if(!innerRef.current){ return }
 
-        const control = new Control({element: controlRef.current });
-        map?.addControl(control);
-        return () => { map?.removeControl(control) };
+        const control = new Control({element: innerRef.current });
+        map.addControl(control);
+        return () => { map.removeControl(control) };
     }, []);
 
-    if(collapsable){
-        return (
-            <div style={{display: 'none'}}>
-                <div ref={controlRef} className={`${styles.control} ${className}`} { ...props }>
-                    {collapsable &&
-                        <CollapseButton 
-                            className={styles[collapsePositionButton]}
-                            collapsed={collapsed} 
-                            onClick={() => setCollapsed(!collapsed)} 
-                            image={collapseImage}
-                        />
-                    }
-                    <div style={{display: collapsed ? 'none' : 'block'}} ref={ref}>
-                        { children }
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
     return (
-        <div style={{display: 'none'}}>
-            <div ref={controlRef} className={`${styles.control} ${className}`} { ...props }>  
+        <div 
+            ref={innerRef} 
+            className={classNames(styles.control, {[styles.collapsed]: collapsed}, className)} 
+            { ...props }
+        >  
+            {collapsable &&
+                <CollapseButton 
+                    className={collapseButtonClassName}
+                    collapsed={collapsed} 
+                    icon={collapseIcon}
+                    onClick={() => setCollapsed(!collapsed)} 
+                />
+            }
+            <div className={classNames(styles.content, contentClassName)}>
                 { children }
             </div>
         </div>
     );
 });
-
-export default BaseControl;

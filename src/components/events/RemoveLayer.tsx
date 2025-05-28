@@ -1,8 +1,8 @@
-import { useEffect, useCallback, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { MapContext } from "../contexts";
 
 
-class RemoveLayerEvent extends CustomEvent<string> {
+export class RemoveLayerEvent extends CustomEvent<string> {
     static type: string = 'map-remove-layer-event';
 
     constructor(layerTitle: string){
@@ -13,26 +13,23 @@ class RemoveLayerEvent extends CustomEvent<string> {
     }
 }
 
-function RemoveLayer(){
+export default function RemoveLayer(){
     const map = useContext(MapContext);
 
-    const removeLayer = useCallback((evt: RemoveLayerEvent) => {
-        map?.getAllLayers().forEach(layer => {
-            if(layer.get("title") === evt.detail){
-                map.removeLayer(layer);
-            }
-        })
-    }, []);
-
     useEffect(() => {
+        function removeLayer(evt: RemoveLayerEvent){
+            const layers = map.getAllLayers();
+            for(let i = 0; layers.length; i++){
+                if(layers[i].get("title") === evt.detail){
+                    map.removeLayer(layers[i]);
+                    break;
+                }
+            }
+        }
+
         document.addEventListener(RemoveLayerEvent.type, removeLayer as EventListener);
         return () => document.removeEventListener(RemoveLayerEvent.type, removeLayer as EventListener);
     }, []);
     
     return <></>;
-}
-
-export {
-    RemoveLayer,
-    RemoveLayerEvent
 }

@@ -1,7 +1,7 @@
 import { MultiLineString, LineString } from "ol/geom";
 import { getTransform, ProjectionLike } from "ol/proj";
 
-export default function calculateArea(geometry: LineString | MultiLineString, sourceCRS: ProjectionLike, destCRS?: ProjectionLike){
+export default function calculateLength(geometry: LineString | MultiLineString, sourceCRS: ProjectionLike, destCRS?: ProjectionLike){
     let geometryToCalculate = geometry.clone();
     
     if(destCRS){

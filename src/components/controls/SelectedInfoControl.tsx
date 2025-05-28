@@ -3,19 +3,20 @@ import { Feature } from "ol";
 import { SelectEvent } from "ol/interaction/Select";
 import { InteractionContext, LayerContext } from "../contexts";
 import BaseControl from "./BaseControl";
+import icon from "../../assets/information.png";
 
 
 export default function SelectedInfoControl ({
     children,
     collapsable,
-    collapseImage,
-    collapsePositionButton,
+    collapseIcon,
+    collapseButtonClassName,
     factory,
     ...props
 } : React.HTMLAttributes<HTMLDivElement>&{
     collapsable?: boolean;
-    collapseImage?: string;
-    collapsePositionButton?: "top_right" | "top_left";
+    collapseIcon?: string;
+    collapseButtonClassName?: string;
     factory: (features: Feature[]) => React.ReactElement;
 }){
     const layer = useContext(LayerContext);
@@ -32,8 +33,8 @@ export default function SelectedInfoControl ({
         return (
             <BaseControl 
                 collapsable={collapsable}
-                collapseImage={collapseImage}
-                collapsePositionButton={collapsePositionButton}
+                collapseIcon={collapseIcon || icon}
+                collapseButtonClassName={collapseButtonClassName}
                 style={{display: features.length > 0 ? "block" : "none"}}
                 {...props} 
             >

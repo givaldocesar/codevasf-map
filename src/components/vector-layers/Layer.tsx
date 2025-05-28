@@ -8,18 +8,16 @@ import { MapContext, LayerContext } from "../contexts";
 
 const FORMAT = new GeoJSON();
 
-interface LayerProps extends BaseLayerProps {
-    data?: {[property: string]: any} | {[property: string]: any}[];
-    layer?: CustomLayer;
-}
-
 export default function Layer({
     children, 
     data, 
     layer, 
     fit, 
     ...props
-} : LayerProps){
+} : BaseLayerProps & {
+    data?: {[property: string]: any} | {[property: string]: any}[];
+    layer?: CustomLayer;
+}){
     const map = useContext(MapContext);
     const base = useMemo(() => {
         try{            
@@ -27,7 +25,7 @@ export default function Layer({
 
             if(data && data.length > 0 ){
                 features = FORMAT.readFeatures(data, {
-                    featureProjection: map?.getView().getProjection()
+                    featureProjection: map.getView().getProjection()
                 });
             }
 
@@ -43,9 +41,9 @@ export default function Layer({
     }, []);
     
     useEffect(() => {
-        map?.addLayer(base);
-        if(fit) map?.fit(base.getSource()?.getExtent());
-        return () => { map?.removeLayer(base) }
+        map.addLayer(base);
+        if(fit) map.fit(base.getSource()?.getExtent());
+        return () => { map.removeLayer(base) }
     }, []);
     
     return (

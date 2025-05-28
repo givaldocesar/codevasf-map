@@ -8,6 +8,10 @@
     padding: 2px 37.5px 2px 0px;
 }
 
+.hidden { 
+    display: none;
+}
+
 .item {
     padding: 2px 5px;
     display: flex;
@@ -42,9 +46,5 @@
         span {
             font-size: medium;
         }
-    }
-
-    .popup { 
-        font-size: smaller;
     }
 }

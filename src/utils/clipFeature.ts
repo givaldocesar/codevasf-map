@@ -1,6 +1,6 @@
 import { GeoJSON } from "ol/format";
 import { Extent } from "ol/extent";
-import { Geometry } from "ol/geom";
+import { Geometry, Polygon } from "ol/geom";
 import bboxClip from "@turf/bbox-clip";
 import truncate from "@turf/truncate";
 

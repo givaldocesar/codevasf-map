@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { CustomSelect } from "../../../classes";
-import { MapContext, InteractionContext } from "../../../components/contexts";
+import { MapContext, InteractionContext } from "../../contexts";
 
 
 export default function BaseInteraction({
@@ -13,8 +13,8 @@ export default function BaseInteraction({
     const map = useContext(MapContext);
 
     useEffect(() => {
-        map?.addInteraction(interaction);
-        return () => { map?.removeInteraction(interaction) }
+        map.addInteraction(interaction);
+        return () => { map.removeInteraction(interaction) }
     }, []);
     
     return (

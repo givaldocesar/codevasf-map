@@ -1,5 +1,7 @@
 export {
     CustomLayer,
+    CustomSelect,
+    CustomSimpleStyle,
     LayerCache,
     MapContext,
     STATUS,
@@ -7,6 +9,6 @@ export {
     calculateArea,
     calculateLength,
     checkFeaturesIntersect,
-    createRandomLayer,
+    createLayer,
     registerProjections,
 } from "../index.js"

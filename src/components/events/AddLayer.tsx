@@ -1,10 +1,10 @@
-import { useEffect, useCallback, useContext } from "react";
-import { FlatText } from "ol/style/flat";
-import { MapContext } from "../contexts";
+import { useEffect, useContext } from "react";
 import { CustomLayer, CustomSimpleStyle } from "../../classes";
+import { LabelType } from "../../interfaces";
+import { MapContext } from "../contexts";
 
 
-class AddLayerEvent extends CustomEvent<{
+export class AddLayerEvent extends CustomEvent<{
     layer: CustomLayer; 
     mapName: string;
     zoomTo?: boolean;
@@ -31,45 +31,33 @@ class AddLayerEvent extends CustomEvent<{
     }
 }
 
-function AddLayer({label} : {label?: {text?: FlatText; expression: string}}){
+export default function AddLayer({label} : {label?: LabelType}){
     const map = useContext(MapContext);
-
-    if(!map?.get('name')) throw new Error("ADD LAYER: Map name is required. Please set map name.");
-
-    const addLayerToMap = useCallback((evt: AddLayerEvent) => {
-        if(map?.get('name') === evt.detail.mapName){
-            try{ 
-                map?.addLayer(evt.detail.layer);
-            } catch (err){
-                console.error(`MAP ${map.get('name')}: Erro ao adicionar camada ${evt.detail.layer.get("title") || ""} por evento.`)
-            };
-    
-            if(label){
-                const style = evt.detail.layer.getBaseStyle() as CustomSimpleStyle; 
-                style.setText(label.text || {
-                    "text-fill-color": "black",
-                    "text-stroke-color": "white",
-                    "text-stroke-width": 2,
-                    "text-scale": 1.5
-                }, label.expression);
-                evt.detail.layer.dispatchEvent('change-style');
-            }
-            
-            if(evt.detail.zoomTo){
-                evt.detail.layer.getFeaturesExtent().then(extent => map?.fit(extent));
-            }
-        }
-    }, []);
+    if(!map.get('name')) throw new Error("ADD LAYER: Map name is required. Please set map name.");
 
     useEffect(() => {
+        function addLayerToMap(evt: AddLayerEvent){
+            const layer = evt.detail.layer;
+            
+            if(map.get('name') === evt.detail.mapName){
+                try{ map?.addLayer(layer) } 
+                catch (err){
+                    console.error(`MAP ${map.get('name') || ""}: Erro ao adicionar camada ${layer.get("title") || ""} por evento.`)
+                };
+        
+                if(label){
+                    const style = layer.getBaseStyle() as CustomSimpleStyle; 
+                    style.setFeatureLabel(label.expression, label.text);
+                    layer.changed();
+                }
+                
+                if(evt.detail.zoomTo) layer.getFeaturesExtent().then(extent => map.fit(extent));
+            }
+        }
+
         document.addEventListener(AddLayerEvent.type, addLayerToMap as EventListener);
         return () => document.removeEventListener(AddLayerEvent.type, addLayerToMap as EventListener);
     }, []);
     
     return <></>;
-}
-
-export {
-    AddLayer,
-    AddLayerEvent
 }

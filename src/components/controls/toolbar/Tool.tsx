@@ -3,7 +3,7 @@ import styles from "./Toolbar.module.scss";
 
 export default function Tool({
     children,
-    className="",
+    className,
     active,
     ...props
 } : React.ButtonHTMLAttributes<HTMLButtonElement>&{
@@ -11,12 +11,8 @@ export default function Tool({
 }){
     return (
         <button
+            className={classNames(styles.tool, {[styles.active]: active}, className)}
             { ...props } 
-            className={classNames({
-                [styles.tool]: true,
-                [styles.active]: active,
-                [className]: className !== "" ? true : false
-            })}
         >
             { children }
         </button>

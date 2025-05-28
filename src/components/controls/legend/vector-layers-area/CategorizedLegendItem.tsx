@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { CustomLayer, CustomCategorizedStyle, NO_CATEGORY } from "../../../../classes";
-import { LayerStatus } from "../../../../interfaces";
-import { VectorLayerIcon, CollpaseLayerIcon } from "../../../buttons";
+import { CustomLayer, CustomCategorizedStyle } from "../../../../classes";
+import { LayerStatus, Filter, ELSE_CATEGORY } from "../../../../interfaces";
+import { VectorLayerIcon, CollapseLayerIcon } from "../../../buttons";
 import LoadingItem from "./LoadingItem";
 import ErrorItem from "./ErrorItem";
 import styles from "../Legend.module.scss";
@@ -11,7 +11,7 @@ export default function CategorizedLegendItem({layer} : {layer: CustomLayer}){
     const [collapsed, setCollapsed] = useState(style.getCollapsed());
     const [layerStatus, setStatus] = useState<LayerStatus>('loading');
 
-    //@ts-expect-error
+    //@ts-ignore
     layer.on('status-changed', () => setStatus(layer.getStatus()));
 
     //LOADING
@@ -38,9 +38,7 @@ export default function CategorizedLegendItem({layer} : {layer: CustomLayer}){
             let count = 0;
             for(let i = 0; i < elements.length; i++){
                 const item = elements.item(i) as HTMLInputElement;
-                if(item.name !== 'main' && item.checked){
-                    count += 1;
-                }
+                if(item.name !== 'main' && item.checked) count += 1;
             }  
 
             const main = elements.namedItem('main') as HTMLInputElement;
@@ -50,7 +48,7 @@ export default function CategorizedLegendItem({layer} : {layer: CustomLayer}){
                 case 0:
                     main.checked = false;
                     break ;
-                case style.getStyles().length:
+                case style.getCategories().length:
                     main.checked = true;
                     break ;
                 default:
@@ -58,22 +56,35 @@ export default function CategorizedLegendItem({layer} : {layer: CustomLayer}){
             }
         }   
 
-        layer.dispatchEvent('change-style');
+        layer.changed();
     }
 
     async function zoom(value?: string){
         const map = layer.get('map');
-        let filter;
+        let filters : Filter[] | undefined;
 
-        if(value){ 
-            filter = {
-                field: style.getField(), 
-                value: value === NO_CATEGORY ? undefined : value
-            } 
+        switch(value){
+            case undefined:
+                map.fit(await layer.getFeaturesExtent());
+                return ;
+            case ELSE_CATEGORY:
+                filters = style.getCategories().map(category=> ({
+                    type: 'text',
+                    value: category.getValue(),
+                    field: style.getField()
+                }));    
+
+                map.fit(await layer.getFeaturesExtent(filters, true));
+                return ;
+            default:
+                filters  = [{
+                    type: 'text',
+                    field: style.getField(), 
+                    value: value
+                }];
+
+                map.fit(await layer.getFeaturesExtent(filters));
         }
-
-        map.fit(await layer.getFeaturesExtent(filter));
-  
     }
 
     const visible = style.getDefaultVisible();
@@ -82,17 +93,19 @@ export default function CategorizedLegendItem({layer} : {layer: CustomLayer}){
         <form className={styles.categorized_item} style={{order: layer.get('order')}}>
             <div className={styles.item}>
                 <input type="checkbox" defaultChecked={visible} onChange={changeVisibility} name="main"/>
-                <CollpaseLayerIcon collpased={collapsed} onClick={() => setCollapsed(!collapsed)}/>
+                <CollapseLayerIcon collpased={collapsed} onClick={() => setCollapsed(!collapsed)}/>
                 <label onClick={() => zoom()}>{layer.get('title')}</label>
             </div>
             <div className={styles.categories} style={{maxHeight: collapsed ? '0px' : '500px'}}>
                 { 
-                    style.getStyles().map(item => {
+                    style.getCategories().map(item => {
+                        const value = item.getValue();
+                        
                         return (
-                            <div className={styles.item} key={item.getValue()}>
-                                <input type="checkbox" defaultChecked={visible} onChange={changeVisibility} name={item.getValue()}/>
+                            <div className={styles.item} key={value}>
+                                <input type="checkbox" defaultChecked={visible} onChange={changeVisibility} name={value}/>
                                 <VectorLayerIcon geometry={item.getGeometry()} style={item}/>
-                                <label onClick={() => zoom(item.getValue())} id={item.getValue()}>{item.getLabel() || item.getValue() }</label>
+                                <label onClick={() => zoom(value)} id={value}>{item.getLegendLabel() || value }</label>
                             </div>
                         );
                     })

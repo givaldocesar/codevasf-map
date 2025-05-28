@@ -1,0 +1,40 @@
+@use "../../../styles/breakpoints";
+@use "../../../styles/colors";
+@use "./toolbar/Toolbar.module.scss";
+
+.area {
+    padding: 5px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 5px;
+}
+
+.title {
+    margin:0;
+    font-weight: bold;
+    font-size: large;
+    border-bottom: 2px solid black;
+}
+
+.table_loader {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .text_loader {
+        font-size: large;
+        color: colors.$std;
+    }
+}
+
+@media (min-width: breakpoints.$break-large){
+    .title {
+        font-size: x-large;
+    }
+}

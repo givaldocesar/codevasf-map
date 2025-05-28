@@ -2,6 +2,7 @@ export {
     SimpleStyle,
     CategorizedStyle,
     Category,
+    ElseCategory,
     Circle,
     FeatureLabel,
     Fill,

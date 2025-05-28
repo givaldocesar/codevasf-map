@@ -1,13 +1,13 @@
 import React, { useContext, useMemo } from "react";
 import { pointerMove } from "ol/events/condition";
-import { CustomLayer, CustomMap, CustomSelect } from "../../../classes";
-import { MapContext, LayerContext } from "../../../components/contexts";
+import { CustomSelect } from "../../../classes";
+import { MapContext, LayerContext } from "../../contexts";
 import BaseInteraction from "./BaseInteraction";
 
 
 export default function Hover({children} : {children?: React.ReactNode}){
-    const map = useContext(MapContext) as CustomMap;
-    const layer = useContext(LayerContext) as CustomLayer;
+    const map = useContext(MapContext);
+    const layer = useContext(LayerContext);
     
     const hover = useMemo(()=> {
         const interaction = new CustomSelect({

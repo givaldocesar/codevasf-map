@@ -1,18 +1,19 @@
+import classNames from "classnames";
 import BaseIcon from "./BaseIcon";
 import styles from "./Button.module.scss";
 
 
 export default function CollapseLayerIcon({
-    className="",
-    onClick,
-    collpased=false
+    className,
+    collpased=false,
+    ...props
 } : React.HTMLAttributes<HTMLOrSVGElement>&{
     collpased?: boolean;
 }){
     return (
         <BaseIcon
-            className={`${styles.collapse_icon} ${className}`} 
-            onClick={onClick}
+            className={classNames(styles.collapse_icon, className)} 
+            { ...props }
         >
             <title>{ collpased ? "Mostrar" : "Ocultar" }</title>
             {collpased ?

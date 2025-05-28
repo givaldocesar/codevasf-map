@@ -1,4 +1,4 @@
-import { CustomLayer } from "../../../../classes";
+import { CustomLayer } from "@/classes";
 import { ErrorIcon } from "../../../buttons";
 import styles from "../Legend.module.scss";
 

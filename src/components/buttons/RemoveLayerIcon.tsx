@@ -1,15 +1,16 @@
+import classNames from "classnames";
 import BaseIcon from "./BaseIcon";
 import styles from "./Button.module.scss";
 
 export default function RemoveLayerIcon({
-    className="",
+    className,
     title="Remover camada",
-    onClick
+    ...props
 } : React.HTMLAttributes<HTMLOrSVGElement>){
     return (
         <BaseIcon 
-            className={`${styles.remove_icon} ${className}`} 
-            onClick={onClick}
+            className={classNames(styles.remove_icon, className)} 
+            {...props}
         >
             <title>{title}</title>
             <line x1={10} y1={10} x2={40} y2={40} />

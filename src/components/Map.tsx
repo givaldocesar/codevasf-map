@@ -1,69 +1,64 @@
-import React, { useEffect, useMemo, useState, useRef } from "react";
+import React, { forwardRef, useEffect, useMemo } from "react";
+import classNames from "classnames";
 import dynamic from "next/dynamic";
 import { CustomMap } from "../classes";
-import { CRS } from "../interfaces";
-import { registerProjections } from "../utils";
-import { TextLoader } from "./loaders";
+import { useInnerRef } from "../hooks";
 import { MapContext } from "./contexts";
+import { TextLoader } from "./loaders";
 import styles from "./Components.module.scss";
 
-registerProjections();
 
-function Map({
-    children,
-    className="",
-    projection,
-    center,
-    zoom,
-    minZoom,
-    maxZoom,
-    name
-}: {
-    children?:      React.ReactNode; 
-    className?:     string; 
-    projection?:    CRS;
+type MapOptions = {
     center?:        [number, number];
-    zoom?:          number;
+    projection?:    string;
     minZoom?:       number;
     maxZoom?:       number;
     name?:          string;
-}){
-    const ref = useRef<HTMLDivElement>(null);
-    const [popup, setPopup] = useState<React.ReactNode>(null);
-
-    const map = useMemo(() => new CustomMap({
-        projection: projection,
-        center: center,
-        zoom: zoom,
-        minZoom: minZoom,
-        maxZoom: maxZoom
-    }), []);
-
-    map.set('name', name);
-
-    useEffect(() => {
-        map.setTarget(ref?.current || undefined);
-        return () => map.setTarget(undefined);
-    }, [ref.current]);
-
-    useEffect(() => {
-        ref.current?.addEventListener('show-popup', ((evt: CustomEvent) => {
-            evt.stopPropagation();
-            setPopup(evt.detail);
-        }) as EventListener);
-    });
-
-    return (
-        <div className={`${styles.map} ${className}`} ref={ref}>
-            <MapContext.Provider value={map}>
-                { children }
-            </MapContext.Provider>
-            { popup }
-        </div>
-    );
+    zoom?:          number;
 }
 
+const Map = forwardRef<HTMLDivElement, MapOptions&React.HTMLAttributes<HTMLDivElement>>(({
+    children,
+    className,
+    center,
+    projection,
+    minZoom,
+    maxZoom,
+    name,
+    zoom,
+    ...props
+}, ref) => {
+    const innerRef = useInnerRef(ref);
+
+    const map = useMemo(() => {
+        const baseMap = new CustomMap({
+            projection: projection,
+            center: center,
+            zoom: zoom,
+            minZoom: minZoom,
+            maxZoom: maxZoom
+        });
+
+        baseMap.set('name', name);
+        
+        return baseMap;
+    }, []);
+
+    useEffect(() => {
+        if(innerRef.current) map.setTarget(innerRef.current);
+        return () => map.setTarget(undefined);
+    }, []);
+    
+    return (
+        <MapContext.Provider value={map}>
+            <div className={classNames(styles.map, className)} ref={innerRef} {...props}>
+                { children }
+            </div>
+        </MapContext.Provider>
+    );
+});
+
 export default dynamic( () => Promise.resolve(Map), {
-    loading: () => <TextLoader className={`${styles.loading_map} ${styles.map}`}>Carregando</TextLoader>,
+    loading: () => <TextLoader className={classNames(styles.loading_map, styles.map)}>Carregando</TextLoader>,
     ssr: false
 });

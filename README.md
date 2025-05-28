@@ -26,11 +26,11 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
         --Legend:                                                   Adiciona legenda ao mapa, onde é possivel alterar o estado das camadas.
             -->collapsable              <boolean>                   Habilita o botão de colapsar.
             -->collapseImage            <string>                    Caminho para a image de fundo do botão de colapsar. 
-            -->collapsePositionButton   <'top_right' | 'top_left'>  Posição do botão para colapsar.
+            -->collapseButtonClassName  <string>                    Posição do botão para colapsar.
         --DragAndDrop:                                              Adiciona a interação de DragAndDrop arquivos KML's ao mapa.
             -->collapsable              <boolean>                   Habilita o botão de colapsar.
             -->collapseImage            <string>                    Caminho para a image de fundo do botão de colapsar. 
-            -->collapsePositionButton   <'top_right' | 'top_left'>  Posição do botão para colapsar.
+            -->collapseButtonClassName  <string>                    Posição do botão para colapsar.
             -->showControl              <boolean>                   Exibe/Oculta o controle.
             -->showFeaturesProperties   <boolean>                   Habilita um popup que mostra as propriedades da feição, quando o mouse repousa sobre esta.
         --Toolbar:                                                  Adiciona uma toolbar ao mapa. 'Tools' podem ser filhos deste componente.
@@ -52,7 +52,7 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
             -->mapName:     <string>        ID do mapa que a camada será adicionada.
             -->zoomTo?:     <boolean>       Ao adicionar, dá zoom na camada adicionadas.
         
-        --FitToFeatures:                    Adiciona um 'listener' ao mapa, que ao ouvir um evento do tipo 'FitToFeatureEvent' executa zoom nas feições fornecidas.
+        --FitToFeatures:                    Adiciona um 'listener' ao mapa, que ao ouvir um evento do tipo 'FitToFeatureEvent' executa zoom nas feições     fornecidas.
         --FitToFeaturesEvent:               Evento que quando disparado faz com que o mapa centre nas feições fornecidas, caso este possua o evento
                                             'FitToFeatures'.
             -->features:    <Feature[]>     Feições a serem exibidas.  
@@ -99,22 +99,27 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
                                  'LineString' |         Não altera a exibição, apenas utilizada pra definir o ícone que aparecerá na legenda.
                                  'Polygon' | 
                                  undefined>
-            ╚> AttributesTable:                         Exibe um popup com informações sobre as feições. É possível dar zoom em feições específicas, através de
-                                                        filtros e botões.
-                -->popup:           <Window>            Se fornecido, vincula todos os eventos a esta janela.
-                -->mapName:         <string>            Requerido para manipulação de eventos de interação entre a tabela e o mapa.
-                -->layer:           <CustomLayer>       Camada do map que terá as informações exibidas.
-                -->fields:          <FieldType[]>       Lista de campos que serão exibidos como colunas. Há várias opções de customização.
-                                                        Caso não seja fornecido, todos os campos existentes serão exibidos.
+            ╚> AttributesTable:                                 Exibe um popup com informações sobre as feições. É possível dar zoom em feições específicas, 
+                                                                através de filtros e botões.
+                -->popup:           <Window>                    Se fornecido, vincula todos os eventos a esta janela.
+                -->mapName:         <string>                    Requerido para manipulação de eventos de interação entre a tabela e o mapa.
+                -->layer:           <CustomLayer>               Camada do map que terá as informações exibidas.
+                -->fields:          <FieldType[]>               Lista de campos que serão exibidos como colunas. Há várias opções de customização.
+                                                                Caso não seja fornecido, todos os campos existentes serão exibidos.
+                
                 -->options:
-                    -allowDelete:       <boolean>       Permite apagar feições.      
-                    -allowDownload:     <boolean>       Permite baixar a camada como um arquivo KML.
-                    -api:                               Permite usar uma api.
-                        -->url:         <string>        URL que permite salvar as edições para o banco de dados na API da CODEVASF. 
-                        -->token:       <string>        Token de acesso do usuário, caso necessário. 
-                    -filters            <boolean>       Adiciona ferramentas de filtro a tabela.  
-                    -header:            <boolean>       Exibe ou não o cabeçãrio da tabela.
-                    -multipleEdit:      <boolean>       Permite alterar atributos de multiplas feições.    
+                    -allowDelete:         <boolean>                 Permite apagar feições.      
+                    -allowDownload:       <boolean>                 Permite baixar a camada como um arquivo KML.
+                    -rowFactory:          <(feature) => ReactNode>  Função que recebe uma feição e retorna o conteúdo interno de uma linha da tabela.
+                    -extraRowTools:                                 Permite adicionar ferramentas além de deletar e mostrar feições.
+                        -->toolsClassName <string>                  ClassName para a área de ferramentas.
+                        -->factory        <(feature) => ReactNode>  Fabrica que gera as ferramentas extras.
+                    -api:                                           Permite usar uma api.
+                        -->url:           <string>                  URL que permite salvar as edições para o banco de dados na API da CODEVASF. 
+                        -->token:         <string>                  Token de acesso do usuário, caso necessário. 
+                    -filters              <boolean>                 Adiciona ferramentas de filtro a tabela.  
+                    -header:              <boolean>                 Exibe ou não o cabeçãrio da tabela.
+                    -multipleEdit:        <boolean>                 Permite alterar atributos de multiplas feições.    
                     
 
             ╚> style:
@@ -148,8 +153,9 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
                                         'Polygon' | 
                                         undefined>                                              
                         --->value:                          Valor de filtro das feições.
-                                                            O filtro utiliza a propriedade "field" de "CategorizedStyle".
-                        --->value = 'NO_CATEGORY'           Exibe e estiliza as feições que não foram categorizadas.
+                                                            O filtro utiliza a propriedade "field" de "CategorizedStyle".          
+                    --AllOtherValues:                       Exibe e estiliza as feições que não foram categorizadas. Mesmas opções que 'Category', com exceção
+                                                            de 'value'   
 
                         OBS: 'Stroke', 'Fill' e 'FeatureLabel' também podem ser utilizados como filhossde 'Category'.
             
@@ -161,7 +167,7 @@ Componentes React + OpenLayers para desenvolvimento de projetos WEB da CODEVASF.
                     --SelectedInfoControl:                                      Exibe um controle com conteúdo gerado pela 'factory'.
                         -->collapsable              <boolean>                   Habilita o botão de colapsar.
                         -->collapseImage            <string>                    Caminho para a image de fundo do botão de colapsar. 
-                        -->collapsePositionButton   <'top_right' | 'top_left'>  Posição do botão para colapsar.
+                        -->collapseButtonClassName   <string>  Posição do botão para colapsar.
                         -->factory:                 (<Feature>) => ReactNode    Função que recebe uma feição e retorna o contéudo do 'control'.
                     --SelectControl:                    Adiciona uma barra com um "select" para a interação pai deste elemento.
                         --->fieldValue:     <string>    Campo da feição o qual as opçoes do "select" serão prenchidas, as opções terão todos

@@ -1,5 +1,6 @@
 import { useMemo, useContext, useEffect } from "react";
 import { ScaleLine } from "ol/control";
+import classNames from "classnames";
 import { MapContext } from "../contexts";
 
 
@@ -20,14 +21,14 @@ export default function Scale({
     const map = useContext(MapContext);
     const scale = useMemo(() => {
         return new ScaleLine({
-            className: `${className} ${props.bar ? 'ol-scale-bar' : 'ol-scale-line'}`,
+            className: classNames(className, {'ol-scale-bar': props.bar, 'ol-scale-line': !props.bar}),
             ...props
         });
     }, [props]);
 
     useEffect(() => {
-        map?.addControl(scale);
-        return () => { map?.removeControl(scale) }
+        map.addControl(scale);
+        return () => { map.removeControl(scale) }
     }, [map, scale]);
     
     return <></>;

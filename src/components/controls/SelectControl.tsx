@@ -2,22 +2,14 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import classNames from "classnames";
 import { Feature } from "ol";
 import { SelectEvent } from "ol/interaction/Select";
-import { LayerStatus } from "../../interfaces";
 import { getFeatureLabel } from "../../utils";
+import { LayerStatus } from "../../interfaces";
+import { ArrowButton } from "../buttons";
+import { FormSelect } from "../popups/form";
 import { LayerContext, InteractionContext } from "../contexts";
 import BaseControl from "./BaseControl";
-import { ArrowButton } from "../buttons";
-import { Select } from "../pop-ups/form";
 import styles from "./Controls.module.scss";
-
-
-interface SelectedControlProps extends React.HTMLAttributes<HTMLDivElement> {
-    fieldValue: string;
-    expression?: string;
-    label?: string; 
-    labelClassName?: string;
-    collapsable?: boolean;
-}
+ 
 
 export default function SelectControl({
     children,
@@ -28,7 +20,13 @@ export default function SelectControl({
     labelClassName,
     collapsable=true,
     ...props
-} : SelectedControlProps){
+} : React.HTMLAttributes<HTMLDivElement> & {
+    fieldValue: string;
+    expression?: string;
+    label?: string; 
+    labelClassName?: string;
+    collapsable?: boolean;
+}){
 
     const ref = useRef<HTMLSelectElement>(null);
     const layer = useContext(LayerContext);
@@ -60,7 +58,7 @@ export default function SelectControl({
 
     useEffect(() => {
         async function getValues() {
-            const features = layer?.getSource()?.getFeatures();
+            const features = layer.getSource()?.getFeatures();
             const data = new Map<string, {value: string, text?: string}>();
             const options_: React.ReactElement[]  = [];
             
@@ -78,13 +76,10 @@ export default function SelectControl({
                 return 0
             }).forEach(optionData => {
                 options_.push(
-                    <option 
-                        value={optionData.value} 
-                        key={optionData.value}
-                    >
+                    <option value={optionData.value} key={optionData.value}>
                         {optionData.text || optionData.value}
                     </option>
-                )
+                );
             });
             
             setOptions(options_);
@@ -99,7 +94,7 @@ export default function SelectControl({
         let features: Feature[] = []
 
         if(evt.target.value !== "NO_ONE"){
-            features = (await layer?.filterFeatures([{field: fieldValue, value: evt.target.value }])) || [];
+            features = (await layer.filterFeatures([{type: 'text', field: fieldValue, value: evt.target.value }])) || [];
         }
 
         interaction?.setSelected(features);
@@ -107,29 +102,24 @@ export default function SelectControl({
 
     return (
         <BaseControl 
-            className={classNames({
-                [styles.select_control]: true,
-                [styles.select_hidden]: collapsed,
-                [className]: className !== '' ? true : false
-            })}
+            className={classNames(className)}
+            contentClassName={styles.select_control}
+            collapsable={false}
             {...props}
         >
-            <div className={styles.select}>
+            <div className={classNames(styles.select, {[styles.select_collapsed] : collapsed})}>
                 <span className={labelClassName}>{label}</span>
-                <Select onChange={selected} ref={ref}>
+                <FormSelect onChange={selected} ref={ref}>
                     <option value="NO_ONE">Nenhum selecionado</option>
                     { options }
-                </Select>
+                </FormSelect>
                 { children }
             </div>
             { collapsable && 
                 <ArrowButton 
+                    className={classNames(styles.select_button, {[styles.select_button_collapsed]: collapsed})}
                     title= {collapsed ? "Expandir" : "Ocultar"}
                     onClick={() => setCollapsed(!collapsed)}
-                    style={{
-                        height: '28px',
-                        rotate: collapsed ? "270deg" : "90deg"
-                    }}
                 /> 
             }
         </BaseControl>

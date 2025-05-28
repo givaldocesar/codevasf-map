@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./Loaders.module.scss";
 
-const Loader: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+export default function Loader({
     children,
     className
-}) => {
+} : React.HTMLAttributes<HTMLDivElement>){
     return (
         <div className={className}>
             <p className={styles.pulse}>
@@ -12,7 +12,5 @@ const Loader: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
                 <span className={styles.dots} />
             </p>
         </div>
-    )
+    );
 }
-
-export default Loader;

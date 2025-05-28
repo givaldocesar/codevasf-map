@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { FlatIcon } from "ol/style/flat";
 import { CustomSimpleStyle } from "../../../classes";
+import { convertFlatIcon } from "../../../utils";
 import { LayerContext, StyleContext } from "../../contexts";
 
 
@@ -9,10 +10,13 @@ export default function Icon(props: FlatIcon){
     const style = useContext(StyleContext);
 
     if(style instanceof CustomSimpleStyle){
-        style.setImage(props);
-        layer?.dispatchEvent('change-style');
+        const icon = convertFlatIcon(props);
+        if(icon){
+            style.setImage(icon);
+            layer.changed();
+        }
     } else {
-        console.error(`CAMADA ${layer?.get("title")}: invalid style provided for Icon.`);
+        throw new Error(`CAMADA ${layer?.get("title")}: invalid style provided for Icon.`);
     }
    
     return <></>;

@@ -1,19 +1,19 @@
+import classNames from "classnames";
 import styles from "./Button.module.scss";
 
-const BaseIcon: React.FC<React.HTMLAttributes<HTMLOrSVGElement>> = ({
+
+export default function BaseIcon({
     children,
-    onClick,
-    className
-}) => {
+    className,
+    ...props
+} : React.HTMLAttributes<HTMLOrSVGElement>){
     return (
         <svg 
-            className={`${styles.layer_icon} ${className}`} 
+            className={classNames(styles.layer_icon, className)} 
             viewBox="0 0 50 50" 
-            onClick={onClick}
+            {...props}
         >
             { children }
         </svg>
     );
 }
-
-export default BaseIcon;

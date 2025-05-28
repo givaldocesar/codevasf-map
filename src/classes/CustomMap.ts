@@ -1,8 +1,12 @@
-import { Map as OLMap, View } from "ol";
-import { Extent, isEmpty } from "ol/extent";
+import { Map, View } from "ol";
 import { defaults } from "ol/interaction/defaults";
+import { Extent, isEmpty } from "ol/extent";
+import Layer from "ol/layer/Layer";
+import { registerProjections } from "../utils";
 
-export default class CustomMap extends OLMap {
+registerProjections();
+
+export default class CustomMap extends Map {
     constructor({
         projection='EPSG:4674',
         center=[0,0],
@@ -27,18 +31,16 @@ export default class CustomMap extends OLMap {
         });
     }
 
-    getLayerByTitle(layerTitle: string){
+    getLayerByTitle(title: string) : Layer | null {
         const layers = this.getAllLayers();
         for(let i = 0; i < layers.length; i++){
-            if(layers[i].get("title") === layerTitle){
-                return layers[i];
-            }
+            if(layers[i].get("title") === title) return layers[i];
         }
 
         return null;
     }
 
-    fit(extent?: Extent | null, maxZoom?: number){
+    fit(extent: Extent | undefined | null, maxZoom?: number) : void {
         if(extent && !isEmpty(extent)){
             this.getView().fit(extent, {
                 padding: [50, 50, 50, 50],

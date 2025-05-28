@@ -1,5 +1,6 @@
 import { useContext, useState, useMemo, useEffect } from "react";
 import Image, { StaticImageData } from "next/image";
+import classNames from "classnames";
 import TileLayer from "ol/layer/Tile";
 import { Google, XYZ } from "ol/source";
 import { MapContext } from "../contexts";
@@ -11,16 +12,18 @@ import google_white from "../../assets/google_white.png";
 
 class CustomGoogle extends Google {
     constructor({
+        apiKey,
         mapType,
         layerTypes,
         image
     }: {
-        mapType?: 'hybrid' | 'roadmap' | 'satellite' | 'terrain',
-        layerTypes?: string[],
-        image: StaticImageData
+        apiKey: string;
+        mapType?: 'hybrid' | 'roadmap' | 'satellite' | 'terrain';
+        layerTypes?: string[];
+        image: StaticImageData;
     }){
         super({
-            key: process.env.NEXT_PUBLIC_API_KEY || process.env.API_KEY || '',
+            key: apiKey,
             mapType: mapType,
             layerTypes: layerTypes,
             scale: 'scaleFactor2x',
@@ -34,16 +37,20 @@ class CustomGoogle extends Google {
 }
 
 export default function GoogleLayer({
+    apiKey,
     standard=false, 
     order, 
     zIndex, 
     mapType='satellite'
 }: {
-    standard?: boolean,
-    order?: number,
-    zIndex?: number,
+    apiKey: string;
+    standard?: boolean;
+    order?: number;
+    zIndex?: number;
     mapType?: 'hybrid' | 'roadmap' | 'satellite' | 'terrain'
 }){
+    if(!apiKey) throw new Error("GOOGLE LAYER: Not api key.");
+
     const map = useContext(MapContext);
     const [showLogo, setShow] = useState(standard);
     
@@ -80,6 +87,7 @@ export default function GoogleLayer({
                 case 'hybrid':
                     title = 'Google Hybrid';
                     source = new CustomGoogle({
+                        apiKey: apiKey,
                         mapType: 'satellite',
                         layerTypes: ['layerRoadmap'],
                         image: google_white
@@ -88,6 +96,7 @@ export default function GoogleLayer({
                 case 'roadmap':
                     title = 'Google Maps';
                     source = new CustomGoogle({
+                        apiKey: apiKey,
                         mapType: mapType,
                         image: google
                     });
@@ -95,6 +104,7 @@ export default function GoogleLayer({
                 case "satellite":
                     title = 'Google Satellite';
                     source = new CustomGoogle({
+                        apiKey: apiKey,
                         mapType: mapType,
                         image: google_white
                     });
@@ -102,6 +112,7 @@ export default function GoogleLayer({
                 case "terrain":
                     title = 'Google Terrain';
                     source = new CustomGoogle({
+                        apiKey: apiKey,
                         mapType: mapType,
                         layerTypes: ['layerRoadmap'],
                         image: google
@@ -123,18 +134,20 @@ export default function GoogleLayer({
             order: order,
         });
 
-        layer.on("change:visible", (evt) => setShow(layer.getVisible()));
+        layer.on("change:visible", () => setShow(layer.getVisible()));
 
         return layer;
     }, []);
 
     useEffect(() => {
-        map?.addLayer(layer);
+        map.addLayer(layer);
         return () => { map?.removeLayer(layer) }
     }, [map, layer]);
     
     return (
-        <BaseControl className={`ol-unselectable ${styles.google_logo}`} style={{display: showLogo ? 'block' : 'none'}}>
+        <BaseControl 
+            className={classNames('ol-unselectable', styles.google_logo, {[styles.hidden]: !showLogo})}
+        >
             <Image 
                 src={layer.getSource()?.get("image")}
                 width={119}

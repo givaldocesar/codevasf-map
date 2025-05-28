@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { CustomLayer } from "../../../../classes";
+import { CustomLayer } from "@/classes";
 import { LoadingIcon } from "../../../buttons";
 import styles from "../Legend.module.scss";
 
 export default function LoadingItem({layer}:{layer: CustomLayer}){
     const [progress, setProgress] = useState<number>(0);
 
-    //@ts-expect-error
+    //@ts-ignore
     layer.on('progress-changed', () => setProgress(layer.getLoadingProgress()));
     
     return (

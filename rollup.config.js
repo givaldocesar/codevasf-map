@@ -17,7 +17,7 @@ function types(input, output){
 
 export default [
     {
-        input: "src/components/index.ts",
+        input: "./src/index.ts",
         output: [
             {
                 file: `dist/index.js`,
@@ -38,5 +38,5 @@ export default [
             }) 
         ]
     },
-    types("src/components/index.ts", "dist/index.d.ts"),
+    types("./src/index.ts", "dist/index.d.ts"),
 ]

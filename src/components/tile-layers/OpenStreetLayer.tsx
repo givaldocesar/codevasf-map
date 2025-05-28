@@ -32,8 +32,8 @@ export default function OpenStreetLayer({
     }, [standard, order, zIndex]);
 
     useEffect(()=> {
-        map?.addLayer(layer); 
-        return () => { map?.removeLayer(layer) }
+        map.addLayer(layer); 
+        return () => { map.removeLayer(layer) }
     }, [map, layer]);
     
     return <></>

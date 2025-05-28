@@ -1,4 +1,4 @@
-import { CustomLayer, CustomCategorizedStyle } from "../../../../classes";
+import { CustomLayer, CustomCategorizedStyle } from "@/classes";
 import CategorizedLegendItem from "./CategorizedLegendItem";
 import SimpleLegendItem from "./SimpleLegendItem";
 

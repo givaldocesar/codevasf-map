@@ -1,16 +1,20 @@
 import { useState } from "react";
-import { CustomLayer, CustomSimpleStyle } from "../../../../classes";
-import { LayerStatus } from "../../../../interfaces";
+import { CustomLayer, CustomSimpleStyle } from "@/classes";
+import { LayerStatus } from "@/interfaces";
 import { VectorLayerIcon } from "../../../buttons";
 import LoadingItem from "./LoadingItem";
 import ErrorItem from "./ErrorItem";
 import styles from "../Legend.module.scss";
 
 
-export default function SimpleLegendItem({layer} : {layer: CustomLayer}){
+export default function SimpleLegendItem({
+    layer
+} : {
+    layer: CustomLayer
+}){
     const [layerStatus, setStatus] = useState<LayerStatus>('loading');
 
-    //@ts-expect-error
+    //@ts-ignore
     layer.on('status-changed', () => setStatus(layer.getStatus()));
 
     //LOADING

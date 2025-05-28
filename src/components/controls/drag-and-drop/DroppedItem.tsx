@@ -1,9 +1,11 @@
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { useForceUpdate } from "@/hooks";
 import { CustomLayer, CustomSimpleStyle } from "../../../classes";
-import { MapContext } from "../../../components/contexts";
-import { RemoveLayerIcon, VectorLayerIcon } from "../../../components/buttons";
-import { ChangeLayerStylePopup } from "../../../components/pop-ups";
-import { useForceUpdate } from "../../../utils";
+import { MapContext } from "../../contexts";
+import { RemoveLayerIcon, VectorLayerIcon } from "../../buttons";
+import { ChangeLayerStylePopup } from "../../popups";
+import RemoveDroppedLayerEvent from "./RemoveDroppedLayerEvent";
 import styles from "./DragAndDrop.module.scss";
 
 
@@ -17,43 +19,46 @@ const DroppedItem: React.FC<{
     const [name, _] = id.split('_');
     const forceUpdate = useForceUpdate();
     const map = useContext(MapContext);
+    const [popup, setPopup] = useState<React.ReactNode>(null);
 
     useEffect(() => {
-        //@ts-ignore
-        layer.on("change-style", forceUpdate);
-        //@ts-ignore
-        return () => { layer.un("change-style", forceUpdate) }
+        layer.on("change", forceUpdate);
+        return () => { layer.un("change", forceUpdate) }
     }, []);
 
-    function zoom(){    
-        map?.fit(layer.getSource()?.getExtent());
-    }
-
+    
     function changeStyle(evt:React.MouseEvent<HTMLOrSVGElement>){
         evt.stopPropagation();
-        evt.target.dispatchEvent(new CustomEvent("show-popup", {
-            detail: <ChangeLayerStylePopup layer={layer} />,
-            bubbles: true
-        }))
+        setPopup(
+            createPortal(
+                <ChangeLayerStylePopup 
+                    layer={layer} 
+                    close={() => setPopup(null)}
+                />, 
+                document.body
+            )
+        );
     }
 
     function remove(evt:React.MouseEvent<HTMLOrSVGElement>){
-        evt.target.dispatchEvent(new CustomEvent('remove-layer', { 
-            detail: id,
-            bubbles: true
-        }));
+        evt.target.dispatchEvent(new RemoveDroppedLayerEvent(id));
     }
 
+    function zoom(){ map.fit(layer.getSource()?.getExtent()) }
+
     return (
-        <div className={styles.item}>
-            <VectorLayerIcon 
-                geometry={layer.getGeometry()} 
-                style={layer.getBaseStyle() as CustomSimpleStyle}
-                onClick={changeStyle}
-            />
-            <span onClick={zoom}>{ name }</span>
-            <RemoveLayerIcon onClick={remove}/>
-        </div>
+        <>
+            <div className={styles.item}>
+                <VectorLayerIcon 
+                    geometry={layer.getGeometry()} 
+                    style={layer.getBaseStyle() as CustomSimpleStyle}
+                    onClick={changeStyle}
+                />
+                <span onClick={zoom}>{ name }</span>
+                <RemoveLayerIcon onClick={remove}/>
+            </div>
+            { popup }
+        </>
     );
 }
 

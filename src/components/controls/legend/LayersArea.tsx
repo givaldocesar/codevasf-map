@@ -4,7 +4,11 @@ import { ArrowButton } from "../../buttons";
 import styles from "./Legend.module.scss";
 
 
-const LayersArea = forwardRef<HTMLDivElement, {children?: React.ReactNode; title?: string;hide?: boolean;}>(({children, title, hide=false}, ref) => {
+export default forwardRef<HTMLDivElement, {children?: React.ReactNode; title?: string;hide?: boolean;}>(({
+    children, 
+    title, 
+    hide=false
+}, ref) => {
     const [_hide, setHide] = useState<boolean>(hide);
 
     return (
@@ -29,5 +33,3 @@ const LayersArea = forwardRef<HTMLDivElement, {children?: React.ReactNode; title
         </div>
     );
 });
-
-export default LayersArea;

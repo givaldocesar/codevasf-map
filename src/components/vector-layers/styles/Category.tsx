@@ -1,17 +1,18 @@
 import React, { useContext } from "react";
-import { CustomCategorizedStyle, CategoryStyle } from "../../../classes";
-import { LayerContext, StyleContext } from "../../contexts";
+import { CustomCategorizedStyle, CustomCategoryStyle } from "../../../classes";
 import { Geometries } from "../../../interfaces";
+import { LayerContext, StyleContext } from "../../contexts";
+
 
 function Category({
     children, 
-    label, 
+    legendLabel, 
     value, 
     geometry, 
     visible
 }: {
     children?: React.ReactNode; 
-    label?: string;
+    legendLabel?: string;
     value: string;
     geometry?: Geometries;
     zIndex?: number;
@@ -19,11 +20,11 @@ function Category({
 }){
     const layer = useContext(LayerContext);
     const parent = useContext(StyleContext) as CustomCategorizedStyle;
-    const style = new CategoryStyle({
-        geometry: geometry || layer?.getGeometry(),
+    const style = new CustomCategoryStyle({
+        geometry: geometry || layer.getGeometry(),
         visible: visible || parent.getDefaultVisible(),
         value, 
-        label,
+        legendLabel,
     });
 
     if(!parent){

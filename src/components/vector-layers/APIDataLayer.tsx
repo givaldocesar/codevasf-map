@@ -3,19 +3,11 @@ import { CustomLayer, LayerCache } from "../../classes";
 import { BaseLayerProps } from "../../interfaces";
 import { MapContext } from "../contexts";
 import Layer from "./Layer";
-import { processAPIData } from "./utils";
+import { processAPIData } from "./vector-layer-utils";
 
 const PROMISES_LIMIT = 30;
 
-interface APIDataLayerProps extends BaseLayerProps {
-   apiURL: string;
-   database: string;
-   urlInit?: RequestInit;
-   groupField: string;
-   noCache?: boolean;
-}
-
-function APIDataLayer({
+export default function APIDataLayer({
     children,
     apiURL, 
     database, 
@@ -24,9 +16,15 @@ function APIDataLayer({
     fit, 
     noCache,
     ...props
-} : APIDataLayerProps){
+} : BaseLayerProps & {
+   apiURL: string;
+   database: string;
+   urlInit?: RequestInit;
+   groupField: string;
+   noCache?: boolean;
+}){
     const map = useContext(MapContext);
-    const projection = map?.getView().getProjection();
+    const projection = map.getView().getProjection();
     const layer = useMemo(() => new CustomLayer(props), []);
     let isLoading = false;
 
@@ -35,7 +33,7 @@ function APIDataLayer({
         async function getData(){
             if(!apiURL){
                 layer.setStatus('error');
-                layer.set('error', 'apiURL indefinida');
+                layer.set('error', 'undefined apiURL');
             }
             
             try{
@@ -67,7 +65,7 @@ function APIDataLayer({
                     throw new Error(result);
                 }
                 
-                if(fit) map?.fit(layer.getSource()?.getExtent());
+                if(fit) map.fit(layer.getSource()?.getExtent());
                 layer.setStatus('complete');
             } catch (err) {
                 const error = err as Error;
@@ -100,5 +98,3 @@ function APIDataLayer({
         </Layer>
     );
 }
-
-export default APIDataLayer;

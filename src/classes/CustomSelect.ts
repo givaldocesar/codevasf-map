@@ -1,14 +1,15 @@
 import { Feature } from "ol";
 import { Select } from "ol/interaction";
-import BaseEvent from "ol/events/Event";
 import { Condition, never } from "ol/events/condition";
+import BaseEvent from "ol/events/Event";
 import CustomLayer from "./CustomLayer";
-import { CustomSimpleStyle, CustomCategorizedStyle } from "./styles";
+import CustomSimpleStyle from "./CustomSimpleStyle";
+import CustomCategorizedStyle from "./CustomCategorizedStyle";
 
 
-export default class CustomSelect extends Select{
-    private baseStyle_: CustomSimpleStyle | CustomCategorizedStyle;
-
+export default class CustomSelect extends Select {
+    private baseStyle: CustomSimpleStyle | CustomCategorizedStyle;
+    
     constructor({
         condition,
         layers,
@@ -21,30 +22,30 @@ export default class CustomSelect extends Select{
         super({
             toggleCondition: never,
             condition,
-            layers
+            layers,
         });
 
-        this.baseStyle_ = style || new CustomSimpleStyle();
+        this.baseStyle = style || new CustomSimpleStyle();
         //@ts-ignore
-        this.style_ = this.baseStyle_.renderFunction;
+        this.style_ = this.baseStyle.renderFunction;
     }
 
-    getBaseStyle(){
-        return this.baseStyle_;
+    getStyle() : CustomSimpleStyle | CustomCategorizedStyle{
+        return this.baseStyle;
     }
 
-    setBaseStyle(style: CustomSimpleStyle | CustomCategorizedStyle){
-        this.baseStyle_ = style;
-        //@ts-ignore
-        this.style_ = style.renderFunction;
-    }
-
-    setSelected(features: Feature[] | undefined){
+    setSelected(features: Feature[]){
         const event = new BaseEvent("select");
         //@ts-ignore
         event.selected = features;
         this.dispatchEvent(event)
         this.getFeatures().clear();
         this.getFeatures().extend(features || []); 
+    }
+
+    setStyle(style: CustomSimpleStyle | CustomCategorizedStyle){
+        this.baseStyle = style ;
+        //@ts-ignore
+        this.style_= this.baseStyle.renderFunction;
     }
 }

@@ -14,6 +14,4 @@ export default function convertFlatIcon(flatIcon: FlatIcon){
     }
 
     if(JSON.stringify(props) !== '{}') return new Icon(props);
-    
-    return null;
 }

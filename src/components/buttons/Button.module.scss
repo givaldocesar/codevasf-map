@@ -72,18 +72,33 @@
 }
 
 .collapse_button {
-    border-radius: 10px;
+    position: absolute;
+    border-radius: 5px;
     width: widths.$s-6;
     height: widths.$s-6;
 
+    display: flex;
+    align-items: center;
+    justify-items: center;
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+
     &:hover{
         background-color: colors.$hover;
+        cursor: pointer;
 
         line { stroke: white; }
 
-        image { filter: invert(1); }
+        img { filter: invert(1); }
     }
     
+}
+
+.collapsed {
+    position: static;
 }
 
 @media (min-width: breakpoints.$break-large){

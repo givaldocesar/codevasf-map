@@ -24,6 +24,4 @@ export default function convertFlatCircle(flatCircle: FlatCircle){
     }
 
     if(JSON.stringify(props) !== '{}') return new Circle(props);
-    
-    return null;
 }

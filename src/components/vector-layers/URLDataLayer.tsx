@@ -2,15 +2,10 @@ import { useEffect, useMemo, useContext } from "react";
 import { GeoJSON } from "ol/format";
 import { CustomLayer, LayerCache } from "../../classes";
 import { BaseLayerProps } from "../../interfaces";
+import { getFormatFromContent } from "../../utils";
 import { MapContext } from "../contexts";
 import Layer from "./Layer";
-import { getFormatFromContent } from "./utils";
 
-
-interface URLDataLayerProps extends BaseLayerProps {
-    url: string;
-    urlInit?: RequestInit;
-}
 
 export default function URLDataLayer({
     children, 
@@ -18,7 +13,10 @@ export default function URLDataLayer({
     urlInit, 
     fit, 
     ...props
-} : URLDataLayerProps){
+} : BaseLayerProps & {
+    url: string;
+    urlInit?: RequestInit;
+}){
     const map = useContext(MapContext);
     const layer = useMemo(() => new CustomLayer(props), []);
 
@@ -86,7 +84,7 @@ export default function URLDataLayer({
                     if(response.status === 404) throw new Error('URL não encontrada.');
                 }
 
-                if(fit) map?.fit(layer.getSource()?.getExtent());
+                if(fit) map.fit(layer.getSource()?.getExtent());
                 layer.setLoadingProgress(100); 
                 layer.setStatus('complete');
             } catch (err) {

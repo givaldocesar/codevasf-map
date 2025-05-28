@@ -3,6 +3,7 @@ node_modules/
 #BUILD
 dist/index.*
 dist/styles_components.css
+old_src/*
 
 #MISC
 .tsbuildinfo

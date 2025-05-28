@@ -1,9 +1,11 @@
 import { useMemo, useContext, useEffect } from "react";
 import { Attribution } from "ol/control";
+import classNames from "classnames";
 import { MapContext } from "../contexts";
 
+
 export default function Attributions({
-    className='',
+    className,
     collapsible=true
 }: {
     className?: string,
@@ -13,15 +15,15 @@ export default function Attributions({
     
     const attribution = useMemo(() => {
         return new Attribution({
-            className: `${className} ol-attribution`,
+            className: classNames(className, 'ol-attribution'),
             collapsible: collapsible,
             tipLabel: "Fontes"
         });
     }, []);
 
     useEffect(() => {
-        map?.addControl(attribution);
-        return () => { map?.removeControl(attribution) }
+        map.addControl(attribution);
+        return () => { map.removeControl(attribution) }
     }, [map, attribution]);
     
     return <></>;

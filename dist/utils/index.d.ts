@@ -1,5 +1,7 @@
 export {
     CustomLayer,
+    CustomSelect,
+    CustomSimpleStyle,
     LayerCache,
     MapContext,
     STATUS, 
@@ -7,12 +9,11 @@ export {
     calculateArea,
     calculateLength,
     checkFeaturesIntersect,
-    createRandomLayer,
+    createLayer,
     registerProjections
-} from "../index.js"
+} from "../index.js";
 
 export type {
     FieldType,
-    FeatureStatus,
-    APIType
-} from "../index.d.ts";
+    FeatureStatus
+} from "../index.d.ts"

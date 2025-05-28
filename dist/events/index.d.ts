@@ -6,8 +6,11 @@ export {
     AddLayerEvent,
     FitToFeatures,
     FitToFeaturesEvent,
+    LayerStatusEvent,
     RemoveLayer,
     RemoveLayerEvent,
     RemoveFeatures,
-    RemoveFeaturesEvent
+    RemoveFeaturesEvent,
+    SelectFeatures,
+    SelectFeaturesEvent
 } from "../index.js";
