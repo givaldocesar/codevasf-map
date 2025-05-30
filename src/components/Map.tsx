@@ -8,16 +8,14 @@ import { TextLoader } from "./loaders";
 import styles from "./Components.module.scss";
 
 
-type MapOptions = {
+const Map = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>&{
     center?:        [number, number];
     projection?:    string;
     minZoom?:       number;
     maxZoom?:       number;
     name?:          string;
-    zoom?:          number;
-}
-
-const Map = forwardRef<HTMLDivElement, MapOptions&React.HTMLAttributes<HTMLDivElement>>(({
+    zoom?:          number;}>((
+{
     children,
     className,
     center,

@@ -22,8 +22,8 @@ export default function Attributions({
     }, []);
 
     useEffect(() => {
-        map.addControl(attribution);
-        return () => { map.removeControl(attribution) }
+        map?.addControl(attribution);
+        return () => { map?.removeControl(attribution) }
     }, [map, attribution]);
     
     return <></>;

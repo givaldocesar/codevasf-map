@@ -24,7 +24,7 @@ export default function TileLayersArea(){
         }
     }, []);
 
-    map.getLayers().on('add', addLayer);
+    map?.getLayers().on('add', addLayer);
 
     const changeCurrent = useCallback((evt: Event) => {
         evt.stopPropagation();

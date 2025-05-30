@@ -25,7 +25,7 @@ export default function Layer({
 
             if(data && data.length > 0 ){
                 features = FORMAT.readFeatures(data, {
-                    featureProjection: map.getView().getProjection()
+                    featureProjection: map?.getView().getProjection()
                 });
             }
 
@@ -41,9 +41,9 @@ export default function Layer({
     }, []);
     
     useEffect(() => {
-        map.addLayer(base);
-        if(fit) map.fit(base.getSource()?.getExtent());
-        return () => { map.removeLayer(base) }
+        map?.addLayer(base);
+        if(fit) map?.fit(base.getSource()?.getExtent());
+        return () => { map?.removeLayer(base) }
     }, []);
     
     return (

@@ -44,7 +44,7 @@ const DroppedItem: React.FC<{
         evt.target.dispatchEvent(new RemoveDroppedLayerEvent(id));
     }
 
-    function zoom(){ map.fit(layer.getSource()?.getExtent()) }
+    function zoom(){ map?.fit(layer.getSource()?.getExtent()) }
 
     return (
         <>

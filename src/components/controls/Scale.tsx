@@ -27,8 +27,8 @@ export default function Scale({
     }, [props]);
 
     useEffect(() => {
-        map.addControl(scale);
-        return () => { map.removeControl(scale) }
+        map?.addControl(scale);
+        return () => { map?.removeControl(scale) }
     }, [map, scale]);
     
     return <></>;

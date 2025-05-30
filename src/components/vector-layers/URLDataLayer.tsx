@@ -84,7 +84,7 @@ export default function URLDataLayer({
                     if(response.status === 404) throw new Error('URL não encontrada.');
                 }
 
-                if(fit) map.fit(layer.getSource()?.getExtent());
+                if(fit) map?.fit(layer.getSource()?.getExtent());
                 layer.setLoadingProgress(100); 
                 layer.setStatus('complete');
             } catch (err) {

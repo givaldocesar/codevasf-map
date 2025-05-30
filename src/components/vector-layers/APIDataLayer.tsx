@@ -24,7 +24,7 @@ export default function APIDataLayer({
    noCache?: boolean;
 }){
     const map = useContext(MapContext);
-    const projection = map.getView().getProjection();
+    const projection = map?.getView().getProjection();
     const layer = useMemo(() => new CustomLayer(props), []);
     let isLoading = false;
 
@@ -65,7 +65,7 @@ export default function APIDataLayer({
                     throw new Error(result);
                 }
                 
-                if(fit) map.fit(layer.getSource()?.getExtent());
+                if(fit) map?.fit(layer.getSource()?.getExtent());
                 layer.setStatus('complete');
             } catch (err) {
                 const error = err as Error;

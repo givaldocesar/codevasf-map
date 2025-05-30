@@ -56,6 +56,8 @@ export default function TableRow({
     }
 
     function zoom() : void {
+        console.log(mapName)
+
         document.dispatchEvent(new FitToFeaturesEvent({
             features: [feature],
             maxZoom: 15,
@@ -126,6 +128,15 @@ export default function TableRow({
                 options.rowFactory(feature) :
                 
                 fields.map(field => {
+                    if(field.name === 'ol_uid'){
+                        return (
+                            <td key={field.name} className={styles.row}>
+                                { getUid(feature) }
+                            </td>
+                        );
+                    }
+                    
+                   
                     if(field.editable){
                         return (
                             <td 
@@ -171,7 +182,7 @@ export default function TableRow({
 
                     return (
                         <td key={field.name} className={styles.row}>
-                            { field.name === 'ol_uid' ? getUid(feature) : feature.get(field.name) }
+                            { feature.get(field.name) }
                         </td>
                     );
                 })

@@ -18,10 +18,12 @@ export default function RemoveLayer(){
 
     useEffect(() => {
         function removeLayer(evt: RemoveLayerEvent){
-            const layers = map.getAllLayers();
-            for(let i = 0; layers.length; i++){
+            const layers = map?.getAllLayers();
+            if(!layers) return ;
+
+            for(let i = 0; i < layers?.length; i++){
                 if(layers[i].get("title") === evt.detail){
-                    map.removeLayer(layers[i]);
+                    map?.removeLayer(layers[i]);
                     break;
                 }
             }

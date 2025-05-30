@@ -21,12 +21,12 @@ export class SelectFeaturesEvent extends CustomEvent<{mapName: string; selectNam
 
 export default function SelectFeatures(){
     const map = useContext(MapContext);
-    if(!map.get('name')) throw new Error("SELECT FEATURES: Map name is required. Please set map name.");
+    if(!map?.get('name')) throw new Error("SELECT FEATURES: Map name is required. Please set map name.");
 
     useEffect(() => {
         function selectFeatures(evt: SelectFeaturesEvent){
-            if(evt.detail.mapName === map.get('name')){
-                const interactions = map.getInteractions().getArray();
+            if(evt.detail.mapName === map?.get('name')){
+                const interactions = map?.getInteractions().getArray();
 
                 for(let i = 0; i < interactions.length; i++){
                     if(interactions[i].get('name') === evt.detail.selectName){

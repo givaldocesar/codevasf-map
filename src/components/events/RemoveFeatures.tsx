@@ -21,11 +21,11 @@ export class RemoveFeaturesEvent extends CustomEvent<{mapName: string; layerTitl
 
 export default function RemoveFeatures(){
     const map = useContext(MapContext);
-    if(!map.get('name')) throw new Error("REMOVE FEATURES: Map name is required. Please set map name.");
+    if(!map?.get('name')) throw new Error("REMOVE FEATURES: Map name is required. Please set map name.");
 
     useEffect(() => {
         function removeFeatures(evt: RemoveFeaturesEvent){
-            if(evt.detail.mapName === map.get('name')){
+            if(evt.detail.mapName === map?.get('name')){
                 const layers = map.getAllLayers();
 
                 for(let i = 0; layers.length; i++){

@@ -35,8 +35,8 @@ export default forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>&{
         if(!innerRef.current){ return }
 
         const control = new Control({element: innerRef.current });
-        map.addControl(control);
-        return () => { map.removeControl(control) };
+        map?.addControl(control);
+        return () => { map?.removeControl(control) };
     }, []);
 
     return (

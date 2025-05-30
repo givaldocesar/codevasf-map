@@ -30,13 +30,13 @@ export class FitToFeaturesEvent extends CustomEvent<{mapName: string, features: 
 export default function FitToFeatures(){
     const map = useContext(MapContext);
 
-    if(!map.get('name')) throw new Error("FIT TO FEATURES: Map name is required. Please set map name.");
+    if(!map?.get('name')) throw new Error("FIT TO FEATURES: Map name is required. Please set map name.");
 
     useEffect(() => {
         function fitToFeatures(evt: FitToFeaturesEvent){
-            if(evt.detail.mapName === map.get('name')){
+            if(evt.detail.mapName === map?.get('name')){
                 const extent = getFeaturesExtent(evt.detail.features);
-                map.fit(extent, evt.detail.maxZoom);
+                map?.fit(extent, evt.detail.maxZoom);
             }
         };
 

@@ -13,8 +13,8 @@ export default function BaseInteraction({
     const map = useContext(MapContext);
 
     useEffect(() => {
-        map.addInteraction(interaction);
-        return () => { map.removeInteraction(interaction) }
+        map?.addInteraction(interaction);
+        return () => { map?.removeInteraction(interaction) }
     }, []);
     
     return (

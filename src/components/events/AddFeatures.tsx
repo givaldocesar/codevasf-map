@@ -38,6 +38,8 @@ export default function AddFeatures({label} : {label?: LabelType}){
 
     useEffect(() => {
         function addFeaturesToMap(evt: AddFeaturesEvent){
+            if(!map) return;
+
             try{ 
                 const layer = createLayer({
                     map: map,
@@ -48,7 +50,7 @@ export default function AddFeatures({label} : {label?: LabelType}){
                     }
                 });
 
-                map.addLayer(layer);
+                map?.addLayer(layer);
 
                 if(label){
                     const style = layer.getBaseStyle() as CustomSimpleStyle; 
@@ -57,7 +59,7 @@ export default function AddFeatures({label} : {label?: LabelType}){
                 }
                 
                 if(evt.detail.zoomTo){
-                    layer.getFeaturesExtent().then(extent => map.fit(extent));
+                    layer.getFeaturesExtent().then(extent => map?.fit(extent));
                 }
             } 
             catch {

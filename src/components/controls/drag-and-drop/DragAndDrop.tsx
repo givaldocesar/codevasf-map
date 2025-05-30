@@ -39,8 +39,8 @@ export default function DragAndDrop({
 
     //Adiciona a interação ao mapa
     useEffect(() => {
-        map.addInteraction(interaction);
-        return () => { map.removeInteraction(interaction) }
+        map?.addInteraction(interaction);
+        return () => { map?.removeInteraction(interaction) }
     }, []);
 
     //escuta quando um arquivo é adicionado (apenas uma única vez)
@@ -50,9 +50,9 @@ export default function DragAndDrop({
             const file = files.find(file => file.props.id === id);
             
             if(file) {
-                map.fit(file.props.layer.getSource()?.getExtent());
+                map?.fit(file.props.layer.getSource()?.getExtent());
             
-            } else {
+            } else if(map) {
                 const layer = createLayer({
                     map: map,
                     features: evt.features as Feature[],

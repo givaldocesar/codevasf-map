@@ -140,10 +140,10 @@ export default function GoogleLayer({
     }, []);
 
     useEffect(() => {
-        map.addLayer(layer);
+        map?.addLayer(layer);
         return () => { map?.removeLayer(layer) }
     }, [map, layer]);
-    
+
     return (
         <BaseControl 
             className={classNames('ol-unselectable', styles.google_logo, {[styles.hidden]: !showLogo})}

@@ -33,20 +33,20 @@ export class AddLayerEvent extends CustomEvent<{
 
 export default function AddLayer({label} : {label?: LabelType}){
     const map = useContext(MapContext);
-    if(!map.get('name')) throw new Error("ADD LAYER: Map name is required. Please set map name.");
+    if(!map?.get('name')) throw new Error("ADD LAYER: Map name is required. Please set map name.");
 
     useEffect(() => {
         function addLayerToMap(evt: AddLayerEvent){
             const layer = evt.detail.layer;
             
-            if(map.get('name') === evt.detail.mapName){
+            if(map?.get('name') === evt.detail.mapName){
                 try{ map?.addLayer(layer) } 
                 catch (err){
                     console.error(`MAP ${map.get('name') || ""}: Erro ao adicionar camada ${layer.get("title") || ""} por evento.`)
                 };
         
                 if(label){
-                    const style = layer.getBaseStyle() as CustomSimpleStyle; 
+                    const style = layer.getBaseStyle(); 
                     style.setFeatureLabel(label.expression, label.text);
                     layer.changed();
                 }

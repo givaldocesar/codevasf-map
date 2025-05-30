@@ -25,8 +25,8 @@ export default function VectorLayersArea(){
             }
         }
 
-        map.getLayers().on('add', addLayer);
-        return () => map.getLayers().un('add', addLayer);
+        map?.getLayers().on('add', addLayer);
+        return () => map?.getLayers().un('add', addLayer);
     }, []);
 
     useEffect(() => {
@@ -36,8 +36,8 @@ export default function VectorLayersArea(){
             forceUpdate();
         }
 
-        map.getLayers().on('remove', removeLayer);
-        return () => map.getLayers().un('remove', removeLayer);
+        map?.getLayers().on('remove', removeLayer);
+        return () => map?.getLayers().un('remove', removeLayer);
     }, [])
 
     return (

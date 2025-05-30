@@ -17,9 +17,9 @@ export default function Hover({children} : {children?: React.ReactNode}){
         
         interaction.on('select', (evt) => {
             const feature = evt.selected[0];
-            if(feature) { 
+            if(feature && map) { 
                 map.getViewport().style.cursor = 'pointer';
-            } else {
+            } else if(map){
                 map.getViewport().style.cursor = 'default';
             }
         });

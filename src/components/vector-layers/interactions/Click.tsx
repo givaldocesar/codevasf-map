@@ -31,7 +31,7 @@ export default function Click({
 
         interaction.set("name", name);
         if(onSelect) interaction.on("select", onSelect);
-        if(zoomToFeature) interaction.on('select', (evt) => map.fit(getFeaturesExtent(evt.selected)));
+        if(zoomToFeature) interaction.on('select', (evt) => map?.fit(getFeaturesExtent(evt.selected)));
         return interaction;
     }, [zoomToFeature]);
     
