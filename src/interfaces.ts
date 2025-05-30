@@ -41,7 +41,7 @@ export type FieldType = {
     name: string;
     label?: string;
     columnWidth?: string;
-    type?: 'text' | 'number' | 'file';
+    type?: 'text' | 'number' | 'file' | 'text-area';
     maxLength?: number;
     editable?: boolean;
     decimals?: number;

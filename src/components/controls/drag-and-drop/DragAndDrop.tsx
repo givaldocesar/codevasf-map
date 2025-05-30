@@ -75,7 +75,6 @@ export default function DragAndDrop({
     useEffect(() => {
         function remove(evt: RemoveDroppedLayerEvent){
             const idx = files.findIndex(file => file.props.id === evt.detail);
-            console.log(idx, files, files[idx])
             
             map?.removeLayer(files[idx].props.layer);
             files.splice(idx, 1);

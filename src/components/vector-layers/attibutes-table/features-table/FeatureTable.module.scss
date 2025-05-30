@@ -41,6 +41,12 @@
     }
 }
 
+tr {
+    td, input {
+        word-wrap:break-word;
+    }
+}
+
 tr.edited {
     background-color: lightgoldenrodyellow;
     color: goldenrod;

@@ -33,7 +33,7 @@ export default function TableRow({
         return () => feature.un("propertychange", updateStatus);
     }, []);
     
-    function update(evt: React.ChangeEvent<HTMLInputElement>) : void {
+    function update(evt: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) : void {
         feature.set(STATUS, "edited");
         
         const field = evt.target;
@@ -135,15 +135,26 @@ export default function TableRow({
                                     [styles.disabled]: status === 'loading'
                                 })}
                             >
-                                <input 
-                                    name={field.name}
-                                    type={field.type || 'text'}
-                                    className={styles.field}
-                                    maxLength={field.maxLength || 2056}
-                                    defaultValue={feature.get(field.name)}
-                                    onChange={update}
-                                    disabled={status === 'loading' || status === 'excluded'}
-                                />
+                                {field.type === 'text-area' ?
+                                    <textarea 
+                                        name={field.name}
+                                        className={styles.field}
+                                        maxLength={field.maxLength || 2056}
+                                        defaultValue={feature.get(field.name)}
+                                        onChange={update}
+                                        disabled={status === 'loading' || status === 'excluded'}
+                                    />:
+                                    <input 
+                                        name={field.name}
+                                        type={field.type || 'text'}
+                                        className={styles.field}
+                                        maxLength={field.maxLength || 2056}
+                                        defaultValue={feature.get(field.name)}
+                                        onChange={update}
+                                        disabled={status === 'loading' || status === 'excluded'}
+                                    />
+                                }
+                                
                             </td>
                         );
                     }
